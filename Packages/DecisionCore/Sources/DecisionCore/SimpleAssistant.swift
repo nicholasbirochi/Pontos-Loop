@@ -15,6 +15,12 @@ public enum SimpleAssistant {
         guard !has("postal", "pixar", "tempo", "clima", "celular", "acoes", "bitcoin", "senha", "noticias") else {
             return fallback
         }
+        if has("foto", "fotos", "print", "imagem", "imagens") {
+            return "Toque em ‘Comparar uma foto’ aqui, ou em ‘Usar foto ou print’ na aba Simular. Escolha até 4 imagens com o preço e as parcelas. Confira os valores lidos antes de comparar. A imagem é processada neste aparelho."
+        }
+        if has("ia", "inteligencia", "mac", "ollama") {
+            return "Sou o Noah, um assistente com respostas prontas sobre a calculadora. Não uso a IA do seu Mac. A leitura de fotos usa o reconhecimento de texto da Apple neste aparelho, sem enviar a imagem para um servidor."
+        }
         let asksResult = has("escolher", "escolha", "recomende", "recomendar", "recomendacao", "compensa", "melhor", "vale", "resultado", "economizo", "economia")
         if asksResult && has("nao", "nunca", "sem") {
             return "Tudo bem, não vou recomendar uma opção. Posso explicar o custo econômico, os pontos ou como preencher a simulação."
@@ -30,7 +36,7 @@ public enum SimpleAssistant {
             if comparison.difference <= 0.01 {
                 return "Deu empate econômico na simulação: a diferença é de até R$ 0,01. As opções ficam em \(money(ordered[0].presentCost)) e \(money(ordered[1].presentCost)) em reais de hoje. Escolha o prazo mais confortável para você."
             }
-            return "Pelos dados da simulação, compensa \(ordered[0].name). O custo em reais de hoje é \(money(ordered[0].presentCost)), contra \(money(ordered[1].presentCost)) na outra opção. A vantagem estimada é de \(money(comparison.difference)). Isso considera o rendimento e os benefícios que você informou, com dinheiro reservado para pagar a fatura inteira."
+            return "Pelos dados da simulação, compensa \(ordered[0].name).\n\nVantagem estimada: \(money(comparison.difference)).\nCusto em reais de hoje: \(money(ordered[0].presentCost)) contra \(money(ordered[1].presentCost)).\n\nA conta usa os valores e benefícios que você preencheu."
         }
         if has("custo", "economico", "presente") {
             return "É uma forma de comparar tudo em reais de hoje. Pagar depois pode ter um custo menor se o dinheiro render enquanto espera. A conta também considera pontos e cashback. Esse valor ajuda na comparação; o dinheiro que sai da conta é o ‘desembolso’."

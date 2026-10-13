@@ -24,7 +24,14 @@ um segundo ganho de rendimento.
 
 ## Compra
 
+Na entrada simplificada, PixHoje é o preço final informado diretamente, validado
+com até duas casas decimais. O motor exige valores válidos e não infere descontos.
+Para cenários antigos sem preço Pix direto, preserva-se a regra anterior:
 PixHoje = arredondarCentavos(precoReferencia*(1-descontoPix/100)).
+
+Na importação de imagem, TotalCartaoSugerido = parcelas × valorPorParcela.
+É apenas uma sugestão revisável: totais contratuais e ajustes na última parcela
+podem ser diferentes. Nenhuma comparação importada é aplicada sem confirmação.
 Cartao = VPparcelas - VPpontos - VPcashbackAdicional.
 O total do cartão contém juros e taxas reais, não reaplicados pelo motor.
 

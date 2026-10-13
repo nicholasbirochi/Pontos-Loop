@@ -14,6 +14,9 @@ private func percent(_ value: Double) -> String {
 struct CalculatorView: View {
     @Binding var input: InputState
     @Binding var scenarios: [SavedScenario]
+    @Binding var hasCompared: Bool
+    var openPhoto: () -> Void
+    @State private var showAdvanced = false
     var openAssistant: () -> Void
     var openHistory: () -> Void
     @FocusState private var editingNumber: Bool
@@ -31,28 +34,56 @@ struct CalculatorView: View {
 
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
+            ScrollViewReader { proxy in
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 24) {
+                    VStack(alignment: .leading, spacing: 20) {
                         hero
                         modePicker
-                        if case .success(let comparison) = result {
-                            recommendation(comparison)
-                        }
-                        if geometry.size.width > 820 {
-                            HStack(alignment: .top, spacing: 24) {
-                                inputs.frame(maxWidth: 420)
-                                output.frame(maxWidth: .infinity)
+                        if input.mode == .purchase {
+                            Button(action: openPhoto) {
+                                Label("Usar foto ou print", systemImage: "photo.on.rectangle")
+                                    .font(.headline).frame(maxWidth: .infinity, minHeight: 38)
                             }
-                        } else {
-                            inputs
-                            output
+                            .buttonStyle(.bordered)
+                            .accessibilityIdentifier("importPhoto")
                         }
-                        Text("Estimativa com as condições informadas. Benefícios em pontos têm valor estimado; o cálculo considera dinheiro disponível e pagamento integral da fatura.")
-                            .font(.footnote).foregroundStyle(.secondary)
+                        inputs
+                        if input.monthlyRate != "0" || (input.rewardsEnabled && input.mode == .purchase) || (input.cashback != "0" && input.mode == .purchase) {
+                            Text("Inclui rendimento de \(input.monthlyRate)% a.m." + (input.rewardsEnabled && input.mode == .purchase ? " e pontos." : ".") + (input.cashback != "0" && input.mode == .purchase ? " Cashback: R$ \(input.cashback)." : ""))
+                                .font(.caption).foregroundStyle(.secondary)
+                        }
+                        Button {
+                            editingNumber = false
+                            if hasCompared {
+                                withAnimation { proxy.scrollTo("result", anchor: .top) }
+                            } else {
+                                hasCompared = true
+                            }
+                        } label: {
+                            Label("Comparar agora", systemImage: "equal.circle.fill")
+                                .font(.headline).frame(maxWidth: .infinity, minHeight: 40)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .accessibilityIdentifier("compareNow")
+                        advancedInputs
+                        if hasCompared {
+                            VStack(spacing: 18) {
+                                if case .success(let comparison) = result {
+                                    recommendation(comparison)
+                                    DisclosureGroup("Ver detalhes do cálculo") { output.padding(.top, 14) }
+                                        .font(.subheadline)
+                                } else {
+                                    output
+                                }
+                            }.id("result")
+                        }
+                        Text("Use os preços reais da oferta. A comparação pressupõe dinheiro reservado e pagamento integral da fatura.")
+                            .font(.caption).foregroundStyle(.secondary)
                     }
-                    .padding(20).frame(maxWidth: 1120)
-                    .frame(maxWidth: .infinity)
+                    .padding(20).frame(maxWidth: 680).frame(maxWidth: .infinity)
+                }
+                .onChange(of: hasCompared) { _, shown in
+                    if shown { withAnimation { proxy.scrollTo("result", anchor: .top) } }
                 }
             }
             .background(AppTheme.canvas)
@@ -68,7 +99,7 @@ struct CalculatorView: View {
                         scenarioName = input.mode.rawValue
                         showSave = true
                     } label: { Label("Salvar", systemImage: "bookmark") }
-                    .disabled({ if case .failure = result { return true }; return false }())
+                    .disabled(!hasCompared || { if case .failure = result { return true }; return false }())
                     .accessibilityIdentifier("saveScenario")
                 }
             }
@@ -96,25 +127,22 @@ struct CalculatorView: View {
     }
 
     private var hero: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack {
-                Label("DECIDA COM CLAREZA", systemImage: "sparkle")
-                    .font(.caption.weight(.semibold)).tracking(1.2)
-                Spacer()
-                Image(systemName: "creditcard.fill")
-                    .font(.title2).foregroundStyle(AppTheme.silver)
-                    .accessibilityHidden(true)
-            }
-            Text("Seu dinheiro.\nSua melhor escolha.")
-                .font(.system(.title, design: .rounded).weight(.bold))
-                .fixedSize(horizontal: false, vertical: true)
-            Text("Pix ou cartão? A gente faz as contas.")
-                .font(.subheadline).foregroundStyle(.white.opacity(0.85))
-        }
-        .foregroundStyle(.white).padding(24).frame(maxWidth: .infinity, alignment: .leading)
-        .background(LinearGradient(colors: [AppTheme.ink, Color(red: 0.11, green: 0.12, blue: 0.14)],
-                                   startPoint: .topLeading, endPoint: .bottomTrailing))
-        .clipShape(RoundedRectangle(cornerRadius: 28))
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Compare sem complicar.")
+                .font(.system(.title2, design: .rounded).bold())
+            Text("Digite os valores ou escolha uma foto da oferta.")
+                .font(.subheadline).foregroundStyle(.secondary)
+        }.frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var pixPrice: Binding<String> {
+        Binding(get: {
+            if let value = input.directPixPrice { return value }
+            guard let price = try? decimal(input.referencePrice, "preço"),
+                  let discount = try? decimal(input.pixDiscount, "desconto") else { return "" }
+            return DecisionEngine.cents(price * (1 - discount / 100))
+                .formatted(.number.locale(brazil).grouping(.never).precision(.fractionLength(2)))
+        }, set: { input.directPixPrice = $0 })
     }
 
     private var modePicker: some View {
@@ -129,26 +157,17 @@ struct CalculatorView: View {
 
     private var inputs: some View {
         VStack(spacing: 18) {
-            panel("Condições da operação") {
+            panel("Valores da oferta") {
                 switch input.mode {
                 case .purchase:
-                    numberField("Preço de referência", text: $input.referencePrice, unit: "R$")
-                    numberField("Desconto no Pix", text: $input.pixDiscount, unit: "%")
-                    HStack {
-                        ForEach(["0", "3", "5", "7", "10"], id: \.self) { value in
-                            Button(value + "%") { input.pixDiscount = value }.buttonStyle(.bordered)
-                        }
-                    }.controlSize(.small)
-                    numberField("Total no cartão, incluindo juros e taxas", text: $input.cardTotal, unit: "R$")
-                    Button("Usar preço de referência no cartão") {
-                        input.cardTotal = input.referencePrice
-                        input.eligibleSpend = input.referencePrice
-                    }.font(.caption)
-                    Stepper("Quantidade de parcelas: \(input.installmentCount)",
-                            value: $input.installmentCount, in: 1...36)
-                    DatePicker("Primeiro vencimento", selection: $input.firstDate,
-                               in: Date()..., displayedComponents: .date)
-                    Text("Informe o total real cobrado. Se houver juros, inclua-os no total. O cronograma usa parcelas mensais iguais, com ajuste de centavos na última.")
+                    numberField("Preço no Pix", text: pixPrice, unit: "R$")
+                    numberField("Total no cartão", text: $input.cardTotal, unit: "R$")
+                    Stepper("Parcelas: \(input.installmentCount)x", value: $input.installmentCount, in: 1...36)
+                    if let total = try? decimal(input.cardTotal, "total"), total > 0 {
+                        Text("Aproximadamente \(money(DecisionEngine.number(total / Decimal(input.installmentCount)))) por parcela.")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                    Text("Inclua juros e taxas no total do cartão.")
                         .font(.caption).foregroundStyle(.secondary)
                 case .anticipation:
                     numberField("Soma das parcelas restantes", text: $input.remainingTotal, unit: "R$")
@@ -159,9 +178,11 @@ struct CalculatorView: View {
                     numberField("Valor da oferta de quitação", text: $input.quote, unit: "R$")
                     DatePicker("Pagamento da quitação", selection: $input.paymentDate,
                                in: Date()..., displayedComponents: .date)
+                    DisclosureGroup("Pontos extras da antecipação") {
                     numberField("Pontos extras pela antecipação", text: $input.incrementalPoints, unit: "pts")
                     numberField("Valor estimado de 1.000 pontos", text: $input.reaisPerThousand, unit: "R$")
                     numberField("Bônus disponível em", text: $input.bonusDay, unit: "dias")
+                    }
                     Text("Para antecipar uma fatura inteira, use 1 parcela. Copie a oferta do banco e conte apenas os pontos adicionais. A data é a do pagamento efetivo, que pode ser o vencimento da fatura.")
                         .font(.caption).foregroundStyle(.secondary)
                 case .redemption:
@@ -174,6 +195,15 @@ struct CalculatorView: View {
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }
+        }
+    }
+
+    private var advancedInputs: some View {
+        DisclosureGroup(isExpanded: $showAdvanced) {
+                if input.mode == .purchase {
+                    DatePicker("Primeiro vencimento", selection: $input.firstDate,
+                               in: Date()..., displayedComponents: .date)
+                }
             panel("Rendimento do dinheiro") {
                 numberField("Rendimento líquido mensal", text: $input.monthlyRate, unit: "% a.m.")
                 HStack {
@@ -194,7 +224,7 @@ struct CalculatorView: View {
                         Button("Usar exemplo de pontos") {
                             input.reaisPerPoint = "2,50"
                             input.reaisPerThousand = "20,00"
-                            input.eligibleSpend = input.referencePrice
+                            input.eligibleSpend = input.cardTotal
                         }.font(.caption)
                         Text("Exemplo editável: 1 ponto a cada R$ 2,50 e R$ 20 por mil pontos. Use os valores do seu programa e do resgate que pretende fazer.")
                             .font(.caption).foregroundStyle(.secondary)
@@ -205,7 +235,18 @@ struct CalculatorView: View {
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }
-        }
+            } label: {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Ajustes opcionais").font(.subheadline.bold())
+                    Text("Rendimento: \(input.monthlyRate)% a.m." + (input.rewardsEnabled && input.mode == .purchase ? " · Pontos ativados" : "") + (input.cashback != "0" && input.mode == .purchase ? " · Cashback: R$ \(input.cashback)" : ""))
+                        .font(.caption).foregroundStyle(.secondary)
+                    if input.mode == .purchase {
+                        Text("1ª parcela: " + input.firstDate.formatted(date: .abbreviated, time: .omitted))
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                }
+            }
+            .padding(18).background(AppTheme.card, in: RoundedRectangle(cornerRadius: 18))
     }
 
     @ViewBuilder private var output: some View {
@@ -237,7 +278,7 @@ struct CalculatorView: View {
                     Text("O custo econômico desconta pagamentos futuros pelo rendimento informado e considera os benefícios. Ele pode ser diferente do valor que sai da conta.")
                         .font(.caption).foregroundStyle(.secondary)
                 }
-                if input.mode == .purchase {
+                if input.mode == .purchase && input.directPixPrice == nil {
                     equilibrium(comparison)
                 }
                 if input.mode == .anticipation {

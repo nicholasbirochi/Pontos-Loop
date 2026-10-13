@@ -8,16 +8,17 @@ enum CalculatorMode: String, Codable, CaseIterable, Identifiable {
 
 struct InputState: Codable, Equatable {
     var mode: CalculatorMode = .purchase
-    var referencePrice = "1000,00"
+    var referencePrice = ""
+    var directPixPrice: String?
     var pixDiscount = "5"
-    var cardTotal = "1000,00"
-    var installmentCount = 10
+    var cardTotal = ""
+    var installmentCount = 1
     var firstDate = Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date()
-    var monthlyRate = "0,8"
+    var monthlyRate = "0"
     var reaisPerPoint = "2,50"
     var reaisPerThousand = "20,00"
     var eligibleSpend = "1000,00"
-    var rewardsEnabled = true
+    var rewardsEnabled = false
     var cashback = "0"
     var benefitDay = "30"
     var remainingTotal = "1000,00"
@@ -119,15 +120,27 @@ extension InputState {
         let rate = DecisionEngine.number(try decimal(input.monthlyRate, "rendimento")) / 100
         switch input.mode {
         case .purchase:
-            let price = try decimal(input.referencePrice, "preço de referência")
-            let discount = try decimal(input.pixDiscount, "desconto no Pix")
-            guard discount >= 0, discount <= 100 else {
-                throw CalculationError.invalid("O desconto deve ficar entre 0% e 100%.")
+            let card = try decimal(input.cardTotal, "total no cartão")
+            let pix: Decimal
+            let price: Decimal
+            if let direct = input.directPixPrice {
+                pix = try decimal(direct, "preço no Pix")
+                guard DecisionEngine.cents(pix) == pix else {
+                    throw CalculationError.invalid("O preço no Pix deve ter no máximo duas casas decimais.")
+                }
+                price = max(card, pix)
+            } else {
+                price = try decimal(input.referencePrice, "preço de referência")
+                let discount = try decimal(input.pixDiscount, "desconto no Pix")
+                guard discount >= 0, discount <= 100 else {
+                    throw CalculationError.invalid("O desconto deve ficar entre 0% e 100%.")
+                }
+                pix = DecisionEngine.cents(price * (1 - discount / 100))
             }
             return try DecisionEngine.purchase(
                 referencePrice: price,
-                pixPrice: DecisionEngine.cents(price * (1 - discount / 100)),
-                cardTotal: try decimal(input.cardTotal, "total no cartão"),
+                pixPrice: pix,
+                cardTotal: card,
                 days: try LocalSchedule.days(first: input.firstDate, count: count ?? input.installmentCount),
                 eligibleSpend: input.rewardsEnabled ? decimal(input.eligibleSpend, "base elegível") : 0,
                 reaisPerPoint: input.rewardsEnabled ? decimal(input.reaisPerPoint, "gasto por ponto") : 1,

@@ -46,6 +46,11 @@ final class SimpleAssistantTests: XCTestCase {
         XCTAssertTrue(SimpleAssistant.reply(to: String(repeating: "a", count: 501), comparison: nil).contains("500 caracteres"))
     }
 
+    func testPhotoHelpAndAIExplanationAreHonest() {
+        XCTAssertTrue(SimpleAssistant.reply(to: "Como mando uma foto?", comparison: nil).contains("Confira os valores"))
+        XCTAssertTrue(SimpleAssistant.reply(to: "Você usa a IA do Mac?", comparison: nil).contains("Não uso a IA do seu Mac"))
+    }
+
     func testNegatedRecommendationDoesNotRecommend() throws {
         let answer = SimpleAssistant.reply(to: "Não recomende uma opção, só explique", comparison: try comparison())
         XCTAssertTrue(answer.contains("não vou recomendar"))
