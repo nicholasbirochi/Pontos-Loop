@@ -163,7 +163,7 @@ extension InputState {
                 monthlyRate: rate)
         case .anticipation:
             guard try decimal(input.remainingTotal, "saldo") > 0,
-                  decimal(input.quote, "oferta de quitação") > 0 else {
+                  try decimal(input.quote, "oferta de quitação") > 0 else {
                 throw CalculationError.invalid("Informe o saldo e a oferta de quitação. Zero significa não informado.")
             }
             let remaining = try DecisionEngine.installments(
