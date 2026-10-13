@@ -39,6 +39,17 @@ struct InputCompatibilityCheck {
             _ = try direct.calculate()
             assertionFailure("Pix com mais de dois centavos deveria falhar")
         } catch CalculationError.invalid { }
-        print("OK: cenários antigos continuam calculando; preço Pix direto é salvo e validado.")
+        for (balance, quote) in [("0", "100"), ("100", "0")] {
+            var anticipation = InputState()
+            anticipation.mode = .anticipation
+            anticipation.remainingTotal = balance
+            anticipation.quote = quote
+            anticipation.remainingCount = 1
+            do {
+                _ = try anticipation.calculate()
+                assertionFailure("Saldo e quitação precisam estar preenchidos")
+            } catch CalculationError.invalid { }
+        }
+        print("OK: cenários antigos preservados; preços diretos e zeros validados.")
     }
 }

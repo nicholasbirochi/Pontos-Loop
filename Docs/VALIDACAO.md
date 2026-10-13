@@ -68,3 +68,6 @@ pasta de trabalho na assinatura dos produtos temporários.
   13/iOS 27: Noah, navegação, histórico, fotos e padrões zerados sem vencedor grátis.
 - O build macOS concluiu com sucesso. A captura inicial confirma o novo nome,
   passo a passo visível no topo e os campos em zero. Histórico anterior preservado.
+- Os builds finais macOS e iPhone arm64 sem assinatura foram aprovados, com
+  verificação da assinatura local do Mac. A checagem de compatibilidade também
+  rejeita Pix, saldo ou quitação zerados nos modos individuais.
