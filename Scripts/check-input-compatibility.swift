@@ -29,6 +29,11 @@ struct InputCompatibilityCheck {
         assert(directComparison.options[0].presentCost == 940)
         let saved = try JSONDecoder().decode(InputState.self, from: JSONEncoder().encode(direct))
         assert(saved.directPixPrice == "940,00")
+        direct.directPixPrice = "0"
+        do {
+            _ = try direct.calculate()
+            assertionFailure("Preço Pix não preenchido não pode ser uma compra grátis")
+        } catch CalculationError.invalid { }
         direct.directPixPrice = "940,001"
         do {
             _ = try direct.calculate()
