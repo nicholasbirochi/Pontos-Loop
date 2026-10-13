@@ -15,6 +15,9 @@ public enum SimpleAssistant {
         guard !has("postal", "pixar", "tempo", "clima", "celular", "acoes", "bitcoin", "senha", "noticias") else {
             return fallback
         }
+        if has("audio", "voz", "microfone", "arquivo", "arquivos", "anexo", "anexar", "pdf") {
+            return "Use o + para anexar uma imagem, PDF com texto, TXT ou áudio. O microfone grava até 1 minuto; confira a transcrição antes de enviar. A voz depende do reconhecimento offline da Apple disponível no aparelho. Para uma oferta, toque em ‘Revisar valores da oferta’ no anexo antes de comparar. Os anexos ficam só nesta conversa."
+        }
         if has("foto", "fotos", "print", "imagem", "imagens") {
             return "Toque em ‘Comparar uma foto’ aqui, ou em ‘Usar foto ou print’ na aba Simular. Escolha até 4 imagens com o preço e as parcelas. Confira os valores lidos antes de comparar. A imagem é processada neste aparelho."
         }

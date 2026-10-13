@@ -65,6 +65,29 @@ final class PontosLoopUITests: XCTestCase {
         add(attachment)
     }
 
+    func testChatComposerAndAttachmentMenu() {
+        app.tabBars.buttons["Noah"].tap()
+        XCTAssertTrue(app.buttons["chatMicrophone"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.buttons["sendQuestion"].isEnabled)
+        app.buttons["chatAttachments"].tap()
+        XCTAssertTrue(app.buttons["Arquivo ou áudio"].waitForExistence(timeout: 5))
+        app.buttons["Arquivo ou áudio"].tap()
+        let cancel = app.buttons.matching(NSPredicate(format: "label IN %@", ["Cancelar", "Cancel"])).firstMatch
+        XCTAssertTrue(cancel.waitForExistence(timeout: 20))
+        cancel.tap()
+        let field = app.textFields["chatQuestion"]
+        XCTAssertTrue(field.waitForExistence(timeout: 5))
+        field.tap(); field.typeText("O que são pontos?")
+        app.buttons["sendQuestion"].tap()
+        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Pontos são uma recompensa")).firstMatch.waitForExistence(timeout: 5))
+        app.buttons["newChat"].tap()
+        XCTAssertTrue(app.buttons["Diagnóstico dos 4 cenários"].waitForExistence(timeout: 5))
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "Noah chat com áudio e anexos"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+    }
+
     func testSavedScenarioSurvivesRelaunchAndCanBeRestored() {
         comparePurchase()
         XCTAssertTrue(app.buttons["saveScenario"].waitForExistence(timeout: 10))

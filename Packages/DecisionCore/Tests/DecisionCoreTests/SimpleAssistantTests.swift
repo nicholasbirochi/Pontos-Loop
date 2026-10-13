@@ -2,6 +2,14 @@ import XCTest
 @testable import DecisionCore
 
 final class SimpleAssistantTests: XCTestCase {
+    func testVoiceAndAttachmentHelp() {
+        for question in ["Como mando áudio?", "Posso anexar um PDF?"] {
+            let answer = SimpleAssistant.reply(to: question, comparison: nil)
+            XCTAssertTrue(answer.contains("transcrição antes de enviar"))
+            XCTAssertTrue(answer.contains("reconhecimento offline"))
+            XCTAssertTrue(answer.contains("Revisar valores"))
+        }
+    }
     private func comparison(pix: Decimal = 950, count: Int = 10) throws -> Comparison {
         try DecisionEngine.purchase(referencePrice: 1000, pixPrice: pix, cardTotal: 1000,
             days: (1...count).map { $0 * 30 }, eligibleSpend: 1000, reaisPerPoint: 2.5,
