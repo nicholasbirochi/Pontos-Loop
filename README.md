@@ -7,6 +7,8 @@ local que explica as contas de um jeito simples. Compatível com **iPhone 13**
 
 <img src="Design/PontosLoop-iPhone13.png" width="300" alt="Pontos Loop no simulador do iPhone 13, com tema preto e Noah" />
 
+*Captura real no simulador iPhone 13, com os campos iniciais zerados.*
+
 ## Ver e instalar
 
 - **Mac:** abra `PontosLoop.xcodeproj`, escolha o esquema
