@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000">
+<defs><linearGradient id="hero" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#15213f"/><stop offset="1" stop-color="#364980"/></linearGradient></defs>
+<rect width="1400" height="1000" fill="#eef1f7"/>
+<g font-family="Arial, sans-serif">
+<text x="60" y="57" font-size="25" font-weight="700" fill="#19243e">Compra Clara</text>
+<text x="60" y="86" font-size="15" fill="#64718a">Referência visual para iPhone e Mac. Layout ilustrativo, não é captura do aplicativo.</text>
+<rect x="50" y="120" width="375" height="830" rx="40" fill="#111827"/>
+<rect x="62" y="132" width="351" height="806" rx="30" fill="#f8f9fc"/>
+<rect x="185" y="140" width="106" height="20" rx="10" fill="#111827"/>
+<text x="86" y="200" font-size="18" font-weight="700" fill="#19243e">Compra Clara</text>
+<rect x="82" y="221" width="310" height="153" rx="23" fill="url(#hero)"/>
+<text x="103" y="252" font-size="10" font-weight="700" fill="#d1ddff">SEU DINHEIRO, COM MAIS CLAREZA</text>
+<text x="103" y="291" font-size="29" font-weight="700" fill="#fff">Qual opção</text>
+<text x="103" y="326" font-size="25" font-weight="700" fill="#fff">vale mais a pena?</text>
+<rect x="82" y="391" width="310" height="37" rx="10" fill="#e9ecf3"/>
+<rect x="85" y="394" width="97" height="31" rx="8" fill="#fff"/>
+<text x="112" y="415" font-size="13" fill="#21304b">Compra</text>
+<text x="205" y="415" font-size="13" fill="#64718a">Antecipar</text>
+<text x="321" y="415" font-size="13" fill="#64718a">Pontos</text>
+<rect x="82" y="445" width="310" height="210" rx="20" fill="#fff" stroke="#e3e8f2"/>
+<text x="102" y="476" font-size="16" font-weight="700" fill="#19243e">Condições da compra</text>
+<text x="102" y="505" font-size="12" fill="#64718a">Preço de referência</text>
+<rect x="102" y="514" width="270" height="42" rx="10" fill="#f3f5f9"/>
+<text x="114" y="542" font-size="21" fill="#21304b">1.000,00</text><text x="344" y="542" font-size="12" fill="#64718a">R$</text>
+<text x="102" y="585" font-size="13" fill="#64718a">Pix: 5% de desconto</text>
+<text x="102" y="611" font-size="13" fill="#64718a">Cartão: 10x de R$ 100,00</text>
+<text x="102" y="636" font-size="13" fill="#64718a">Rendimento líquido: 0,8% a.m.</text>
+<rect x="82" y="673" width="310" height="135" rx="21" fill="#455ff1"/>
+<text x="103" y="703" font-size="10" font-weight="700" fill="#dee5ff">COM AS CONDIÇÕES INFORMADAS</text>
+<text x="103" y="739" font-size="25" font-weight="700" fill="#fff">Pagar no cartão</text>
+<text x="103" y="774" font-size="15" fill="#fff">Vantagem estimada de R$ 0,56</text>
+<text x="94" y="845" font-size="13" fill="#64718a">Pix hoje</text><text x="306" y="845" font-size="17" font-weight="700" fill="#19243e">R$ 950,00</text>
+<text x="94" y="879" font-size="13" fill="#64718a">Custo econômico cartão</text><text x="306" y="879" font-size="17" font-weight="700" fill="#455ff1">R$ 949,44</text>
+<rect x="185" y="918" width="106" height="4" rx="2" fill="#111827"/>
+<rect x="470" y="120" width="880" height="735" rx="20" fill="#fff" stroke="#dde3ed"/>
+<rect x="470" y="120" width="880" height="43" rx="20" fill="#f3f5f9"/>
+<rect x="470" y="144" width="880" height="19" fill="#f3f5f9"/>
+<circle cx="492" cy="141" r="5" fill="#c4cad5"/><circle cx="508" cy="141" r="5" fill="#c4cad5"/><circle cx="524" cy="141" r="5" fill="#c4cad5"/>
+<text x="878" y="147" font-size="13" fill="#64718a">Compra Clara</text>
+<rect x="496" y="187" width="828" height="148" rx="22" fill="url(#hero)"/>
+<text x="522" y="224" font-size="11" fill="#cedbff" font-weight="700">SEU DINHEIRO, COM MAIS CLAREZA</text>
+<text x="522" y="268" font-size="35" fill="#fff" font-weight="700">Qual opção vale mais a pena?</text>
+<text x="522" y="303" font-size="16" fill="#d6e0f7">Compare o desconto de hoje com os benefícios de pagar depois.</text>
+<rect x="496" y="356" width="828" height="39" rx="10" fill="#eef1f6"/>
+<rect x="500" y="360" width="271" height="31" rx="8" fill="#fff"/>
+<text x="609" y="381" font-size="14" fill="#19243e">Compra</text><text x="884" y="381" font-size="14" fill="#64718a">Antecipar</text><text x="1168" y="381" font-size="14" fill="#64718a">Pontos</text>
+<rect x="496" y="417" width="356" height="319" rx="20" fill="#fff" stroke="#e3e8f2"/>
+<text x="516" y="451" font-size="18" font-weight="700" fill="#19243e">Condições da operação</text>
+<text x="516" y="484" font-size="13" fill="#64718a">Preço de referência</text><rect x="516" y="497" width="315" height="43" rx="10" fill="#f3f5f9"/>
+<text x="531" y="526" font-size="22" fill="#19243e">R$ 1.000,00</text>
+<text x="516" y="570" font-size="13" fill="#64718a">Desconto no Pix</text><rect x="516" y="581" width="315" height="43" rx="10" fill="#f3f5f9"/>
+<text x="531" y="610" font-size="22" fill="#19243e">5%</text>
+<text x="516" y="660" font-size="15" fill="#19243e">Parcelas: 10x de R$ 100,00</text>
+<text x="516" y="695" font-size="13" fill="#64718a">Rendimento líquido: 0,8% a.m.</text>
+<rect x="872" y="417" width="452" height="136" rx="20" fill="#455ff1"/>
+<text x="895" y="447" font-size="11" font-weight="700" fill="#dde5ff">COM AS CONDIÇÕES INFORMADAS</text>
+<text x="895" y="486" font-size="28" font-weight="700" fill="#fff">Pagar no cartão</text>
+<text x="895" y="523" font-size="16" fill="#fff">Vantagem econômica estimada de R$ 0,56</text>
+<rect x="872" y="572" width="452" height="164" rx="20" fill="#fff" stroke="#e3e8f2"/>
+<text x="894" y="604" font-size="17" font-weight="700" fill="#19243e">Quando o Pix começa a compensar</text>
+<text x="894" y="651" font-size="36" font-weight="700" fill="#455ff1">5,06%</text>
+<text x="894" y="684" font-size="14" fill="#64718a">Acima desse desconto, o Pix tem menor custo.</text>
+<text x="894" y="710" font-size="14" fill="#64718a">Abaixo dele, o cartão tem menor custo.</text>
+<text x="499" y="779" font-size="13" fill="#64718a">Custos econômicos em reais de hoje. Pontos têm valor estimado.</text>
+<text x="499" y="807" font-size="12" fill="#64718a">Exemplo: vencimentos 30/60/.../300 dias; benefício de R$ 8 disponível em 30 dias.</text>
+<text x="471" y="910" font-size="17" fill="#19243e" font-weight="700">Uma base compartilhada. Duas experiências nativas.</text>
+<text x="471" y="940" font-size="14" fill="#64718a">SwiftUI · motor isolado · dados locais · taxas e pontos editáveis</text>
+</g></svg>

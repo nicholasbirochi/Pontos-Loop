@@ -1,0 +1,335 @@
+[
+  {
+    "id": "pix_hoje",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "950",
+        "day": 0
+      }
+    ],
+    "expectedPV": 950.0
+  },
+  {
+    "id": "pontos_sem_rendimento",
+    "rate": 0,
+    "flows": [
+      {
+        "amount": "1000",
+        "day": 30
+      },
+      {
+        "amount": "-8",
+        "day": 0
+      }
+    ],
+    "expectedPV": 992.0
+  },
+  {
+    "id": "pagamento_60_dias",
+    "rate": 0.01,
+    "flows": [
+      {
+        "amount": "1000",
+        "day": 60
+      }
+    ],
+    "expectedPV": 980.2960494069209
+  },
+  {
+    "id": "beneficio_adiado",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "1000",
+        "day": 30
+      },
+      {
+        "amount": "-8",
+        "day": 90
+      }
+    ],
+    "expectedPV": 984.252460537419
+  },
+  {
+    "id": "antecipacao_bonus",
+    "rate": 0.01,
+    "flows": [
+      {
+        "amount": "1000",
+        "day": 0
+      },
+      {
+        "amount": "-20",
+        "day": 0
+      }
+    ],
+    "expectedPV": 980.0
+  },
+  {
+    "id": "resgate_custo_pontos",
+    "rate": 0,
+    "flows": [
+      {
+        "amount": "985",
+        "day": 0
+      },
+      {
+        "amount": "20",
+        "day": 0
+      }
+    ],
+    "expectedPV": 1005.0
+  },
+  {
+    "id": "resgate_fatura_futura",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "985",
+        "day": 30
+      },
+      {
+        "amount": "20",
+        "day": 0
+      }
+    ],
+    "expectedPV": 997.1825396825396
+  },
+  {
+    "id": "taxa_negativa",
+    "rate": -0.005,
+    "flows": [
+      {
+        "amount": "1000",
+        "day": 30
+      }
+    ],
+    "expectedPV": 1005.0251256281407
+  },
+  {
+    "id": "datas_irregulares",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "200",
+        "day": 0
+      },
+      {
+        "amount": "300",
+        "day": 42
+      },
+      {
+        "amount": "500",
+        "day": 78
+      },
+      {
+        "amount": "-20",
+        "day": 90
+      }
+    ],
+    "expectedPV": 966.8923305859034
+  },
+  {
+    "id": "parcelas_centavos",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "33.33",
+        "day": 30
+      },
+      {
+        "amount": "33.33",
+        "day": 60
+      },
+      {
+        "amount": "33.34",
+        "day": 90
+      }
+    ],
+    "expectedPV": 98.4210018516519
+  },
+  {
+    "id": "compra_1x_008_pontos_30",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "1000.00",
+        "day": 30
+      },
+      {
+        "amount": "-8",
+        "day": 30
+      }
+    ],
+    "expectedPV": 984.1269841269841
+  },
+  {
+    "id": "compra_3x_008_pontos_30",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "333.33",
+        "day": 30
+      },
+      {
+        "amount": "333.33",
+        "day": 60
+      },
+      {
+        "amount": "333.34",
+        "day": 90
+      },
+      {
+        "amount": "-8",
+        "day": 30
+      }
+    ],
+    "expectedPV": 976.2742154474959
+  },
+  {
+    "id": "compra_6x_008_pontos_30",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "166.67",
+        "day": 30
+      },
+      {
+        "amount": "166.67",
+        "day": 60
+      },
+      {
+        "amount": "166.67",
+        "day": 90
+      },
+      {
+        "amount": "166.67",
+        "day": 120
+      },
+      {
+        "amount": "166.67",
+        "day": 150
+      },
+      {
+        "amount": "166.65",
+        "day": 180
+      },
+      {
+        "amount": "-8",
+        "day": 30
+      }
+    ],
+    "expectedPV": 964.6506283581465
+  },
+  {
+    "id": "compra_10x_008_pontos_30",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "100.00",
+        "day": 30
+      },
+      {
+        "amount": "100.00",
+        "day": 60
+      },
+      {
+        "amount": "100.00",
+        "day": 90
+      },
+      {
+        "amount": "100.00",
+        "day": 120
+      },
+      {
+        "amount": "100.00",
+        "day": 150
+      },
+      {
+        "amount": "100.00",
+        "day": 180
+      },
+      {
+        "amount": "100.00",
+        "day": 210
+      },
+      {
+        "amount": "100.00",
+        "day": 240
+      },
+      {
+        "amount": "100.00",
+        "day": 270
+      },
+      {
+        "amount": "100.00",
+        "day": 300
+      },
+      {
+        "amount": "-8",
+        "day": 30
+      }
+    ],
+    "expectedPV": 949.435687977183
+  },
+  {
+    "id": "compra_12x_008_pontos_30",
+    "rate": 0.008,
+    "flows": [
+      {
+        "amount": "83.33",
+        "day": 30
+      },
+      {
+        "amount": "83.33",
+        "day": 60
+      },
+      {
+        "amount": "83.33",
+        "day": 90
+      },
+      {
+        "amount": "83.33",
+        "day": 120
+      },
+      {
+        "amount": "83.33",
+        "day": 150
+      },
+      {
+        "amount": "83.33",
+        "day": 180
+      },
+      {
+        "amount": "83.33",
+        "day": 210
+      },
+      {
+        "amount": "83.33",
+        "day": 240
+      },
+      {
+        "amount": "83.33",
+        "day": 270
+      },
+      {
+        "amount": "83.33",
+        "day": 300
+      },
+      {
+        "amount": "83.33",
+        "day": 330
+      },
+      {
+        "amount": "83.37",
+        "day": 360
+      },
+      {
+        "amount": "-8",
+        "day": 30
+      }
+    ],
+    "expectedPV": 941.9464002895996
+  }
+]

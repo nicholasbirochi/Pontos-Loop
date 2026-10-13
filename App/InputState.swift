@@ -1,0 +1,161 @@
+import Foundation
+import DecisionCore
+
+enum CalculatorMode: String, Codable, CaseIterable, Identifiable {
+    case purchase = "Compra", anticipation = "Antecipar", redemption = "Pontos"
+    var id: String { rawValue }
+}
+
+struct InputState: Codable, Equatable {
+    var mode: CalculatorMode = .purchase
+    var referencePrice = "1000,00"
+    var pixDiscount = "5"
+    var cardTotal = "1000,00"
+    var installmentCount = 10
+    var firstDate = Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date()
+    var monthlyRate = "0,8"
+    var reaisPerPoint = "2,50"
+    var reaisPerThousand = "20,00"
+    var eligibleSpend = "1000,00"
+    var rewardsEnabled = true
+    var cashback = "0"
+    var benefitDay = "30"
+    var remainingTotal = "1000,00"
+    var remainingCount = 10
+    var quote = "1000,00"
+    var paymentDate = Date()
+    var incrementalPoints = "0"
+    var bonusDay = "0"
+    var bill = "1000,00"
+    var billDays = "30"
+    var pointsSpent = "1000"
+    var redemptionDiscount = "15,00"
+    var alternativeValue = "20,00"
+
+    static func restore() -> InputState {
+        guard let data = UserDefaults.standard.data(forKey: "compra-clara-draft-v1"),
+              let result = try? JSONDecoder().decode(InputState.self, from: data) else { return InputState() }
+        return result
+    }
+    func persist() {
+        if let data = try? JSONEncoder().encode(self) {
+            UserDefaults.standard.set(data, forKey: "compra-clara-draft-v1")
+        }
+    }
+}
+
+enum BrazilianInput {
+    static func decimal(_ raw: String, label: String) throws -> Decimal {
+        let input = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        let pattern = #"^[+-]?(?:[0-9]+(?:[.,][0-9]+)?|[0-9]{1,3}(?:\.[0-9]{3})+(?:,[0-9]+)?)$"#
+        guard input.range(of: pattern, options: .regularExpression) != nil else {
+            throw CalculationError.invalid("Preencha \(label) com um número válido.")
+        }
+        let grouped = input.range(of: #"^[+-]?[0-9]{1,3}(?:\.[0-9]{3})+$"#,
+                                  options: .regularExpression) != nil
+        let normalized = input.contains(",") || grouped
+            ? input.replacingOccurrences(of: ".", with: "").replacingOccurrences(of: ",", with: ".")
+            : input
+        guard let value = Decimal(string: normalized, locale: Locale(identifier: "en_US_POSIX")),
+              !value.isNaN else { throw CalculationError.invalid("Revise \(label).") }
+        return value
+    }
+    static func day(_ raw: String, label: String) throws -> Int {
+        let value = try decimal(raw, label: label)
+        let d = DecisionEngine.number(value)
+        guard d >= 0, d <= 36_600, d.rounded() == d else {
+            throw CalculationError.invalid("\(label) deve ser inteiro entre 0 e 36.600.")
+        }
+        return Int(d)
+    }
+}
+
+enum LocalSchedule {
+    static func day(_ date: Date) throws -> Int {
+        let calendar = Calendar.current
+        let start = calendar.startOfDay(for: Date())
+        let end = calendar.startOfDay(for: date)
+        let days = calendar.dateComponents([.day], from: start, to: end).day ?? -1
+        guard days >= 0 else { throw CalculationError.invalid("Escolha uma data a partir de hoje.") }
+        return days
+    }
+    static func days(first: Date, count: Int) throws -> [Int] {
+        guard (1...120).contains(count) else { throw CalculationError.invalid("Quantidade inválida.") }
+        return try (0..<count).map {
+            guard let date = Calendar.current.date(byAdding: .month, value: $0, to: first) else {
+                throw CalculationError.invalid("Não foi possível calcular o vencimento.")
+            }
+            return try day(date)
+        }
+    }
+}
+
+struct SavedScenario: Codable, Identifiable {
+    var id: UUID = UUID()
+    var createdAt: Date = Date()
+    var name: String
+    var input: InputState
+}
+
+enum HistoryStore {
+    static func load() -> [SavedScenario] {
+        guard let data = UserDefaults.standard.data(forKey: "compra-clara-history-v1"),
+              let result = try? JSONDecoder().decode([SavedScenario].self, from: data) else { return [] }
+        return result
+    }
+    static func save(_ scenarios: [SavedScenario]) {
+        if let data = try? JSONEncoder().encode(scenarios) {
+            UserDefaults.standard.set(data, forKey: "compra-clara-history-v1")
+        }
+    }
+}
+
+extension InputState {
+    func calculate(_ count: Int? = nil) throws -> Comparison {
+        let input = self
+        func decimal(_ value: String, _ label: String) throws -> Decimal {
+            try BrazilianInput.decimal(value, label: label)
+        }
+        let rate = DecisionEngine.number(try decimal(input.monthlyRate, "rendimento")) / 100
+        switch input.mode {
+        case .purchase:
+            let price = try decimal(input.referencePrice, "preço de referência")
+            let discount = try decimal(input.pixDiscount, "desconto no Pix")
+            guard discount >= 0, discount <= 100 else {
+                throw CalculationError.invalid("O desconto deve ficar entre 0% e 100%.")
+            }
+            return try DecisionEngine.purchase(
+                referencePrice: price,
+                pixPrice: DecisionEngine.cents(price * (1 - discount / 100)),
+                cardTotal: try decimal(input.cardTotal, "total no cartão"),
+                days: try LocalSchedule.days(first: input.firstDate, count: count ?? input.installmentCount),
+                eligibleSpend: input.rewardsEnabled ? decimal(input.eligibleSpend, "base elegível") : 0,
+                reaisPerPoint: input.rewardsEnabled ? decimal(input.reaisPerPoint, "gasto por ponto") : 1,
+                reaisPerThousand: input.rewardsEnabled ? decimal(input.reaisPerThousand, "valor do milheiro") : 0,
+                rewardsEnabled: input.rewardsEnabled,
+                cashback: try decimal(input.cashback, "cashback adicional"),
+                benefitDay: try BrazilianInput.day(input.benefitDay, label: "prazo dos benefícios"),
+                monthlyRate: rate)
+        case .anticipation:
+            let remaining = try DecisionEngine.installments(
+                total: decimal(input.remainingTotal, "saldo das parcelas"),
+                days: LocalSchedule.days(first: input.firstDate, count: input.remainingCount))
+            return try DecisionEngine.anticipation(
+                remaining: remaining, quote: decimal(input.quote, "oferta de quitação"),
+                paymentDay: LocalSchedule.day(input.paymentDate),
+                incrementalPoints: decimal(input.incrementalPoints, "pontos extras"),
+                reaisPerThousand: decimal(input.reaisPerThousand, "valor do milheiro"),
+                bonusDay: BrazilianInput.day(input.bonusDay, label: "prazo do bônus"),
+                monthlyRate: rate)
+        case .redemption:
+            return try DecisionEngine.redemption(
+                bill: decimal(input.bill, "fatura"),
+                billDay: BrazilianInput.day(input.billDays, label: "prazo da fatura"),
+                pointsSpent: decimal(input.pointsSpent, "pontos utilizados"),
+                offeredDiscount: decimal(input.redemptionDiscount, "desconto oferecido"),
+                alternativeValuePerThousand: decimal(input.alternativeValue, "valor alternativo do milheiro"),
+                monthlyRate: rate)
+        }
+    }
+
+}
