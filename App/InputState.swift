@@ -146,6 +146,9 @@ extension InputState {
                 }
                 pix = DecisionEngine.cents(price * (1 - discount / 100))
             }
+            guard card > 0, pix > 0 else {
+                throw CalculationError.invalid("Preencha o preço no Pix e o total no cartão. Zero significa não informado.")
+            }
             return try DecisionEngine.purchase(
                 referencePrice: price,
                 pixPrice: pix,
@@ -159,6 +162,10 @@ extension InputState {
                 benefitDay: try BrazilianInput.day(input.benefitDay, label: "prazo dos benefícios"),
                 monthlyRate: rate)
         case .anticipation:
+            guard try decimal(input.remainingTotal, "saldo") > 0,
+                  decimal(input.quote, "oferta de quitação") > 0 else {
+                throw CalculationError.invalid("Informe o saldo e a oferta de quitação. Zero significa não informado.")
+            }
             let remaining = try DecisionEngine.installments(
                 total: decimal(input.remainingTotal, "saldo das parcelas"),
                 days: LocalSchedule.days(first: input.firstDate, count: input.remainingCount))
