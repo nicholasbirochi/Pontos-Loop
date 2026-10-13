@@ -25,6 +25,12 @@ final class OfferExtractorTests: XCTestCase {
         XCTAssertTrue(result.installments.isEmpty)
         XCTAssertTrue(result.pixPrices.isEmpty)
     }
+    func testExplicitInterestLabelsAreKeptForHumanReview() {
+        let offers = ExtractedOffers.read("10x R$ 100,00 sem juros\n12x R$ 100,00 com juros").installments
+        XCTAssertEqual(offers.map(\.hasInterest), [false, true])
+        XCTAssertNil(ExtractedOffers.read("2x R$ 10,00").installments.first?.hasInterest)
+    }
+
     func testIntegerCurrencyAndDotDecimalsAndMultilineOffer() {
         XCTAssertEqual(ExtractedOffers.read("10x\nde R$ 100").installments.first?.total, 1000)
         XCTAssertEqual(ExtractedOffers.read("2x R$ 1.000").installments.first?.total, 2000)

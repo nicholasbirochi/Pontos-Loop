@@ -2,7 +2,7 @@ import Foundation
 
 /// Respostas locais sobre a calculadora; não chama serviços ou modelos de IA.
 public enum SimpleAssistant {
-    public static func reply(to question: String, comparison: Comparison?) -> String {
+    public static func reply(to question: String, comparison: Comparison?, diagnostics: FourCaseReport? = nil) -> String {
         guard question.count <= 500 else {
             return "A pergunta passou do limite de 500 caracteres. Resuma e tente novamente."
         }
@@ -11,7 +11,7 @@ public enum SimpleAssistant {
         let words = Set(normalized.components(separatedBy: CharacterSet.alphanumerics.inverted)
             .filter { !$0.isEmpty })
         func has(_ terms: String...) -> Bool { !words.isDisjoint(with: terms) }
-        let fallback = "Consigo explicar esta calculadora: Pix, cartão, parcelas, rendimento informado, pontos, cashback, antecipação e resgate. Sou o Noah, um assistente local com respostas prontas. Tente: ‘Qual opção vale mais a pena?’"
+        let fallback = "Consigo explicar esta calculadora: Pix, cartão, parcelas, rendimento informado, pontos, cashback, antecipação e resgate. Sou o Noah, assistente local do Pontos Loop, com respostas prontas. Tente: ‘Qual opção vale mais a pena?’"
         guard !has("postal", "pixar", "tempo", "clima", "celular", "acoes", "bitcoin", "senha", "noticias") else {
             return fallback
         }
@@ -22,8 +22,14 @@ public enum SimpleAssistant {
             return "Sou o Noah, um assistente com respostas prontas sobre a calculadora. Não uso a IA do seu Mac. A leitura de fotos usa o reconhecimento de texto da Apple neste aparelho, sem enviar a imagem para um servidor."
         }
         let asksResult = has("escolher", "escolha", "recomende", "recomendar", "recomendacao", "compensa", "melhor", "vale", "resultado", "economizo", "economia")
-        if asksResult && has("nao", "nunca", "sem") {
+        if asksResult && normalized.range(of: #"\b(?:nao|nunca|sem)\s+(?:me\s+)?(?:recomende|recomendar|indique|escolha)"#, options: .regularExpression) != nil {
             return "Tudo bem, não vou recomendar uma opção. Posso explicar o custo econômico, os pontos ou como preencher a simulação."
+        }
+        if let diagnostics, asksResult || has("diagnostico", "cenarios", "casos", "comparar") {
+            return diagnostics.summary
+        }
+        if has("fatura") && has("pontos", "ganho", "ganhar", "pontua", "pontuacao") {
+            return "Sim: compras elegíveis no Inter Prime podem gerar pontos normais sem antecipar — a referência é 1 ponto a cada R$ 2,50. Eles já entram nas opções elegíveis do cartão. Antecipar pode somar o bônus EXTRA mostrado pelo Inter; não conto os pontos normais duas vezes. É preciso cumprir as regras do Loop, manter débito automático ativo e pagar a fatura integral em dia. Juros e parcelamento da fatura não pontuam; confira a previsão no PDF da sua fatura."
         }
         if asksResult {
             guard let comparison, comparison.options.count >= 2 else {

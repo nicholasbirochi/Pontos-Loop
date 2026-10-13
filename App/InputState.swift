@@ -2,36 +2,40 @@ import Foundation
 import DecisionCore
 
 enum CalculatorMode: String, Codable, CaseIterable, Identifiable {
+    case fourCases = "4 cenários"
     case purchase = "Compra", anticipation = "Antecipar", redemption = "Pontos"
     var id: String { rawValue }
 }
 
 struct InputState: Codable, Equatable {
-    var mode: CalculatorMode = .purchase
-    var referencePrice = ""
-    var directPixPrice: String?
-    var pixDiscount = "5"
-    var cardTotal = ""
-    var installmentCount = 1
+    var mode: CalculatorMode = .fourCases
+    var referencePrice = "0"
+    var directPixPrice: String? = "0"
+    var pixDiscount = "0"
+    var cardTotal = "0"
+    var installmentCount = 0
     var firstDate = Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date()
     var monthlyRate = "0"
-    var reaisPerPoint = "2,50"
-    var reaisPerThousand = "20,00"
-    var eligibleSpend = "1000,00"
+    var reaisPerPoint = "0"
+    var reaisPerThousand = "0"
+    var eligibleSpend = "0"
     var rewardsEnabled = false
     var cashback = "0"
-    var benefitDay = "30"
-    var remainingTotal = "1000,00"
-    var remainingCount = 10
-    var quote = "1000,00"
+    var benefitDay = "0"
+    var remainingTotal = "0"
+    var remainingCount = 0
+    var quote = "0"
     var paymentDate = Date()
     var incrementalPoints = "0"
     var bonusDay = "0"
-    var bill = "1000,00"
-    var billDays = "30"
-    var pointsSpent = "1000"
-    var redemptionDiscount = "15,00"
-    var alternativeValue = "20,00"
+    var bill = "0"
+    var billDays = "0"
+    var pointsSpent = "0"
+    var redemptionDiscount = "0"
+    var alternativeValue = "0"
+
+    var interestTotal: String? = "0"
+    var interestCount: Int? = 0
 
     static func restore() -> InputState {
         guard let data = UserDefaults.standard.data(forKey: "compra-clara-draft-v1"),
@@ -119,6 +123,11 @@ extension InputState {
         }
         let rate = DecisionEngine.number(try decimal(input.monthlyRate, "rendimento")) / 100
         switch input.mode {
+        case .fourCases:
+            guard let comparison = try diagnoseFourCases().comparison else {
+                throw CalculationError.invalid("Preencha pelo menos 2 cenários para comparar. Zero significa não informado.")
+            }
+            return comparison
         case .purchase:
             let card = try decimal(input.cardTotal, "total no cartão")
             let pix: Decimal
@@ -171,4 +180,25 @@ extension InputState {
         }
     }
 
+}
+
+extension InputState {
+    func diagnoseFourCases() throws -> FourCaseReport {
+        func value(_ raw: String, _ label: String) throws -> Decimal {
+            try BrazilianInput.decimal(raw, label: label)
+        }
+        return try DecisionEngine.fourCases(
+            principal: value(cardTotal, "valor da compra"),
+            pixPrice: value(directPixPrice ?? "0", "preço Pix"),
+            noInterestDays: installmentCount == 0 ? [] : LocalSchedule.days(first: firstDate, count: installmentCount),
+            interestTotal: value(interestTotal ?? "0", "total com juros"),
+            interestDays: (interestCount ?? 0) == 0 ? [] : LocalSchedule.days(first: firstDate, count: interestCount ?? 0),
+            anticipationQuote: value(quote, "oferta de antecipação"),
+            anticipationDay: LocalSchedule.day(paymentDate), firstDueDay: LocalSchedule.day(firstDate),
+            extraPoints: value(incrementalPoints, "pontos extras"),
+            reaisPerThousand: value(reaisPerThousand, "valor de mil pontos"),
+            normalPointDay: BrazilianInput.day(benefitDay, label: "prazo dos pontos normais"),
+            anticipatedPointDay: BrazilianInput.day(bonusDay, label: "prazo dos pontos antecipados"),
+            monthlyRate: DecisionEngine.number(value(monthlyRate, "rendimento")) / 100)
+    }
 }

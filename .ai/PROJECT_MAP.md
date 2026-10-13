@@ -1,9 +1,10 @@
-# CompraClara — projeto 60
+# Pontos Loop — projeto 60
 
 App nativo SwiftUI, iOS 17+ e macOS 14+, sem dependências remotas.
 
 - `AppRootView`: mantém rascunho e histórico e conecta Simular, Noah e Salvos.
 - `InputState.calculate`: valida a entrada brasileira e transforma datas em fluxos.
+- `DecisionCore/FourCaseDiagnosis`: diagnóstico de quatro ofertas, pontos normais do Prime em cada opção de cartão e bônus incremental separado; zeros são dados ausentes.
 - `DecisionCore/DecisionEngine`: dinheiro em Decimal e valor presente em Double.
 - `DecisionCore/SimpleAssistant`: respostas locais por assunto, com a comparação atual.
 - `CalculatorView`: entrada simples (Pix direto, total e parcelas), comparação explícita e detalhes recolhidos.

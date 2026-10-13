@@ -1,44 +1,61 @@
-# CompraClara · projeto 60
+# Pontos Loop · projeto 60 (numeração apenas da pasta local)
 
 Calculadora nativa para escolher entre Pix, cartão, antecipação e resgate de
 pontos. Interface em português, visual preto e grafite e **Noah**, um chatbot
 local que explica as contas de um jeito simples. Compatível com **iPhone 13**
 (iOS 17+) e Mac (macOS 14+).
 
-<img src="Design/CompraClara-iPhone13.png" width="300" alt="CompraClara no simulador do iPhone 13, com tema preto e Noah" />
+<img src="Design/PontosLoop-iPhone13.png" width="300" alt="Pontos Loop no simulador do iPhone 13, com tema preto e Noah" />
 
 ## Ver e instalar
 
-- **Mac:** abra `CompraClara.xcodeproj`, escolha o esquema
-  `CompraClara-macOS`, destino **My Mac**, e execute com ⌘R.
-- **Simulador:** abra o mesmo projeto, escolha `CompraClara-iOS` e um iPhone
+- **Mac:** abra `PontosLoop.xcodeproj`, escolha o esquema
+  `PontosLoop-macOS`, destino **My Mac**, e execute com ⌘R.
+- **Simulador:** abra o mesmo projeto, escolha `PontosLoop-iOS` e um iPhone
   simulado, e execute com ⌘R.
 - **Seu iPhone 13:** conecte por cabo, escolha sua equipe em
   **Signing & Capabilities → Team**, selecione seu iPhone e execute com ⌘R.
   [Passo a passo completo](Docs/INSTALAR-NO-IPHONE.md).
 
-Também pode dar dois cliques em `Abrir CompraClara.command`.
+Também pode dar dois cliques em `Abrir Pontos Loop.command`.
 O projeto Xcode está incluído. XcodeGen só é necessário para regenerá-lo depois
 que você mudar `project.yml`: `xcodegen generate`.
 
-## Comparar de um jeito simples
+## Aprender e comparar os quatro casos
 
-1. Digite **Preço no Pix** e **Total no cartão** e ajuste as parcelas.
-2. Toque em **Comparar agora**. Rendimento e pontos ficam em **Ajustes opcionais**;
-   a memória e o gráfico ficam em **Ver detalhes do cálculo**.
-3. Para começar com fotos, toque em **Usar foto ou print** (ou **Comparar uma foto**
-   no Noah). Selecione até 4 imagens, confira/corrija os valores e toque em
-   **Usar e comparar**. No Mac, selecione os arquivos de imagem.
+No topo há **Passo a passo: aprenda a comparar**. Novas simulações começam com
+valores numéricos zerados; **Nova simulação** limpa o rascunho atual sem apagar o histórico.
 
-A leitura usa **Apple Vision no próprio iPhone ou Mac**, sem servidor. Funciona
-melhor com ofertas explícitas como `Pix R$ 950,00` e `10x de R$ 100,00`.
-Imagens sem preço Pix podem precisar desse valor digitado. Ofertas ambíguas não
-são adivinhadas, e listas de parcelas irregulares não viram um cronograma.
-Fotos e texto lido não são gravados no histórico; só os valores confirmados.
-A importação começa com rendimento 0%, sem pontos/cashback, como indicado na revisão.
+1. Informe o valor elegível da compra sem juros e o preço final no Pix.
+2. Preencha as parcelas sem juros e, se existir, o total/parcelas da oferta com juros.
+3. Copie a oferta de quitação e somente o bônus **extra** de pontos do Inter.
+4. Nos ajustes, informe o valor real de 1.000 pontos no seu resgate, rendimento
+   líquido e datas de disponibilidade dos pontos.
+5. Toque em **Diagnosticar 4 cenários** ou peça o diagnóstico ao **Noah**.
 
-**O Noah não utiliza Ollama nem a IA deste Mac.** Continua usando respostas locais
-prontas. Reconhecer texto numa foto é uma função separada do chatbot.
+Zero significa oferta não informada, não uma opção grátis. O app mostra os quatro
+casos, aponta dados faltantes e recomenda apenas entre as ofertas válidas. Sem
+valor de resgate informado, mostra pontos em quantidade e avisa que seu valor em
+reais ainda não entra no ranking.
+
+A estimativa Prime usa **1 ponto/R$ 2,50 de compra elegível**, nas opções de cartão
+com e sem juros e na antecipação. Os pontos normais entram uma vez; antecipar soma
+apenas o bônus extra informado. Juros não aumentam a base elegível. O modelo de
+quatro ofertas compara a mesma compra antes da decisão; para dívida já contratada,
+use **Antecipar**. Os prazos dos pontos são aproximações informadas pelo usuário.
+
+**Só estar na fatura não torna todo lançamento elegível.** O Inter exige as
+condições do Loop, débito automático ativo e pagamento integral em dia; encargos,
+parcelamento da fatura e outros lançamentos são excluídos. Confira a previsão no
+PDF da sua fatura. [Fontes oficiais e consulta](Docs/INTER-PRIME.md).
+
+Para fotos, use **Usar foto ou print** (até 4 imagens). Confira Pix, total,
+parcelas e se há juros antes de confirmar. Ofertas ambíguas e parcelas irregulares
+exigem preenchimento manual. A leitura usa Apple Vision local; fotos e texto não
+são gravados no histórico.
+
+O **Noah não utiliza a IA do Mac**. Suas respostas locais usam o diagnóstico real
+dos cenários informados, sem API ou modelo generativo.
 
 ## O que tem
 
@@ -66,7 +83,7 @@ reservado e pagamento integral da fatura. [Fórmulas](Docs/FORMULAS.md).
 ```sh
 swift test --package-path Packages/DecisionCore --scratch-path /tmp/compraclara-tests
 python3 Scripts/check_math.py
-xcodebuild -project CompraClara.xcodeproj -scheme CompraClara-iOS \
+xcodebuild -project PontosLoop.xcodeproj -scheme PontosLoop-iOS \
   -destination 'generic/platform=iOS Simulator' \
   -derivedDataPath /tmp/compraclara-build CODE_SIGNING_ALLOWED=NO build
 ```
@@ -89,4 +106,4 @@ Para testes de interface, selecione um simulador no Xcode e use ⌘U.
 
 O símbolo do ícone segue a referência do Inter, recolorido em cinza sobre preto
 conforme pedido. [Fonte e reprodução do ícone](Design/LOGO.md).
-Este é um projeto pessoal independente. Não conecta ao banco nem pede senha.
+Esta é uma ferramenta pessoal independente, sem vínculo oficial com o Inter. Não conecta ao banco nem pede senha.

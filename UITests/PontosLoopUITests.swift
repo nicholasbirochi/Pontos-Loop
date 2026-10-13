@@ -1,12 +1,14 @@
 import XCTest
 
-final class CompraClaraUITests: XCTestCase {
+final class PontosLoopUITests: XCTestCase {
     private var app: XCUIApplication!
 
     override func setUpWithError() throws {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+        XCTAssertTrue(app.buttons["newScenario"].waitForExistence(timeout: 10))
+        app.buttons["newScenario"].tap()
         XCTAssertTrue(app.segmentedControls["scenarioPicker"].waitForExistence(timeout: 10))
         app.segmentedControls.buttons["Compra"].tap()
     }
@@ -21,8 +23,24 @@ final class CompraClaraUITests: XCTestCase {
             field.typeText(value)
             if app.buttons["Concluir"].exists { app.buttons["Concluir"].tap() }
         }
+        app.steppers["purchaseCount"].buttons.element(boundBy: 1).tap()
         app.buttons["compareNow"].tap()
         XCTAssertTrue(app.staticTexts["recommendation"].waitForExistence(timeout: 5))
+    }
+
+    func testZeroDefaultsAndMissingOffersAreNotRecommendedAsFree() {
+        app.segmentedControls.buttons["4 cenários"].tap()
+        let shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = "Pontos Loop zerado"
+        shot.lifetime = .keepAlways
+        add(shot)
+        XCTAssertTrue((app.textFields["Valor da compra elegível sem juros"].value as? String ?? "").hasPrefix("0"))
+        XCTAssertTrue((app.textFields["Preço final no Pix com desconto"].value as? String ?? "").hasPrefix("0"))
+        app.buttons["compareNow"].tap()
+        XCTAssertFalse(app.staticTexts["recommendation"].exists)
+        app.buttons["explainResult"].tap()
+        app.buttons["Diagnóstico dos 4 cenários"].tap()
+        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Preencha pelo menos 2")).firstMatch.waitForExistence(timeout: 5))
     }
 
     func testSimpleStartAndPhotoEntry() {
@@ -39,8 +57,8 @@ final class CompraClaraUITests: XCTestCase {
         comparePurchase()
         XCTAssertTrue(app.staticTexts["recommendation"].waitForExistence(timeout: 10))
         app.buttons["explainResult"].tap()
-        app.buttons["Qual opção vale mais a pena?"].tap()
-        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS[c] %@", "Pelos dados da simulação")).firstMatch.waitForExistence(timeout: 5))
+        app.buttons["Diagnóstico dos 4 cenários"].tap()
+        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS[c] %@", "Diagnóstico dos 4 cenários")).firstMatch.waitForExistence(timeout: 5))
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = "Noah no iPhone"
         attachment.lifetime = .keepAlways

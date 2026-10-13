@@ -93,3 +93,23 @@ Taxa finita maior que -100% e até 100% a.m. é limite matemático, não recomen
 Taxa negativa é permitida como hipótese.
 IR, IOF, custos e risco não são calculados automaticamente.
 Use rendimento líquido ou inclua os custos nos fluxos.
+
+## Diagnóstico dos quatro cenários — Pontos Loop 1.2
+
+Para a mesma compra elegível: PontosNormais = ValorCompraSemJuros / 2,50.
+CustoSemJuros = VPparcelasSemJuros − VPpontosNormais.
+CustoComJuros = VPparcelasComJuros − VPpontosNormais; juros não ampliam a base de pontos.
+CustoPix = PrecoFinalPixHoje, sem os pontos de compra no cartão.
+CustoAntecipar = VPquitacao − VPpontosNormais − VPbonusEXTRA.
+Os pontos normais aparecem UMA vez em cada alternativa elegível de cartão.
+Os prazos dos pontos normais e dos pontos após antecipar são informados pelo usuário.
+
+Zero em preços/quantidade significa oferta ausente e nunca uma alternativa grátis.
+É preciso pelo menos duas ofertas válidas para recomendar; o diagnóstico continua
+mostrando as quatro posições com os dados faltantes. Empates até um centavo são
+apresentados como empate, inclusive quando há mais de duas alternativas.
+Milheiro zero permite mostrar quantidade de pontos, mas seu benefício em reais
+fica zero e isso é avisado. Não há conversão universal ou rendimento predefinido.
+O diagnóstico presume compra elegível e cumprimento das condições do Inter Loop.
+Para pagamentos já contratados sem alternativa Pix real, use o modo Antecipar;
+não compare uma dívida existente com uma oferta que não está disponível.

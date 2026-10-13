@@ -15,9 +15,11 @@ struct PhotoImportView: View {
     @State private var text = ""
     @State private var offers = ExtractedOffers.read("")
     @State private var selectedOffer: String = ""
-    @State private var pix = ""
-    @State private var total = ""
-    @State private var count = 1
+    @State private var pix = "0"
+    @State private var withInterest = false
+    @State private var principal = "0"
+    @State private var total = "0"
+    @State private var count = 0
     @State private var firstDate = Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date()
     @State private var error: String?
 
@@ -49,12 +51,12 @@ struct PhotoImportView: View {
                             Picker("Qual parcelamento?", selection: $selectedOffer) {
                                 Text("Escolha uma oferta").tag("")
                                 ForEach(offers.installments) { offer in
-                                    Text("\(offer.count)x de \(money(offer.amount))").tag(offer.id)
+                                    Text("\(offer.count)x de \(money(offer.amount))" + (offer.hasInterest.map { $0 ? " · com juros" : " · sem juros" } ?? "")).tag(offer.id)
                                 }
                             }
                             .onChange(of: selectedOffer) { _, id in
                                 if let offer = offers.installments.first(where: { $0.id == id }) {
-                                    total = number(offer.total); count = offer.count
+                                    total = number(offer.total); count = offer.count; withInterest = offer.hasInterest ?? false
                                 }
                             }
                         }
@@ -70,9 +72,11 @@ struct PhotoImportView: View {
                         }
                         field("Preço no Pix", value: $pix)
                         field("Total no cartão", value: $total)
-                        Stepper("Parcelas: \(count)x", value: $count, in: 1...36)
+                        Toggle("Esta oferta do cartão tem juros", isOn: $withInterest)
+                        if withInterest { field("Valor da compra sem juros (base elegível)", value: $principal) }
+                        Stepper("Parcelas: \(count)x", value: $count, in: 0...36)
                         DatePicker("Primeiro vencimento", selection: $firstDate, in: Date()..., displayedComponents: .date)
-                        Text("O total sugerido é parcelas × valor de cada parcela. Confira juros, taxas e a última parcela. A primeira comparação usa rendimento de 0%, sem pontos e sem cashback; você pode adicionar extras depois.")
+                        Text("O total sugerido é parcelas × valor de cada parcela. Confira juros, taxas e a última parcela. O rendimento e o valor monetário dos pontos começam em 0. Pontos normais do Prime são estimados sobre a compra elegível; confira também se esta oferta tem juros.")
                             .font(.caption).foregroundStyle(.secondary)
                         Button(action: apply) {
                             Label("Usar e comparar", systemImage: "checkmark")
@@ -151,18 +155,18 @@ struct PhotoImportView: View {
         readTask?.cancel()
         reading = true; error = nil
         text = ""; offers = ExtractedOffers.read("")
-        pix = ""; total = ""; selectedOffer = ""
+        pix = "0"; total = "0"; principal = "0"; withInterest = false; selectedOffer = ""
         readTask = Task {
             do {
                 let recognized = try await load()
                 try Task.checkCancellation()
                 text = String(recognized.prefix(30_000))
                 offers = ExtractedOffers.read(text)
-                selectedOffer = ""; pix = ""; total = ""; count = 1
+                selectedOffer = ""; pix = "0"; total = "0"; count = 0
                 if offers.pixPrices.count == 1 { pix = number(offers.pixPrices[0]) }
                 if offers.installments.count == 1 {
                     let offer = offers.installments[0]
-                    total = number(offer.total); count = offer.count; selectedOffer = offer.id
+                    total = number(offer.total); count = offer.count; withInterest = offer.hasInterest ?? false; selectedOffer = offer.id
                 }
             } catch { if !Task.isCancelled { self.error = error.localizedDescription } }
             if !Task.isCancelled { reading = false }
@@ -171,11 +175,13 @@ struct PhotoImportView: View {
 
     private func apply() {
         do {
-            var reviewed = input
-            reviewed.mode = .purchase
+            var reviewed = InputState()
+            reviewed.mode = .fourCases
             reviewed.directPixPrice = pix
-            reviewed.cardTotal = total
-            reviewed.installmentCount = count
+            reviewed.cardTotal = withInterest ? principal : total
+            reviewed.interestTotal = withInterest ? total : "0"
+            reviewed.interestCount = withInterest ? count : 0
+            reviewed.installmentCount = withInterest ? 0 : count
             reviewed.firstDate = firstDate
             reviewed.monthlyRate = "0"
             reviewed.rewardsEnabled = false

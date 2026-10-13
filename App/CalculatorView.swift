@@ -37,9 +37,10 @@ struct CalculatorView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
+                        tutorial
                         hero
                         modePicker
-                        if input.mode == .purchase {
+                        if input.mode == .purchase || input.mode == .fourCases {
                             Button(action: openPhoto) {
                                 Label("Usar foto ou print", systemImage: "photo.on.rectangle")
                                     .font(.headline).frame(maxWidth: .infinity, minHeight: 38)
@@ -60,7 +61,7 @@ struct CalculatorView: View {
                                 hasCompared = true
                             }
                         } label: {
-                            Label("Comparar agora", systemImage: "equal.circle.fill")
+                            Label(input.mode == .fourCases ? "Diagnosticar 4 cenários" : "Comparar agora", systemImage: "equal.circle.fill")
                                 .font(.headline).frame(maxWidth: .infinity, minHeight: 40)
                         }
                         .buttonStyle(.borderedProminent)
@@ -68,12 +69,16 @@ struct CalculatorView: View {
                         advancedInputs
                         if hasCompared {
                             VStack(spacing: 18) {
+                                if input.mode == .fourCases {
+                                    fourCaseOutput
+                                } else {
                                 if case .success(let comparison) = result {
                                     recommendation(comparison)
                                     DisclosureGroup("Ver detalhes do cálculo") { output.padding(.top, 14) }
                                         .font(.subheadline)
                                 } else {
                                     output
+                                }
                                 }
                             }.id("result")
                         }
@@ -87,13 +92,19 @@ struct CalculatorView: View {
                 }
             }
             .background(AppTheme.canvas)
-            .navigationTitle("CompraClara")
+            .navigationTitle("Pontos Loop")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .scrollDismissesKeyboard(.interactively)
             #endif
             .toolbar {
                 ToolbarItemGroup {
+                    Button {
+                        input = InputState()
+                        hasCompared = false
+                        showAdvanced = false
+                    } label: { Label("Nova simulação", systemImage: "arrow.counterclockwise") }
+                    .accessibilityIdentifier("newScenario")
                     Button { openHistory() } label: { Label("Histórico", systemImage: "clock") }
                     Button {
                         scenarioName = input.mode.rawValue
@@ -126,9 +137,69 @@ struct CalculatorView: View {
         }
     }
 
+    private var tutorial: some View {
+        DisclosureGroup {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("1. Informe o valor da mesma compra e o preço final no Pix.")
+                Text("2. Preencha parcelas sem juros e, se existir, a oferta com juros.")
+                Text("3. Copie do Inter a quitação e apenas o bônus EXTRA de pontos.")
+                Text("4. Em Ajustes opcionais, informe o valor do seu resgate e o rendimento, se houver.")
+                Text("5. Toque em Diagnosticar 4 cenários. O Noah explica qual tem menor custo e o que falta preencher.")
+                Text("Pontos normais da compra não dependem de antecipar. Valores em zero significam não informado; nenhuma oferta é inventada.")
+                    .foregroundStyle(.secondary)
+            }.font(.subheadline).padding(.top, 12)
+        } label: {
+            Label("Passo a passo: aprenda a comparar", systemImage: "list.number")
+                .font(.subheadline.bold())
+        }
+        .padding(16).background(AppTheme.card, in: RoundedRectangle(cornerRadius: 18))
+        .accessibilityIdentifier("tutorial")
+    }
+
+    @ViewBuilder private var fourCaseOutput: some View {
+        if let report = try? input.diagnoseFourCases() {
+            panel("Diagnóstico dos 4 cenários") {
+                if let comparison = report.comparison {
+                    Text(comparison.recommendation).font(.system(.title2, design: .rounded).bold())
+                        .accessibilityIdentifier("recommendation")
+                    Text("Menor custo entre as ofertas preenchidas, com suas datas e condições.")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
+                ForEach(report.cases) { item in
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack {
+                            Text(item.kind.rawValue).font(.subheadline.bold())
+                            Spacer()
+                            if let option = item.option {
+                                Text(money(option.presentCost)).font(.subheadline.bold()).monospacedDigit()
+                            }
+                        }
+                        if item.option != nil {
+                            Text("Pontos normais: \(item.normalPoints.formatted(.number.locale(brazil))) · extras: \(item.extraPoints.formatted(.number.locale(brazil)))")
+                                .font(.caption).foregroundStyle(.secondary)
+                        }
+                        Text(item.explanation).font(.caption).foregroundStyle(.secondary)
+                    }
+                    Divider()
+                }
+                if report.pointValueIsMissing {
+                    Text("O valor dos pontos está em 0: informe seu resgate nos ajustes para incluí-los no custo em reais.")
+                        .font(.caption).foregroundStyle(.orange)
+                }
+                Button(action: openAssistant) { Label("Noah, explique os 4 cenários", systemImage: "bubble.left.and.bubble.right") }
+                    .buttonStyle(.bordered).accessibilityIdentifier("explainResult")
+                if report.comparison != nil {
+                    DisclosureGroup("Ver memória do cálculo") { output.padding(.top, 12) }
+                }
+            }
+        } else {
+            output
+        }
+    }
+
     private var hero: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Compare sem complicar.")
+            Text("Escolha como pagar.")
                 .font(.system(.title2, design: .rounded).bold())
             Text("Digite os valores ou escolha uma foto da oferta.")
                 .font(.subheadline).foregroundStyle(.secondary)
@@ -159,11 +230,32 @@ struct CalculatorView: View {
         VStack(spacing: 18) {
             panel("Valores da oferta") {
                 switch input.mode {
+                case .fourCases:
+                    numberField("Valor da compra elegível sem juros", text: $input.cardTotal, unit: "R$")
+                    numberField("Preço final no Pix com desconto", text: pixPrice, unit: "R$")
+                    Stepper("Parcelas sem juros: \(input.installmentCount)x", value: $input.installmentCount, in: 0...36)
+                    DisclosureGroup("Oferta com juros") {
+                        numberField("Total com juros e taxas", text: Binding(get: { input.interestTotal ?? "0" }, set: { input.interestTotal = $0 }), unit: "R$")
+                        Stepper("Parcelas com juros: \(input.interestCount ?? 0)x", value: Binding(get: { input.interestCount ?? 0 }, set: { input.interestCount = $0 }), in: 0...36)
+                        Text("Parcelamento da compra, não da fatura. Encargos não geram pontos adicionais.")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                    DisclosureGroup("Antecipação + pontos extras") {
+                        numberField("Oferta de quitação do Inter", text: $input.quote, unit: "R$")
+                        numberField("Bônus EXTRA mostrado pelo Inter", text: $input.incrementalPoints, unit: "pts")
+                        DatePicker("Data do pagamento antecipado", selection: $input.paymentDate, in: Date()..., displayedComponents: .date)
+                        numberField("Pontos da antecipação disponíveis em", text: $input.bonusDay, unit: "dias")
+                        Text("Os pontos normais da compra já entram na conta. Aqui informe somente o bônus adicional da oferta, sem repetir os pontos normais.")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                    Text("Deixe em 0 as ofertas que não existem. Compare a mesma compra, com o saldo integral; parcelas já contratadas também têm a aba Antecipar.")
+                        .font(.caption).foregroundStyle(.secondary)
                 case .purchase:
                     numberField("Preço no Pix", text: pixPrice, unit: "R$")
                     numberField("Total no cartão", text: $input.cardTotal, unit: "R$")
-                    Stepper("Parcelas: \(input.installmentCount)x", value: $input.installmentCount, in: 1...36)
-                    if let total = try? decimal(input.cardTotal, "total"), total > 0 {
+                    Stepper("Parcelas: \(input.installmentCount)x", value: $input.installmentCount, in: 0...36)
+                        .accessibilityIdentifier("purchaseCount")
+                    if let total = try? decimal(input.cardTotal, "total"), total > 0, input.installmentCount > 0 {
                         Text("Aproximadamente \(money(DecisionEngine.number(total / Decimal(input.installmentCount)))) por parcela.")
                             .font(.caption).foregroundStyle(.secondary)
                     }
@@ -172,7 +264,7 @@ struct CalculatorView: View {
                 case .anticipation:
                     numberField("Soma das parcelas restantes", text: $input.remainingTotal, unit: "R$")
                     Stepper("Parcelas restantes: \(input.remainingCount)",
-                            value: $input.remainingCount, in: 1...36)
+                            value: $input.remainingCount, in: 0...36)
                     DatePicker("Próximo vencimento", selection: $input.firstDate,
                                in: Date()..., displayedComponents: .date)
                     numberField("Valor da oferta de quitação", text: $input.quote, unit: "R$")
@@ -200,10 +292,21 @@ struct CalculatorView: View {
 
     private var advancedInputs: some View {
         DisclosureGroup(isExpanded: $showAdvanced) {
-                if input.mode == .purchase {
+                if input.mode == .purchase || input.mode == .fourCases {
                     DatePicker("Primeiro vencimento", selection: $input.firstDate,
                                in: Date()..., displayedComponents: .date)
                 }
+            if input.mode == .fourCases {
+                panel("Pontos normais do Inter Prime") {
+                    Text("Estimativa: 1 ponto a cada R$ 2,50 de compra elegível. Os pontos normais entram em todas as opções de cartão, mesmo sem antecipar.")
+                        .font(.subheadline)
+                    numberField("Valor real de 1.000 pontos no seu resgate", text: $input.reaisPerThousand, unit: "R$")
+                    numberField("Pontos normais disponíveis em", text: $input.benefitDay, unit: "dias")
+                    Text("Com o valor do milheiro em 0, os pontos aparecem em quantidade, mas não reduzem o custo em reais. Use a previsão da sua fatura; elegibilidade, débito automático ativo e pagamento integral em dia são necessários.")
+                        .font(.caption).foregroundStyle(.secondary)
+                    Link("Consultar regras do Inter", destination: URL(string: "https://www.inter.co/pra-voce/cartoes/programa-de-pontos/")!)
+                }
+            }
             panel("Rendimento do dinheiro") {
                 numberField("Rendimento líquido mensal", text: $input.monthlyRate, unit: "% a.m.")
                 HStack {
@@ -221,9 +324,8 @@ struct CalculatorView: View {
                         numberField("Gasto para ganhar 1 ponto", text: $input.reaisPerPoint, unit: "R$")
                         numberField("Valor estimado de 1.000 pontos", text: $input.reaisPerThousand, unit: "R$")
                         numberField("Valor da compra elegível a pontos", text: $input.eligibleSpend, unit: "R$")
-                        Button("Usar exemplo de pontos") {
+                        Button("Usar regra do Prime") {
                             input.reaisPerPoint = "2,50"
-                            input.reaisPerThousand = "20,00"
                             input.eligibleSpend = input.cardTotal
                         }.font(.caption)
                         Text("Exemplo editável: 1 ponto a cada R$ 2,50 e R$ 20 por mil pontos. Use os valores do seu programa e do resgate que pretende fazer.")
@@ -408,7 +510,7 @@ struct CalculatorView: View {
 
     private func summary(_ comparison: Comparison) -> String {
         let options = comparison.options.map { "\($0.name): custo econômico \(money($0.presentCost))" }.joined(separator: "\n")
-        return "Compra Clara\n\(comparison.recommendation)\n\(options)\nDiferença: \(money(comparison.difference))\nRendimento líquido mensal: \(input.monthlyRate)%\nEstimativa segundo as condições informadas."
+        return "Pontos Loop\n\(comparison.recommendation)\n\(options)\nDiferença: \(money(comparison.difference))\nRendimento líquido mensal: \(input.monthlyRate)%\nEstimativa segundo as condições informadas."
     }
 
     private func numberField(_ title: String, text: Binding<String>, unit: String) -> some View {

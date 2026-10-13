@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AC334DD5B2C30F1396293CC1"
-               BuildableName = "CompraClara-iOS.app"
-               BlueprintName = "CompraClara-iOS"
-               ReferencedContainer = "container:CompraClara.xcodeproj">
+               BlueprintIdentifier = "403FCBF1A273040709F05362"
+               BuildableName = "PontosLoop-iOS.app"
+               BlueprintName = "PontosLoop-iOS"
+               ReferencedContainer = "container:PontosLoop.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AC334DD5B2C30F1396293CC1"
-            BuildableName = "CompraClara-iOS.app"
-            BlueprintName = "CompraClara-iOS"
-            ReferencedContainer = "container:CompraClara.xcodeproj">
+            BlueprintIdentifier = "403FCBF1A273040709F05362"
+            BuildableName = "PontosLoop-iOS.app"
+            BlueprintName = "PontosLoop-iOS"
+            ReferencedContainer = "container:PontosLoop.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -44,10 +44,10 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "339B6ED782229138527E8B04"
-               BuildableName = "CompraClara-UITests.xctest"
-               BlueprintName = "CompraClara-UITests"
-               ReferencedContainer = "container:CompraClara.xcodeproj">
+               BlueprintIdentifier = "6C3E9F773849EE5F88CAA16A"
+               BuildableName = "PontosLoop-UITests.xctest"
+               BlueprintName = "PontosLoop-UITests"
+               ReferencedContainer = "container:PontosLoop.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -68,10 +68,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AC334DD5B2C30F1396293CC1"
-            BuildableName = "CompraClara-iOS.app"
-            BlueprintName = "CompraClara-iOS"
-            ReferencedContainer = "container:CompraClara.xcodeproj">
+            BlueprintIdentifier = "403FCBF1A273040709F05362"
+            BuildableName = "PontosLoop-iOS.app"
+            BlueprintName = "PontosLoop-iOS"
+            ReferencedContainer = "container:PontosLoop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -87,10 +87,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AC334DD5B2C30F1396293CC1"
-            BuildableName = "CompraClara-iOS.app"
-            BlueprintName = "CompraClara-iOS"
-            ReferencedContainer = "container:CompraClara.xcodeproj">
+            BlueprintIdentifier = "403FCBF1A273040709F05362"
+            BuildableName = "PontosLoop-iOS.app"
+            BlueprintName = "PontosLoop-iOS"
+            ReferencedContainer = "container:PontosLoop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

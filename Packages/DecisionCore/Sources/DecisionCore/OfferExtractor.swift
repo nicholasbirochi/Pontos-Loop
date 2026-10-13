@@ -3,8 +3,9 @@ import Foundation
 public struct InstallmentOffer: Equatable, Identifiable {
     public let count: Int
     public let amount: Decimal
+    public let hasInterest: Bool?
     public var total: Decimal { amount * Decimal(count) }
-    public var id: String { "\(count)-\(amount)" }
+    public var id: String { "\(count)-\(amount)-\(hasInterest.map(String.init) ?? "unknown")" }
 }
 
 /// Lê somente ofertas explícitas. Valores ambíguos ficam para revisão humana.
@@ -22,7 +23,13 @@ public struct ExtractedOffers {
         for match in regex.matches(in: text, range: NSRange(location: 0, length: source.length)) {
             guard let count = Int(source.substring(with: match.range(at: 1))), (1...36).contains(count),
                   let value = decimal(source.substring(with: match.range(at: 2))), value > 0 else { continue }
-            let offer = InstallmentOffer(count: count, amount: value)
+            let end = min(source.length, NSMaxRange(match.range) + 70)
+            let snippet = source.substring(with: NSRange(location: match.range.location, length: end - match.range.location)).components(separatedBy: .newlines).first ?? ""
+            let folded = snippet.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "pt_BR"))
+            let without = folded.contains("sem juros")
+            let withFee = folded.contains("com juros")
+            let interest: Bool? = without == withFee ? nil : withFee
+            let offer = InstallmentOffer(count: count, amount: value, hasInterest: interest)
             if !installments.contains(offer) { installments.append(offer) }
         }
         let currency = try! NSRegularExpression(pattern: #"(?i)R\$\s*("# + amount + #")(?![0-9.,])|([0-9]+(?:\.[0-9]{3})*,[0-9]{2})(?![0-9.,])"#)
