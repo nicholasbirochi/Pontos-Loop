@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0ED7643DE379C4D7115E6777 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261FD31AA6FA111B83CBCE /* HistoryView.swift */; };
+		2CCEB238B8D9718094798549 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261FD31AA6FA111B83CBCE /* HistoryView.swift */; };
+		32A357C67B9CD83E5BEEC9B3 /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65BC60624757F7A9D16BAC /* AssistantView.swift */; };
+		5FE8EA6BCCA51FA6F9ECC5E7 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71B7B1293202EF38A3B780C /* AppRootView.swift */; };
+		65CF4C694275611B3E5C5C45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AC3668E48D3B45D1383FE51 /* Assets.xcassets */; };
+		7182467E7505FE751B1639C4 /* InputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41CB0D350B8099C92FB01E /* InputState.swift */; };
+		76ACCA8074410F9E3EBFBC72 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88849C9ED6CC1FD71DDD7D98 /* AppTheme.swift */; };
+		790E50A5613FEB3C37EB10FE /* CompraClaraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F250DFC9C766E4DC5FBD2 /* CompraClaraApp.swift */; };
+		7AD863D9FD18922FA082D1F7 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71B7B1293202EF38A3B780C /* AppRootView.swift */; };
+		83E07EF5D9DF98D0DA68F30D /* DecisionCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0CFC7BB858F7612E44BD3CA9 /* DecisionCore */; };
+		895D605F72188881FAEF849C /* CompraClaraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0696AC2029B25E9E1BB61B /* CompraClaraUITests.swift */; };
+		92744727C4F182869FD580BF /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65BC60624757F7A9D16BAC /* AssistantView.swift */; };
+		AD6218DEF6B6F3C44375BE02 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9E6C0EF9F351F239319D3617 /* PrivacyInfo.xcprivacy */; };
+		B17731CFA8D52DF559ED8027 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88849C9ED6CC1FD71DDD7D98 /* AppTheme.swift */; };
+		BCC0FD01C8EE36BD13C9C734 /* InputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C41CB0D350B8099C92FB01E /* InputState.swift */; };
+		C11C2133C7C2E514226FBFCB /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EFD0C5E4F21B776A07F3C8 /* CalculatorView.swift */; };
+		C1773B8BFFDEAAF2BE72E5D4 /* CompraClaraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F250DFC9C766E4DC5FBD2 /* CompraClaraApp.swift */; };
+		C439E1172B4F1525A880A80A /* DecisionCore in Frameworks */ = {isa = PBXBuildFile; productRef = 679F487896150E0E5B91933A /* DecisionCore */; };
+		D42C12390B02128BB50E5986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AC3668E48D3B45D1383FE51 /* Assets.xcassets */; };
+		E3D6FE828C1CE61184E3B72D /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EFD0C5E4F21B776A07F3C8 /* CalculatorView.swift */; };
+		F1724465C7A7F4639BCEC6A2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9E6C0EF9F351F239319D3617 /* PrivacyInfo.xcprivacy */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		26BF63DF202EB4421B72B506 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3365238ED5183EEDDECCA9B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC334DD5B2C30F1396293CC1;
+			remoteInfo = "CompraClara-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2D9F8615F3769C10BBCE7F1C /* CompraClara-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "CompraClara-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FB50E7A26D6CAF68A7A61F2 /* CompraClara-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CompraClara-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AC3668E48D3B45D1383FE51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5B3C9D07011F94A514DE3225 /* DecisionCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DecisionCore; path = Packages/DecisionCore; sourceTree = SOURCE_ROOT; };
+		75EFD0C5E4F21B776A07F3C8 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		7C41CB0D350B8099C92FB01E /* InputState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputState.swift; sourceTree = "<group>"; };
+		88849C9ED6CC1FD71DDD7D98 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		8D65BC60624757F7A9D16BAC /* AssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantView.swift; sourceTree = "<group>"; };
+		92261FD31AA6FA111B83CBCE /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		9D0696AC2029B25E9E1BB61B /* CompraClaraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompraClaraUITests.swift; sourceTree = "<group>"; };
+		9E6C0EF9F351F239319D3617 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B5AEB3E07DDB3A14E74B34D2 /* CompraClara-UITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "CompraClara-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E71B7B1293202EF38A3B780C /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		F23F250DFC9C766E4DC5FBD2 /* CompraClaraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompraClaraApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		31246EB7A3ECCD066768B795 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83E07EF5D9DF98D0DA68F30D /* DecisionCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		643610C4B139FD38E039C5F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C439E1172B4F1525A880A80A /* DecisionCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		011CCD91F9523EE294F3762E /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				9D0696AC2029B25E9E1BB61B /* CompraClaraUITests.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
+		1D3852FA51E5AED2BA97B237 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E71B7B1293202EF38A3B780C /* AppRootView.swift */,
+				88849C9ED6CC1FD71DDD7D98 /* AppTheme.swift */,
+				5AC3668E48D3B45D1383FE51 /* Assets.xcassets */,
+				8D65BC60624757F7A9D16BAC /* AssistantView.swift */,
+				75EFD0C5E4F21B776A07F3C8 /* CalculatorView.swift */,
+				F23F250DFC9C766E4DC5FBD2 /* CompraClaraApp.swift */,
+				92261FD31AA6FA111B83CBCE /* HistoryView.swift */,
+				7C41CB0D350B8099C92FB01E /* InputState.swift */,
+				9E6C0EF9F351F239319D3617 /* PrivacyInfo.xcprivacy */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		89F068EB8482A8F029A7BE89 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D9F8615F3769C10BBCE7F1C /* CompraClara-iOS.app */,
+				3FB50E7A26D6CAF68A7A61F2 /* CompraClara-macOS.app */,
+				B5AEB3E07DDB3A14E74B34D2 /* CompraClara-UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B00ACBDC80B48E164AED64F2 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				5B3C9D07011F94A514DE3225 /* DecisionCore */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		F4D98088AB3B081B27E00682 = {
+			isa = PBXGroup;
+			children = (
+				1D3852FA51E5AED2BA97B237 /* App */,
+				B00ACBDC80B48E164AED64F2 /* Packages */,
+				011CCD91F9523EE294F3762E /* UITests */,
+				89F068EB8482A8F029A7BE89 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		339B6ED782229138527E8B04 /* CompraClara-UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAEA52F39FACED5B8A6B32E3 /* Build configuration list for PBXNativeTarget "CompraClara-UITests" */;
+			buildPhases = (
+				41BC3E5485481699DCA75595 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F11B83D7EA752B746DFA176 /* PBXTargetDependency */,
+			);
+			name = "CompraClara-UITests";
+			packageProductDependencies = (
+			);
+			productName = "CompraClara-UITests";
+			productReference = B5AEB3E07DDB3A14E74B34D2 /* CompraClara-UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		81713B720B7363420FC2C136 /* CompraClara-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6C8124221ED358C5147076C /* Build configuration list for PBXNativeTarget "CompraClara-macOS" */;
+			buildPhases = (
+				95097325E39B94B875510E9C /* Sources */,
+				87B8BBE6E81293D2061FED4A /* Resources */,
+				31246EB7A3ECCD066768B795 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CompraClara-macOS";
+			packageProductDependencies = (
+				0CFC7BB858F7612E44BD3CA9 /* DecisionCore */,
+			);
+			productName = "CompraClara-macOS";
+			productReference = 3FB50E7A26D6CAF68A7A61F2 /* CompraClara-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AC334DD5B2C30F1396293CC1 /* CompraClara-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84B568A2568D357B185CB908 /* Build configuration list for PBXNativeTarget "CompraClara-iOS" */;
+			buildPhases = (
+				7FE26A80F59826219F65219C /* Sources */,
+				65A377D2EB99899545935CC8 /* Resources */,
+				643610C4B139FD38E039C5F4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CompraClara-iOS";
+			packageProductDependencies = (
+				679F487896150E0E5B91933A /* DecisionCore */,
+			);
+			productName = "CompraClara-iOS";
+			productReference = 2D9F8615F3769C10BBCE7F1C /* CompraClara-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A3365238ED5183EEDDECCA9B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					339B6ED782229138527E8B04 = {
+						ProvisioningStyle = Automatic;
+						TestTargetID = AC334DD5B2C30F1396293CC1;
+					};
+					81713B720B7363420FC2C136 = {
+						ProvisioningStyle = Manual;
+					};
+					AC334DD5B2C30F1396293CC1 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 5ACDD2DAACC4B6FC1025A6E9 /* Build configuration list for PBXProject "CompraClara" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F4D98088AB3B081B27E00682;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A9164B24946A9DABEA3D14A3 /* XCLocalSwiftPackageReference "Packages/DecisionCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 89F068EB8482A8F029A7BE89 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC334DD5B2C30F1396293CC1 /* CompraClara-iOS */,
+				81713B720B7363420FC2C136 /* CompraClara-macOS */,
+				339B6ED782229138527E8B04 /* CompraClara-UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		65A377D2EB99899545935CC8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D42C12390B02128BB50E5986 /* Assets.xcassets in Resources */,
+				AD6218DEF6B6F3C44375BE02 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		87B8BBE6E81293D2061FED4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65CF4C694275611B3E5C5C45 /* Assets.xcassets in Resources */,
+				F1724465C7A7F4639BCEC6A2 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		41BC3E5485481699DCA75595 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				895D605F72188881FAEF849C /* CompraClaraUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FE26A80F59826219F65219C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FE8EA6BCCA51FA6F9ECC5E7 /* AppRootView.swift in Sources */,
+				B17731CFA8D52DF559ED8027 /* AppTheme.swift in Sources */,
+				92744727C4F182869FD580BF /* AssistantView.swift in Sources */,
+				C11C2133C7C2E514226FBFCB /* CalculatorView.swift in Sources */,
+				790E50A5613FEB3C37EB10FE /* CompraClaraApp.swift in Sources */,
+				0ED7643DE379C4D7115E6777 /* HistoryView.swift in Sources */,
+				BCC0FD01C8EE36BD13C9C734 /* InputState.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95097325E39B94B875510E9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AD863D9FD18922FA082D1F7 /* AppRootView.swift in Sources */,
+				76ACCA8074410F9E3EBFBC72 /* AppTheme.swift in Sources */,
+				32A357C67B9CD83E5BEEC9B3 /* AssistantView.swift in Sources */,
+				E3D6FE828C1CE61184E3B72D /* CalculatorView.swift in Sources */,
+				C1773B8BFFDEAAF2BE72E5D4 /* CompraClaraApp.swift in Sources */,
+				2CCEB238B8D9718094798549 /* HistoryView.swift in Sources */,
+				7182467E7505FE751B1639C4 /* InputState.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6F11B83D7EA752B746DFA176 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC334DD5B2C30F1396293CC1 /* CompraClara-iOS */;
+			targetProxy = 26BF63DF202EB4421B72B506 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		08A9F6600E2C7F3E35FCBC1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = CompraClara;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.ios;
+				PRODUCT_NAME = CompraClara;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2B32895573CBD6A5B897B750 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "CompraClara-iOS";
+			};
+			name = Debug;
+		};
+		3972EA19465FA972252108EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "CompraClara-iOS";
+			};
+			name = Release;
+		};
+		3F4E1113AC946C19191014F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5B551D781934C3C042AF9174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.macos;
+				PRODUCT_NAME = CompraClara;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CC50994C3176AFD3CB69EFBC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = CompraClara;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.ios;
+				PRODUCT_NAME = CompraClara;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ED521E8A3B192047E18B2D81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FE24183D623921B955704F5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.macos;
+				PRODUCT_NAME = CompraClara;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5ACDD2DAACC4B6FC1025A6E9 /* Build configuration list for PBXProject "CompraClara" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED521E8A3B192047E18B2D81 /* Debug */,
+				3F4E1113AC946C19191014F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		84B568A2568D357B185CB908 /* Build configuration list for PBXNativeTarget "CompraClara-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC50994C3176AFD3CB69EFBC /* Debug */,
+				08A9F6600E2C7F3E35FCBC1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CAEA52F39FACED5B8A6B32E3 /* Build configuration list for PBXNativeTarget "CompraClara-UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B32895573CBD6A5B897B750 /* Debug */,
+				3972EA19465FA972252108EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E6C8124221ED358C5147076C /* Build configuration list for PBXNativeTarget "CompraClara-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B551D781934C3C042AF9174 /* Debug */,
+				FE24183D623921B955704F5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A9164B24946A9DABEA3D14A3 /* XCLocalSwiftPackageReference "Packages/DecisionCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/DecisionCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0CFC7BB858F7612E44BD3CA9 /* DecisionCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DecisionCore;
+		};
+		679F487896150E0E5B91933A /* DecisionCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DecisionCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A3365238ED5183EEDDECCA9B /* Project object */;
+}
