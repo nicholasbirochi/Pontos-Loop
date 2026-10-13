@@ -31,3 +31,19 @@ pasta de trabalho na assinatura dos produtos temporários.
   dispositivos, importação de extrato nem cronograma irregular.
 - Não houve certificação formal de acessibilidade ou teste em todos os tamanhos de
   tela e versões do iOS; a prioridade foi o formato do iPhone 13.
+
+## Versão 1.1 — simplificação e fotos (13/10/2026)
+
+- 26 testes do pacote (12 cálculo, 9 Noah, 5 extração de ofertas).
+- Quatro testes de interface no iPhone 13/iOS 27: entrada simples e abertura do
+  importador, Noah contextual, navegação e salvar/relançar/restaurar. Suite completa aprovada.
+- `Scripts/check-photo-import.swift`, compilado junto de `App/PhotoTextRecognizer.swift`,
+  aprovou OCR de imagem sintética com Pix R$ 950 e 10x R$ 100 e rejeição de imagem
+  inválida/acima de 20 MB.
+- `Scripts/check-input-compatibility.swift`, compilado com InputState e DecisionEngine,
+  validou leitura de JSON legado, cálculo de Pix direto, persistência do novo campo e
+  rejeição de Pix com mais de duas casas.
+- Fluxo real no Mac: arquivo PNG selecionado pelo painel nativo, preços/parcelas
+  conferidos na revisão e comparação confirmada em R$ 950 contra R$ 1.000.
+- A câmera e a biblioteca de fotos de um iPhone físico continuam sem validação.
+  Não há captura de câmera integrada; a pessoa escolhe imagens já tiradas ou prints.

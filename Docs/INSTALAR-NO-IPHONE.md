@@ -32,3 +32,10 @@ Instruções oficiais consultadas em 13/10/2026:
 - [Executar em simuladores e aparelhos](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices)
 - [Assinatura com equipe pessoal](https://help.apple.com/xcode/mac/current/en.lproj/dev60b6fbbc7.html)
 - [Habilitar o Modo de Desenvolvedor](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device)
+
+## Usar fotos de uma oferta
+
+Na aba Simular, toque em **Usar foto ou print**, depois **Escolher fotos**.
+Selecione até 4 imagens da oferta, confira preço Pix, total, quantidade e data das
+parcelas e toque em **Usar e comparar**. Se algum campo não for reconhecido,
+preencha manualmente. A leitura acontece no próprio aparelho; não usa a IA do Mac.

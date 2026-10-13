@@ -21,13 +21,32 @@ Também pode dar dois cliques em `Abrir CompraClara.command`.
 O projeto Xcode está incluído. XcodeGen só é necessário para regenerá-lo depois
 que você mudar `project.yml`: `xcodegen generate`.
 
+## Comparar de um jeito simples
+
+1. Digite **Preço no Pix** e **Total no cartão** e ajuste as parcelas.
+2. Toque em **Comparar agora**. Rendimento e pontos ficam em **Ajustes opcionais**;
+   a memória e o gráfico ficam em **Ver detalhes do cálculo**.
+3. Para começar com fotos, toque em **Usar foto ou print** (ou **Comparar uma foto**
+   no Noah). Selecione até 4 imagens, confira/corrija os valores e toque em
+   **Usar e comparar**. No Mac, selecione os arquivos de imagem.
+
+A leitura usa **Apple Vision no próprio iPhone ou Mac**, sem servidor. Funciona
+melhor com ofertas explícitas como `Pix R$ 950,00` e `10x de R$ 100,00`.
+Imagens sem preço Pix podem precisar desse valor digitado. Ofertas ambíguas não
+são adivinhadas, e listas de parcelas irregulares não viram um cronograma.
+Fotos e texto lido não são gravados no histórico; só os valores confirmados.
+A importação começa com rendimento 0%, sem pontos/cashback, como indicado na revisão.
+
+**O Noah não utiliza Ollama nem a IA deste Mac.** Continua usando respostas locais
+prontas. Reconhecer texto numa foto é uma função separada do chatbot.
+
 ## O que tem
 
 - **Simular:** Pix × cartão, quitação antecipada e uso de pontos na fatura.
 - **Noah:** respostas prontas sobre o aplicativo e explicação da comparação
   atual, usando os valores reais da tela. Funciona sem internet, conta ou API.
 - **Salvos:** até 100 simulações e rascunho no dispositivo; compartilhar resumo.
-- Valores em reais, datas mensais, validação de entrada e memória de cálculo.
+- Valores em reais, datas mensais, validação de entrada e memória de cálculo. Novas simulações começam sem rendimento ou recompensas; rascunhos antigos são preservados.
 - Tema escuro, fontes escaláveis, rótulos acessíveis e teclado para números.
 
 O Noah usa regras locais, sem modelo generativo: responde aos assuntos da

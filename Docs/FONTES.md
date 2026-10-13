@@ -18,3 +18,7 @@ O retorno de 0,8% deriva do resgate específico no Shop.
 Não fixamos uma conversão atual para desconto em fatura.
 Não existe média de desconto no Pix embutida: usa-se o desconto concreto.
 0,8% líquido a.m. é hipótese, não taxa de mercado verificada.
+
+Fontes da importação de fotos (consulta em 13/10/2026):
+- [Apple Vision — texto em imagens, processamento no aparelho](https://developer.apple.com/documentation/vision/recognizing-text-in-images)
+- [PhotosPickerItem — carregamento das imagens selecionadas](https://developer.apple.com/documentation/photosui/photospickeritem)

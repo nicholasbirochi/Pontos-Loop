@@ -9,6 +9,7 @@ private struct ChatMessage: Identifiable {
 
 struct AssistantView: View {
     let input: InputState
+    var openPhoto: () -> Void
     @State private var question = ""
     @State private var messages: [ChatMessage] = []
     @FocusState private var editing: Bool
@@ -20,6 +21,10 @@ struct AssistantView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
                         introduction
+                        Button(action: openPhoto) {
+                            Label("Comparar uma foto", systemImage: "photo")
+                                .frame(maxWidth: .infinity, minHeight: 32)
+                        }.buttonStyle(.bordered)
                         if messages.isEmpty {
                             VStack(alignment: .leading, spacing: 10) {
                                 Text("PODE PERGUNTAR").font(.caption.weight(.bold)).tracking(1).foregroundStyle(.secondary)
@@ -81,11 +86,11 @@ struct AssistantView: View {
         VStack(alignment: .leading, spacing: 14) {
             Image(systemName: "sparkles")
                 .font(.title).foregroundStyle(AppTheme.silver)
-                .frame(width: 58, height: 58)
+                .frame(width: 42, height: 42)
                 .background(.white.opacity(0.1), in: RoundedRectangle(cornerRadius: 18))
-            Text("Conta comigo.\nEu simplifico as contas.")
+            Text("Oi, eu sou o Noah.")
                 .font(.system(.title, design: .rounded).weight(.bold))
-            Text("Sou o Noah, seu assistente local. Explico Pix, cartão, pontos e a simulação atual com respostas prontas e simples.")
+            Text("Explico sua comparação em palavras simples. Você também pode importar uma foto da oferta.")
                 .font(.subheadline).foregroundStyle(.white.opacity(0.85))
             Label("Sem internet · conversa só nesta sessão", systemImage: "lock.shield")
                 .font(.caption)
