@@ -13,7 +13,7 @@ struct AssistantView: View {
     @State private var question = ""
     @State private var messages: [ChatMessage] = []
     @FocusState private var editing: Bool
-    private let suggestions = ["Qual opção vale mais a pena?", "O que é custo econômico?", "Como funcionam os pontos?", "E se eu antecipar?"]
+    private let suggestions = ["Diagnóstico dos 4 cenários", "Já ganho pontos na fatura?", "Como usar uma foto?"]
 
     var body: some View {
         NavigationStack {
@@ -90,7 +90,7 @@ struct AssistantView: View {
                 .background(.white.opacity(0.1), in: RoundedRectangle(cornerRadius: 18))
             Text("Oi, eu sou o Noah.")
                 .font(.system(.title, design: .rounded).weight(.bold))
-            Text("Explico sua comparação em palavras simples. Você também pode importar uma foto da oferta.")
+            Text("Explico os quatro cenários: sem juros, com juros, Pix e antecipação com pontos. Os pontos normais da compra entram nas opções elegíveis do cartão.")
                 .font(.subheadline).foregroundStyle(.white.opacity(0.85))
             Label("Sem internet · conversa só nesta sessão", systemImage: "lock.shield")
                 .font(.caption)
@@ -123,7 +123,7 @@ struct AssistantView: View {
     private func send(_ text: String) {
         let clean = String(text.trimmingCharacters(in: .whitespacesAndNewlines).prefix(500))
         guard !clean.isEmpty else { return }
-        let answer = SimpleAssistant.reply(to: clean, comparison: try? input.calculate())
+        let answer = SimpleAssistant.reply(to: clean, comparison: try? input.calculate(), diagnostics: try? input.diagnoseFourCases())
         messages.append(ChatMessage(text: clean, fromUser: true))
         messages.append(ChatMessage(text: answer, fromUser: false))
         messages = Array(messages.suffix(100))

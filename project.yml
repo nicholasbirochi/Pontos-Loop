@@ -1,4 +1,4 @@
-name: CompraClara
+name: PontosLoop
 options:
   bundleIdPrefix: com.nicholasbirochi
   deploymentTarget:
@@ -10,44 +10,45 @@ settings:
     GENERATE_INFOPLIST_FILE: YES
     CODE_SIGN_STYLE: Automatic
     ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-    MARKETING_VERSION: "1.1.0"
-    CURRENT_PROJECT_VERSION: "2"
+    MARKETING_VERSION: "1.2.0"
+    CURRENT_PROJECT_VERSION: "3"
 packages:
   DecisionCore:
     path: Packages/DecisionCore
 targets:
-  CompraClara-iOS:
+  PontosLoop-iOS:
     type: application
     platform: iOS
     sources: [App]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.nicholasbirochi.compraclara.ios
-        PRODUCT_NAME: CompraClara
+        PRODUCT_NAME: PontosLoop
         TARGETED_DEVICE_FAMILY: "1,2"
-        INFOPLIST_KEY_CFBundleDisplayName: CompraClara
+        INFOPLIST_KEY_CFBundleDisplayName: Pontos Loop
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
     dependencies:
       - package: DecisionCore
-  CompraClara-macOS:
+  PontosLoop-macOS:
     type: application
     platform: macOS
     sources: [App]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.nicholasbirochi.compraclara.macos
-        PRODUCT_NAME: CompraClara
+        PRODUCT_NAME: PontosLoop
         CODE_SIGN_STYLE: Manual
         CODE_SIGN_IDENTITY: "-"
+        INFOPLIST_KEY_CFBundleDisplayName: Pontos Loop
         ENABLE_HARDENED_RUNTIME: YES
         ENABLE_APP_SANDBOX: YES
-        CODE_SIGN_ENTITLEMENTS: Config/CompraClara-macOS.entitlements
+        CODE_SIGN_ENTITLEMENTS: Config/PontosLoop-macOS.entitlements
     dependencies:
       - package: DecisionCore
-  CompraClara-UITests:
+  PontosLoop-UITests:
     type: bundle.ui-testing
     platform: iOS
     sources: [UITests]
@@ -56,20 +57,20 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.nicholasbirochi.compraclara.uitests
         ASSETCATALOG_COMPILER_APPICON_NAME: ""
     dependencies:
-      - target: CompraClara-iOS
+      - target: PontosLoop-iOS
 schemes:
-  CompraClara-iOS:
+  PontosLoop-iOS:
     build:
       targets:
-        CompraClara-iOS: all
+        PontosLoop-iOS: all
     run:
       config: Debug
     test:
       targets:
-        - CompraClara-UITests
-  CompraClara-macOS:
+        - PontosLoop-UITests
+  PontosLoop-macOS:
     build:
       targets:
-        CompraClara-macOS: all
+        PontosLoop-macOS: all
     run:
       config: Debug

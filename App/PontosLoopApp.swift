@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct CompraClaraApp: App {
+struct PontosLoopApp: App {
     var body: some Scene {
         WindowGroup {
             AppRootView()

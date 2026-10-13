@@ -1,4 +1,4 @@
 #!/bin/zsh
 set -e
 cd "${0:A:h}"
-open CompraClara.xcodeproj
+open PontosLoop.xcodeproj

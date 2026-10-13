@@ -3,7 +3,15 @@ import Foundation
 @main
 struct InputCompatibilityCheck {
     static func main() throws {
+        let initial = InputState()
+        for field in Mirror(reflecting: initial).children {
+            if let value = field.value as? String { assert(value == "0", "Padrão não zerado: \(field.label ?? "campo")") }
+        }
+        assert(initial.installmentCount == 0 && initial.remainingCount == 0)
         var legacy = InputState()
+        legacy.mode = .purchase
+        legacy.directPixPrice = nil
+        legacy.installmentCount = 2
         legacy.referencePrice = "1000,00"
         legacy.cardTotal = "1000,00"
         legacy.pixDiscount = "5"

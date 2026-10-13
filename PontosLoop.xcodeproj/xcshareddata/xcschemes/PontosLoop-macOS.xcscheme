@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "81713B720B7363420FC2C136"
-               BuildableName = "CompraClara-macOS.app"
-               BlueprintName = "CompraClara-macOS"
-               ReferencedContainer = "container:CompraClara.xcodeproj">
+               BlueprintIdentifier = "754E158185ED1783C953FBCF"
+               BuildableName = "PontosLoop-macOS.app"
+               BlueprintName = "PontosLoop-macOS"
+               ReferencedContainer = "container:PontosLoop.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "81713B720B7363420FC2C136"
-            BuildableName = "CompraClara-macOS.app"
-            BlueprintName = "CompraClara-macOS"
-            ReferencedContainer = "container:CompraClara.xcodeproj">
+            BlueprintIdentifier = "754E158185ED1783C953FBCF"
+            BuildableName = "PontosLoop-macOS.app"
+            BlueprintName = "PontosLoop-macOS"
+            ReferencedContainer = "container:PontosLoop.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "81713B720B7363420FC2C136"
-            BuildableName = "CompraClara-macOS.app"
-            BlueprintName = "CompraClara-macOS"
-            ReferencedContainer = "container:CompraClara.xcodeproj">
+            BlueprintIdentifier = "754E158185ED1783C953FBCF"
+            BuildableName = "PontosLoop-macOS.app"
+            BlueprintName = "PontosLoop-macOS"
+            ReferencedContainer = "container:PontosLoop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -74,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "81713B720B7363420FC2C136"
-            BuildableName = "CompraClara-macOS.app"
-            BlueprintName = "CompraClara-macOS"
-            ReferencedContainer = "container:CompraClara.xcodeproj">
+            BlueprintIdentifier = "754E158185ED1783C953FBCF"
+            BuildableName = "PontosLoop-macOS.app"
+            BlueprintName = "PontosLoop-macOS"
+            ReferencedContainer = "container:PontosLoop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

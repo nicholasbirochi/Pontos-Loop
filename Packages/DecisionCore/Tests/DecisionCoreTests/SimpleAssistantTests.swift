@@ -32,7 +32,7 @@ final class SimpleAssistantTests: XCTestCase {
 
     func testUnsupportedAndSubstringLookalikesDoNotTriggerPurchaseAdvice() throws {
         let unsupported = SimpleAssistant.reply(to: "Explique pixar e cartão postal", comparison: try comparison())
-        XCTAssertTrue(unsupported.contains("assistente local com respostas prontas"))
+        XCTAssertTrue(unsupported.contains("respostas prontas"))
     }
 
     func testConceptualAnswersWorkWithoutValidSimulation() {
@@ -49,6 +49,12 @@ final class SimpleAssistantTests: XCTestCase {
     func testPhotoHelpAndAIExplanationAreHonest() {
         XCTAssertTrue(SimpleAssistant.reply(to: "Como mando uma foto?", comparison: nil).contains("Confira os valores"))
         XCTAssertTrue(SimpleAssistant.reply(to: "Você usa a IA do Mac?", comparison: nil).contains("Não uso a IA do seu Mac"))
+    }
+
+    func testInvoicePointsExplanationSeparatesNormalAndExtraRewards() {
+        let answer = SimpleAssistant.reply(to: "Já ganho pontos na fatura?", comparison: nil)
+        XCTAssertTrue(answer.contains("sem antecipar"))
+        XCTAssertTrue(answer.contains("não conto os pontos normais duas vezes"))
     }
 
     func testNegatedRecommendationDoesNotRecommend() throws {

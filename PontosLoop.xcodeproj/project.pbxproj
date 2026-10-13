@@ -1,0 +1,626 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0524EB9FCFEC850933D0DBC2 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B7745396965945590ECF24 /* AppTheme.swift */; };
+		2D45C4EEA70103244F08C503 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC849D95625F908985AAD6E0 /* CalculatorView.swift */; };
+		324BCC31A374CB20BC7C5A25 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A00F35C690F9233CDAD1EB /* AppRootView.swift */; };
+		420A03E8F4D624DB686C5CF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1EF96CA2B273B88E1423D4 /* Assets.xcassets */; };
+		4DF191EFCEF0F370939253FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1EF96CA2B273B88E1423D4 /* Assets.xcassets */; };
+		56351E3573002F777FD2EFDA /* PhotoTextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02F528C4E585BB7DB9C35AA /* PhotoTextRecognizer.swift */; };
+		5AE9F29BD2941B19E64621A0 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC849D95625F908985AAD6E0 /* CalculatorView.swift */; };
+		6026FE32874C819CE3CCF5A2 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E1351ABAF01432AA300E88 /* HistoryView.swift */; };
+		64A1FBD0F24665E82976FD8E /* PontosLoopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCE287D82F2086EE41D008E /* PontosLoopUITests.swift */; };
+		6561119E95BBDD31570B67EA /* PontosLoopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F5635BB7198B341A9829AB /* PontosLoopApp.swift */; };
+		7EFA8586F3BCEA439B0D2AB2 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B7745396965945590ECF24 /* AppTheme.swift */; };
+		84DB252EB243756581A4D208 /* PhotoImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B218F96BB3DD251D4B80E /* PhotoImportView.swift */; };
+		85141B0E4A5605172A025149 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6D2C988FFD2D18C2F0D70016 /* PrivacyInfo.xcprivacy */; };
+		86043131BEAB2F1CCA37DBA7 /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B2FF154A6373B1FA9FD6C /* AssistantView.swift */; };
+		87C5079C07CC6EB97A2CD452 /* InputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F41E7F253070D296291BB1 /* InputState.swift */; };
+		8EB677047BA01FF00998D022 /* PontosLoopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F5635BB7198B341A9829AB /* PontosLoopApp.swift */; };
+		90670CB855ACBA1BB5087644 /* PhotoTextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02F528C4E585BB7DB9C35AA /* PhotoTextRecognizer.swift */; };
+		AA5F97FE6815AB43F16125F4 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E1351ABAF01432AA300E88 /* HistoryView.swift */; };
+		AB253D766E1F016B354A1B49 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6D2C988FFD2D18C2F0D70016 /* PrivacyInfo.xcprivacy */; };
+		AEC3421FE9D8DCE538F71DB4 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A00F35C690F9233CDAD1EB /* AppRootView.swift */; };
+		B269D5DD74BAADB784E8C097 /* InputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F41E7F253070D296291BB1 /* InputState.swift */; };
+		BCFA90C30213ADDA6E7B94F1 /* DecisionCore in Frameworks */ = {isa = PBXBuildFile; productRef = FD404A2657468F51D3792B13 /* DecisionCore */; };
+		D762E7D0F92B26F4551479CE /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B2FF154A6373B1FA9FD6C /* AssistantView.swift */; };
+		DBA5B2653A2E434A3F52A3C9 /* PhotoImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B218F96BB3DD251D4B80E /* PhotoImportView.swift */; };
+		FFD4BC27390937FEB6E187CC /* DecisionCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1415293B6305EC65681E0BEF /* DecisionCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		14AE40BD15B705323C56093F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9277869352446FAE753A0634 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 403FCBF1A273040709F05362;
+			remoteInfo = "PontosLoop-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00F41E7F253070D296291BB1 /* InputState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputState.swift; sourceTree = "<group>"; };
+		44B7745396965945590ECF24 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		5BCF52296BBEDA0C5E576B20 /* PontosLoop-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PontosLoop-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64F5635BB7198B341A9829AB /* PontosLoopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PontosLoopApp.swift; sourceTree = "<group>"; };
+		6D2C988FFD2D18C2F0D70016 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		859B2FF154A6373B1FA9FD6C /* AssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantView.swift; sourceTree = "<group>"; };
+		8BCE287D82F2086EE41D008E /* PontosLoopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PontosLoopUITests.swift; sourceTree = "<group>"; };
+		8E4B218F96BB3DD251D4B80E /* PhotoImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImportView.swift; sourceTree = "<group>"; };
+		A02F528C4E585BB7DB9C35AA /* PhotoTextRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTextRecognizer.swift; sourceTree = "<group>"; };
+		A1E1351ABAF01432AA300E88 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		AFDAB9661FA98C4CE36F168B /* PontosLoop-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "PontosLoop-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B732F35BBFB0DA8D1837C165 /* DecisionCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DecisionCore; path = Packages/DecisionCore; sourceTree = SOURCE_ROOT; };
+		C632773AB995C6C3A716FA07 /* PontosLoop-UITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "PontosLoop-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0A00F35C690F9233CDAD1EB /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		EC849D95625F908985AAD6E0 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		ED1EF96CA2B273B88E1423D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0B93F86276DC663690A6F7C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCFA90C30213ADDA6E7B94F1 /* DecisionCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		44FF102A84BF71C693187319 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFD4BC27390937FEB6E187CC /* DecisionCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		68A34B8F3CDF997728F2C350 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				8BCE287D82F2086EE41D008E /* PontosLoopUITests.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
+		B8598311C51391853BF8EBE7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AFDAB9661FA98C4CE36F168B /* PontosLoop-iOS.app */,
+				5BCF52296BBEDA0C5E576B20 /* PontosLoop-macOS.app */,
+				C632773AB995C6C3A716FA07 /* PontosLoop-UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C2E40B09BA05CCDFD4AB72B5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E0A00F35C690F9233CDAD1EB /* AppRootView.swift */,
+				44B7745396965945590ECF24 /* AppTheme.swift */,
+				ED1EF96CA2B273B88E1423D4 /* Assets.xcassets */,
+				859B2FF154A6373B1FA9FD6C /* AssistantView.swift */,
+				EC849D95625F908985AAD6E0 /* CalculatorView.swift */,
+				A1E1351ABAF01432AA300E88 /* HistoryView.swift */,
+				00F41E7F253070D296291BB1 /* InputState.swift */,
+				8E4B218F96BB3DD251D4B80E /* PhotoImportView.swift */,
+				A02F528C4E585BB7DB9C35AA /* PhotoTextRecognizer.swift */,
+				64F5635BB7198B341A9829AB /* PontosLoopApp.swift */,
+				6D2C988FFD2D18C2F0D70016 /* PrivacyInfo.xcprivacy */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D1244DFCA55757CDED1DD35F = {
+			isa = PBXGroup;
+			children = (
+				C2E40B09BA05CCDFD4AB72B5 /* App */,
+				FB8444404F17BDF04BB11DB6 /* Packages */,
+				68A34B8F3CDF997728F2C350 /* UITests */,
+				B8598311C51391853BF8EBE7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FB8444404F17BDF04BB11DB6 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				B732F35BBFB0DA8D1837C165 /* DecisionCore */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		403FCBF1A273040709F05362 /* PontosLoop-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7FE3AD659B9328043B572F2 /* Build configuration list for PBXNativeTarget "PontosLoop-iOS" */;
+			buildPhases = (
+				2916D0D716583D79A5005C73 /* Sources */,
+				072DB84B03625CC386E981E0 /* Resources */,
+				44FF102A84BF71C693187319 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PontosLoop-iOS";
+			packageProductDependencies = (
+				1415293B6305EC65681E0BEF /* DecisionCore */,
+			);
+			productName = "PontosLoop-iOS";
+			productReference = AFDAB9661FA98C4CE36F168B /* PontosLoop-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6C3E9F773849EE5F88CAA16A /* PontosLoop-UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5F72EA20B902872690FC46E /* Build configuration list for PBXNativeTarget "PontosLoop-UITests" */;
+			buildPhases = (
+				F0A6AF8E99D1D36649FF0E2F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				19AC8DD9BDCF5E30B7F2146C /* PBXTargetDependency */,
+			);
+			name = "PontosLoop-UITests";
+			packageProductDependencies = (
+			);
+			productName = "PontosLoop-UITests";
+			productReference = C632773AB995C6C3A716FA07 /* PontosLoop-UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		754E158185ED1783C953FBCF /* PontosLoop-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E35482388C2F1EB63DAC205 /* Build configuration list for PBXNativeTarget "PontosLoop-macOS" */;
+			buildPhases = (
+				15FDF527D0FE3D894DF1AB05 /* Sources */,
+				AA6B79AC562C50BB075EB700 /* Resources */,
+				0B93F86276DC663690A6F7C4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PontosLoop-macOS";
+			packageProductDependencies = (
+				FD404A2657468F51D3792B13 /* DecisionCore */,
+			);
+			productName = "PontosLoop-macOS";
+			productReference = 5BCF52296BBEDA0C5E576B20 /* PontosLoop-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9277869352446FAE753A0634 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					403FCBF1A273040709F05362 = {
+						ProvisioningStyle = Automatic;
+					};
+					6C3E9F773849EE5F88CAA16A = {
+						ProvisioningStyle = Automatic;
+						TestTargetID = 403FCBF1A273040709F05362;
+					};
+					754E158185ED1783C953FBCF = {
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 4F4D5DF5AAAF48FE9B4B7BFB /* Build configuration list for PBXProject "PontosLoop" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D1244DFCA55757CDED1DD35F;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1CF1532E9E9C35C7ACF34B4A /* XCLocalSwiftPackageReference "Packages/DecisionCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B8598311C51391853BF8EBE7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				403FCBF1A273040709F05362 /* PontosLoop-iOS */,
+				754E158185ED1783C953FBCF /* PontosLoop-macOS */,
+				6C3E9F773849EE5F88CAA16A /* PontosLoop-UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		072DB84B03625CC386E981E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DF191EFCEF0F370939253FF /* Assets.xcassets in Resources */,
+				AB253D766E1F016B354A1B49 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA6B79AC562C50BB075EB700 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				420A03E8F4D624DB686C5CF2 /* Assets.xcassets in Resources */,
+				85141B0E4A5605172A025149 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		15FDF527D0FE3D894DF1AB05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				324BCC31A374CB20BC7C5A25 /* AppRootView.swift in Sources */,
+				7EFA8586F3BCEA439B0D2AB2 /* AppTheme.swift in Sources */,
+				86043131BEAB2F1CCA37DBA7 /* AssistantView.swift in Sources */,
+				2D45C4EEA70103244F08C503 /* CalculatorView.swift in Sources */,
+				AA5F97FE6815AB43F16125F4 /* HistoryView.swift in Sources */,
+				B269D5DD74BAADB784E8C097 /* InputState.swift in Sources */,
+				84DB252EB243756581A4D208 /* PhotoImportView.swift in Sources */,
+				56351E3573002F777FD2EFDA /* PhotoTextRecognizer.swift in Sources */,
+				8EB677047BA01FF00998D022 /* PontosLoopApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2916D0D716583D79A5005C73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEC3421FE9D8DCE538F71DB4 /* AppRootView.swift in Sources */,
+				0524EB9FCFEC850933D0DBC2 /* AppTheme.swift in Sources */,
+				D762E7D0F92B26F4551479CE /* AssistantView.swift in Sources */,
+				5AE9F29BD2941B19E64621A0 /* CalculatorView.swift in Sources */,
+				6026FE32874C819CE3CCF5A2 /* HistoryView.swift in Sources */,
+				87C5079C07CC6EB97A2CD452 /* InputState.swift in Sources */,
+				DBA5B2653A2E434A3F52A3C9 /* PhotoImportView.swift in Sources */,
+				90670CB855ACBA1BB5087644 /* PhotoTextRecognizer.swift in Sources */,
+				6561119E95BBDD31570B67EA /* PontosLoopApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0A6AF8E99D1D36649FF0E2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64A1FBD0F24665E82976FD8E /* PontosLoopUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		19AC8DD9BDCF5E30B7F2146C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 403FCBF1A273040709F05362 /* PontosLoop-iOS */;
+			targetProxy = 14AE40BD15B705323C56093F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0CAED8915347830D469A0AB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pontos Loop";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.ios;
+				PRODUCT_NAME = PontosLoop;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1A03FB0F4045D47C8703715D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.2.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		39110638FBC347E0412C94A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Config/PontosLoop-macOS.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pontos Loop";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.macos;
+				PRODUCT_NAME = PontosLoop;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		976F0DA7A1521F12C72EF3E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 3;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.2.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C67BDFD96BA5AEAD3BF91B2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Config/PontosLoop-macOS.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pontos Loop";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.macos;
+				PRODUCT_NAME = PontosLoop;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CE224DF696870809F5B6B741 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pontos Loop";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.ios;
+				PRODUCT_NAME = PontosLoop;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F0F4E3EF1E4B483B3D3E8744 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "PontosLoop-iOS";
+			};
+			name = Release;
+		};
+		FC566F48E06877252BE0828E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicholasbirochi.compraclara.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "PontosLoop-iOS";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E35482388C2F1EB63DAC205 /* Build configuration list for PBXNativeTarget "PontosLoop-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C67BDFD96BA5AEAD3BF91B2E /* Debug */,
+				39110638FBC347E0412C94A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4F4D5DF5AAAF48FE9B4B7BFB /* Build configuration list for PBXProject "PontosLoop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				976F0DA7A1521F12C72EF3E7 /* Debug */,
+				1A03FB0F4045D47C8703715D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D5F72EA20B902872690FC46E /* Build configuration list for PBXNativeTarget "PontosLoop-UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC566F48E06877252BE0828E /* Debug */,
+				F0F4E3EF1E4B483B3D3E8744 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E7FE3AD659B9328043B572F2 /* Build configuration list for PBXNativeTarget "PontosLoop-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE224DF696870809F5B6B741 /* Debug */,
+				0CAED8915347830D469A0AB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		1CF1532E9E9C35C7ACF34B4A /* XCLocalSwiftPackageReference "Packages/DecisionCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/DecisionCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1415293B6305EC65681E0BEF /* DecisionCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DecisionCore;
+		};
+		FD404A2657468F51D3792B13 /* DecisionCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DecisionCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 9277869352446FAE753A0634 /* Project object */;
+}

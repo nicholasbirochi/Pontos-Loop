@@ -47,3 +47,24 @@ pasta de trabalho na assinatura dos produtos temporários.
   conferidos na revisão e comparação confirmada em R$ 950 contra R$ 1.000.
 - A câmera e a biblioteca de fotos de um iPhone físico continuam sem validação.
   Não há captura de câmera integrada; a pessoa escolhe imagens já tiradas ou prints.
+
+## Pontos Loop 1.2 — nome, zeros, tutorial e quatro casos
+
+- Nome de exibição Pontos Loop; projeto/esquemas PontosLoop, mantendo bundle IDs
+  e armazenamento para compatibilidade.
+- 35 testes do pacote: cálculo, Noah, extração de ofertas e quatro cenários.
+- Testes do diagnóstico verificam pontos normais nas três alternativas de cartão
+  uma vez, juros sem ampliar a base, bônus incremental capaz de mudar o resultado,
+  zeros como ausentes, empate e dados incompletos, além da frase “sem juros”.
+- A checagem de InputState verificou todos os padrões String em zero, contagens
+  zeradas, JSON legado e persistência do preço Pix direto.
+- A revisão do histórico Git inspecionou 74 blobs sem encontrar padrões de
+  credenciais; documentos e imagens são de especificação/exemplos ilustrativos.
+- Nenhuma publicação de logs de dispositivo, faturas reais ou fotos do usuário.
+- As condições oficiais do Prime foram consultadas em 13/10/2026 e documentadas
+  em INTER-PRIME.md; a previsão real da fatura e a elegibilidade prevalecem.
+
+- A suíte completa de 5 testes de interface concluiu com TEST SUCCEEDED no iPhone
+  13/iOS 27: Noah, navegação, histórico, fotos e padrões zerados sem vencedor grátis.
+- O build macOS concluiu com sucesso. A captura inicial confirma o novo nome,
+  passo a passo visível no topo e os campos em zero. Histórico anterior preservado.
