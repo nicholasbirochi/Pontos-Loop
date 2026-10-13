@@ -13,7 +13,7 @@ struct AppRootView: View {
                            openPhoto: { showPhotos = true },
                            openAssistant: { selection = 1 }, openHistory: { selection = 2 })
                 .tabItem { Label("Simular", systemImage: "slider.horizontal.3") }.tag(0)
-            AssistantView(input: input, openPhoto: { showPhotos = true })
+            AssistantView(input: input)
                 .tabItem { Label("Noah", systemImage: "bubble.left.and.bubble.right") }.tag(1)
             HistoryView(scenarios: $scenarios) { saved in
                 input = saved

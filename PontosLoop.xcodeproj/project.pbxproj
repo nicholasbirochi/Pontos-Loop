@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0524EB9FCFEC850933D0DBC2 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B7745396965945590ECF24 /* AppTheme.swift */; };
+		1AF8FD65C111242B3FD504DC /* CheckoutReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AB3DE9E0521BF9D95DE47 /* CheckoutReviewView.swift */; };
 		2D45C4EEA70103244F08C503 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC849D95625F908985AAD6E0 /* CalculatorView.swift */; };
 		324BCC31A374CB20BC7C5A25 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A00F35C690F9233CDAD1EB /* AppRootView.swift */; };
 		420A03E8F4D624DB686C5CF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1EF96CA2B273B88E1423D4 /* Assets.xcassets */; };
 		4DF191EFCEF0F370939253FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1EF96CA2B273B88E1423D4 /* Assets.xcassets */; };
 		56351E3573002F777FD2EFDA /* PhotoTextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02F528C4E585BB7DB9C35AA /* PhotoTextRecognizer.swift */; };
+		5AAA34048A85B9A137A1E418 /* VoiceInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF47737369F78701AAE1D33A /* VoiceInput.swift */; };
 		5AE9F29BD2941B19E64621A0 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC849D95625F908985AAD6E0 /* CalculatorView.swift */; };
+		5D694CFE440A2418E306D813 /* ChatAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2CA6BBF8976072B436048 /* ChatAttachment.swift */; };
 		6026FE32874C819CE3CCF5A2 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E1351ABAF01432AA300E88 /* HistoryView.swift */; };
 		64A1FBD0F24665E82976FD8E /* PontosLoopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCE287D82F2086EE41D008E /* PontosLoopUITests.swift */; };
 		6561119E95BBDD31570B67EA /* PontosLoopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F5635BB7198B341A9829AB /* PontosLoopApp.swift */; };
@@ -24,13 +27,16 @@
 		87C5079C07CC6EB97A2CD452 /* InputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F41E7F253070D296291BB1 /* InputState.swift */; };
 		8EB677047BA01FF00998D022 /* PontosLoopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F5635BB7198B341A9829AB /* PontosLoopApp.swift */; };
 		90670CB855ACBA1BB5087644 /* PhotoTextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02F528C4E585BB7DB9C35AA /* PhotoTextRecognizer.swift */; };
+		9C8CF75A4DE0C95F3287797C /* ChatAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2CA6BBF8976072B436048 /* ChatAttachment.swift */; };
 		AA5F97FE6815AB43F16125F4 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E1351ABAF01432AA300E88 /* HistoryView.swift */; };
 		AB253D766E1F016B354A1B49 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6D2C988FFD2D18C2F0D70016 /* PrivacyInfo.xcprivacy */; };
 		AEC3421FE9D8DCE538F71DB4 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A00F35C690F9233CDAD1EB /* AppRootView.swift */; };
 		B269D5DD74BAADB784E8C097 /* InputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F41E7F253070D296291BB1 /* InputState.swift */; };
 		BCFA90C30213ADDA6E7B94F1 /* DecisionCore in Frameworks */ = {isa = PBXBuildFile; productRef = FD404A2657468F51D3792B13 /* DecisionCore */; };
+		CD2E2533F1D6D6AA98E3BD36 /* VoiceInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF47737369F78701AAE1D33A /* VoiceInput.swift */; };
 		D762E7D0F92B26F4551479CE /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B2FF154A6373B1FA9FD6C /* AssistantView.swift */; };
 		DBA5B2653A2E434A3F52A3C9 /* PhotoImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B218F96BB3DD251D4B80E /* PhotoImportView.swift */; };
+		F6E57E7D7C814CC430045C2C /* CheckoutReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0AB3DE9E0521BF9D95DE47 /* CheckoutReviewView.swift */; };
 		FFD4BC27390937FEB6E187CC /* DecisionCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1415293B6305EC65681E0BEF /* DecisionCore */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +53,7 @@
 /* Begin PBXFileReference section */
 		00F41E7F253070D296291BB1 /* InputState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputState.swift; sourceTree = "<group>"; };
 		44B7745396965945590ECF24 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		58F2CA6BBF8976072B436048 /* ChatAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAttachment.swift; sourceTree = "<group>"; };
 		5BCF52296BBEDA0C5E576B20 /* PontosLoop-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PontosLoop-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64F5635BB7198B341A9829AB /* PontosLoopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PontosLoopApp.swift; sourceTree = "<group>"; };
 		6D2C988FFD2D18C2F0D70016 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -55,10 +62,12 @@
 		8E4B218F96BB3DD251D4B80E /* PhotoImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImportView.swift; sourceTree = "<group>"; };
 		A02F528C4E585BB7DB9C35AA /* PhotoTextRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTextRecognizer.swift; sourceTree = "<group>"; };
 		A1E1351ABAF01432AA300E88 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		AF47737369F78701AAE1D33A /* VoiceInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceInput.swift; sourceTree = "<group>"; };
 		AFDAB9661FA98C4CE36F168B /* PontosLoop-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "PontosLoop-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B732F35BBFB0DA8D1837C165 /* DecisionCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DecisionCore; path = Packages/DecisionCore; sourceTree = SOURCE_ROOT; };
 		C632773AB995C6C3A716FA07 /* PontosLoop-UITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "PontosLoop-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A00F35C690F9233CDAD1EB /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		EB0AB3DE9E0521BF9D95DE47 /* CheckoutReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutReviewView.swift; sourceTree = "<group>"; };
 		EC849D95625F908985AAD6E0 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		ED1EF96CA2B273B88E1423D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,12 +118,15 @@
 				ED1EF96CA2B273B88E1423D4 /* Assets.xcassets */,
 				859B2FF154A6373B1FA9FD6C /* AssistantView.swift */,
 				EC849D95625F908985AAD6E0 /* CalculatorView.swift */,
+				58F2CA6BBF8976072B436048 /* ChatAttachment.swift */,
+				EB0AB3DE9E0521BF9D95DE47 /* CheckoutReviewView.swift */,
 				A1E1351ABAF01432AA300E88 /* HistoryView.swift */,
 				00F41E7F253070D296291BB1 /* InputState.swift */,
 				8E4B218F96BB3DD251D4B80E /* PhotoImportView.swift */,
 				A02F528C4E585BB7DB9C35AA /* PhotoTextRecognizer.swift */,
 				64F5635BB7198B341A9829AB /* PontosLoopApp.swift */,
 				6D2C988FFD2D18C2F0D70016 /* PrivacyInfo.xcprivacy */,
+				AF47737369F78701AAE1D33A /* VoiceInput.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -273,11 +285,14 @@
 				7EFA8586F3BCEA439B0D2AB2 /* AppTheme.swift in Sources */,
 				86043131BEAB2F1CCA37DBA7 /* AssistantView.swift in Sources */,
 				2D45C4EEA70103244F08C503 /* CalculatorView.swift in Sources */,
+				9C8CF75A4DE0C95F3287797C /* ChatAttachment.swift in Sources */,
+				1AF8FD65C111242B3FD504DC /* CheckoutReviewView.swift in Sources */,
 				AA5F97FE6815AB43F16125F4 /* HistoryView.swift in Sources */,
 				B269D5DD74BAADB784E8C097 /* InputState.swift in Sources */,
 				84DB252EB243756581A4D208 /* PhotoImportView.swift in Sources */,
 				56351E3573002F777FD2EFDA /* PhotoTextRecognizer.swift in Sources */,
 				8EB677047BA01FF00998D022 /* PontosLoopApp.swift in Sources */,
+				5AAA34048A85B9A137A1E418 /* VoiceInput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,11 +304,14 @@
 				0524EB9FCFEC850933D0DBC2 /* AppTheme.swift in Sources */,
 				D762E7D0F92B26F4551479CE /* AssistantView.swift in Sources */,
 				5AE9F29BD2941B19E64621A0 /* CalculatorView.swift in Sources */,
+				5D694CFE440A2418E306D813 /* ChatAttachment.swift in Sources */,
+				F6E57E7D7C814CC430045C2C /* CheckoutReviewView.swift in Sources */,
 				6026FE32874C819CE3CCF5A2 /* HistoryView.swift in Sources */,
 				87C5079C07CC6EB97A2CD452 /* InputState.swift in Sources */,
 				DBA5B2653A2E434A3F52A3C9 /* PhotoImportView.swift in Sources */,
 				90670CB855ACBA1BB5087644 /* PhotoTextRecognizer.swift in Sources */,
 				6561119E95BBDD31570B67EA /* PontosLoopApp.swift in Sources */,
+				CD2E2533F1D6D6AA98E3BD36 /* VoiceInput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +391,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -386,9 +404,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Grave uma mensagem de voz para o Noah. O áudio fica neste aparelho.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Transcreva sua mensagem de voz neste aparelho para conversar com o Noah, sem enviar o áudio para a internet.";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -455,7 +475,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -474,9 +494,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Grave uma mensagem de voz para o Noah. O áudio fica neste aparelho.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Transcreva sua mensagem de voz neste aparelho para conversar com o Noah, sem enviar o áudio para a internet.";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;

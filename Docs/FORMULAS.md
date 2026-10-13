@@ -29,9 +29,10 @@ com até duas casas decimais. O motor exige valores válidos e não infere desco
 Para cenários antigos sem preço Pix direto, preserva-se a regra anterior:
 PixHoje = arredondarCentavos(precoReferencia*(1-descontoPix/100)).
 
-Na importação de imagem, TotalCartaoSugerido = parcelas × valorPorParcela.
-É apenas uma sugestão revisável: totais contratuais e ajustes na última parcela
-podem ser diferentes. Nenhuma comparação importada é aplicada sem confirmação.
+Na importação de imagem, usa-se o total anunciado na mesma linha quando coerente
+com quantidade × valor da parcela, tolerando arredondamento de centavos. Sem total
+coerente, TotalCartaoSugerido = parcelas × valorPorParcela. A pessoa precisa revisar
+o total contratual e eventuais ajustes na última parcela. Nenhuma comparação importada é aplicada sem confirmação.
 Cartao = VPparcelas - VPpontos - VPcashbackAdicional.
 O total do cartão contém juros e taxas reais, não reaplicados pelo motor.
 
@@ -113,3 +114,19 @@ fica zero e isso é avisado. Não há conversão universal ou rendimento predefi
 O diagnóstico presume compra elegível e cumprimento das condições do Inter Loop.
 Para pagamentos já contratados sem alternativa Pix real, use o modo Antecipar;
 não compare uma dívida existente com uma oferta que não está disponível.
+
+## Comparação de prints no chat — Pontos Loop 1.3
+
+Cada oferta confirmada gera seu cronograma mensal a partir do total final exato.
+Pix sai no dia zero. Cartão usa o primeiro vencimento escolhido e os meses seguintes.
+Custo = VPpagamentos − VPpontos − VPcashbackConfirmado.
+Pontos = BaseElegivelPrime / 2,50 + BonusExtra; a base é zero para outros cartões.
+O bônus extra só entra na oferta real de antecipação. Juros não ampliam a base.
+Cashback de antecipação é informado separadamente; não se presume cumulatividade.
+A disponibilidade dos benefícios usa uma única data editável por comparação.
+
+Confirmação do banco é obrigatória; não basta encontrar o nome no cabeçalho.
+O preço de quitação precisa vir do Inter. Cashback condicional e valor do milheiro
+não são inferidos. São necessárias 2 a 100 ofertas válidas; totais zero são rejeitados.
+O ranking vale para as ofertas confirmadas da mesma compra, com dinheiro reservado
+e pagamento integral da fatura. A revisão do chat não altera a calculadora salva.

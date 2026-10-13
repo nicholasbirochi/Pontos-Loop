@@ -5,13 +5,17 @@ App nativo SwiftUI, iOS 17+ e macOS 14+, sem dependências remotas.
 - `AppRootView`: mantém rascunho e histórico e conecta Simular, Noah e Salvos.
 - `InputState.calculate`: valida a entrada brasileira e transforma datas em fluxos.
 - `DecisionCore/FourCaseDiagnosis`: diagnóstico de quatro ofertas, pontos normais do Prime em cada opção de cartão e bônus incremental separado; zeros são dados ausentes.
+- `DecisionCore/CheckoutComparison`: ranking de ofertas confirmadas por banco, total exato, pontos Prime uma vez e quitação real opcional.
 - `DecisionCore/DecisionEngine`: dinheiro em Decimal e valor presente em Double.
 - `DecisionCore/SimpleAssistant`: respostas locais por assunto, com a comparação atual.
 - `CalculatorView`: entrada simples (Pix direto, total e parcelas), comparação explícita e detalhes recolhidos.
 - `PhotoImportView`: até 4 fotos/arquivos, revisão editável, aplicação somente após validar.
-- `PhotoTextRecognizer`: Apple Vision local, imagens até 20 MB, orientação corrigida e redução para 2400 px.
-- `DecisionCore/OfferExtractor`: extrai preços Pix e ofertas regulares explícitas; não adivinha valores ambíguos.
-- `AssistantView`: conversa em memória; nenhuma chamada de rede.
+- `PhotoTextRecognizer`: Apple Vision local, imagens até 20 MB, orientação corrigida, redução para 2400 px e agrupamento horizontal das linhas de parcelas.
+- `DecisionCore/OfferExtractor`: extrai preços Pix e ofertas regulares explícitas; preserva total anunciado coerente, centavos elevados e Pix em linha separada; não adivinha valores ambíguos.
+- `AssistantView`: conversa em memória, até 4 anexos por mensagem, seleção múltipla e drop; nenhuma chamada de rede.
+- `CheckoutReviewView`: revisão de banco, preço e parcelas por anexo; devolve o diagnóstico ao chat sem alterar InputState.
+- `ChatAttachment`: leitura limitada de imagem/PDF/TXT, cartões e reprodução de áudio em memória.
+- `VoiceInput`: gravação nativa até 60s, transcrição local Apple Speech, permissões e cancelamento com espera limitada.
 - `HistoryStore`: UserDefaults versionado v1, até 100 cenários; preço Pix direto opcional mantém compatibilidade com cenários antigos.
 - `project.yml`: fonte XcodeGen; projeto Xcode gerado incluído para abrir diretamente.
 

@@ -47,3 +47,23 @@ esquemas **PontosLoop-iOS** ou **PontosLoop-macOS**. Os identificadores de bundl
 as chaves de armazenamento anteriores foram mantidos para preservar rascunhos e
 histórico na atualização. Use **Nova simulação** para começar com tudo zerado.
 O repositório atual é https://github.com/nicholasbirochi/Pontos-Loop.
+
+## Chat com áudio e anexos (1.3)
+
+Na aba Noah, use **Fotos / +** para anexar até quatro prints na mesma mensagem,
+ou **Arquivo** para PDF com texto, TXT ou áudio. O **microfone** grava até 1 minuto.
+Confira a transcrição antes de enviar. Se o reconhecimento local não estiver
+disponível, escreva a pergunta junto do áudio.
+
+Envie os prints, confirme banco, preços e parcelas em **Conferir ofertas** e toque
+em **Confirmar e comparar no chat**. O ranking compara as ofertas confirmadas de
+Inter Prime, Mercado Livre, Itaú e Pix. Para antecipação, informe a oferta real do
+Inter e somente o bônus extra. Veja `Docs/CHAT-MIDIA.md` para permissões e limites.
+
+## AirDrop e instalação
+
+AirDrop transfere arquivos; enviar o ZIP ou o app de Mac não instala a versão iOS.
+Uma IPA exige assinatura e provisionamento compatíveis com o iPhone de destino.
+Esta entrega contém o projeto para instalar pelo Xcode seguindo os passos acima;
+não contém uma IPA instalável. A conexão do iPhone e a escolha da equipe Apple
+precisam estar prontas antes da instalação e do teste no aparelho real.

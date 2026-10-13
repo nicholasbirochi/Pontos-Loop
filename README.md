@@ -6,6 +6,7 @@ local que explica as contas de um jeito simples. Compatível com **iPhone 13**
 (iOS 17+) e Mac (macOS 14+).
 
 <img src="Design/PontosLoop-iPhone13.png" width="300" alt="Pontos Loop no simulador do iPhone 13, com tema preto e Noah" />
+<img src="Design/PontosLoop-Noah-iPhone13.png" width="300" alt="Noah com fotos, arquivos e áudio no iPhone 13" />
 
 *Captura real no simulador iPhone 13, com os campos iniciais zerados.*
 
@@ -61,6 +62,11 @@ dos cenários informados, sem API ou modelo generativo.
 
 ## O que tem
 
+- **Chat com mídia:** área de mensagem sem a borda nativa de foco, balões animados,
+  sugestões em cartões deslizantes, até 4 anexos por mensagem, fotos/PDF/TXT e
+  áudio de até 1 minuto com reprodução e transcrição local quando disponível.
+  Confirme banco, total e parcelas para receber no chat o ranking de Inter Prime,
+  Itaú, Mercado Livre e Pix. Antecipação exige a oferta real de quitação do Inter. [Como usar e limites](Docs/CHAT-MIDIA.md).
 - **Simular:** Pix × cartão, quitação antecipada e uso de pontos na fatura.
 - **Noah:** respostas prontas sobre o aplicativo e explicação da comparação
   atual, usando os valores reais da tela. Funciona sem internet, conta ou API.

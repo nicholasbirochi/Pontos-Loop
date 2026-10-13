@@ -71,3 +71,43 @@ pasta de trabalho na assinatura dos produtos temporários.
 - Os builds finais macOS e iPhone arm64 sem assinatura foram aprovados, com
   verificação da assinatura local do Mac. A checagem de compatibilidade também
   rejeita Pix, saldo ou quitação zerados nos modos individuais.
+
+## Pontos Loop 1.3 — chat com áudio e comparação de anexos
+
+- 42 testes de DecisionCore aprovados: 12 de cálculo, 7 de quatro cenários,
+  6 de extração, 11 de Noah e 6 de comparação entre ofertas. Incluem pontos Prime
+  uma vez, bônus separado, outros bancos sem pontos automáticos, centavos do total
+  anunciado, Pix em linha separada e cashback não confundido com preço.
+- Suíte completa de 6 testes de interface aprovada no iPhone 13/iOS 27, com
+  `TEST SUCCEEDED`: os cinco fluxos anteriores e menu de anexos, seletor de
+  arquivos, envio de pergunta e limpeza da conversa. O serviço nativo de arquivos
+  precisou de até 20s na primeira inicialização; o teste passou com esse prazo.
+- Checagem nativa de anexos aprovou TXT, PDF com texto, truncamento explícito,
+  arquivos vazios/inválidos e acima de 20 MB, além de WAV vazio ou com 61 segundos
+  rejeitados antes de pedir permissão e cancelamento antes de iniciar reprodução.
+- Checagem de VoicePermissionGate aprovou conclusão única, callback duplicado,
+  timeout, cancelamento e callback tardio, sem pedir permissões reais.
+- OCR nativo de quatro imagens sintéticas aprovado, incluindo Pix em duas linhas,
+  várias quantidades de parcelas e total anunciado diferente em um centavo.
+- Fluxo Mac comprovado pela interface: quatro PNGs selecionados juntos no painel
+  nativo, envio, confirmação de Pix/Inter Prime/Mercado Livre/Itaú e diagnóstico
+  de oito ofertas no chat. Pix ilustrativo R$ 900 venceu cartão R$ 1.000 por
+  R$ 100; total R$ 1.050,01 preservado, cashback condicional mantido em zero e
+  antecipação não informada indicada como ausente. A simulação principal não mudou.
+  Foram usados apenas arquivos sintéticos, sem prints financeiros do usuário.
+- O Mac declarou suporte local a pt_BR, mas a autorização Speech para um áudio
+  sintético não retornou neste ambiente. A transcrição real permanece pendente.
+  O app limita a espera e preserva áudio válido com aviso para escrever a pergunta;
+  não tenta reconhecimento por servidor nem anuncia que entendeu o áudio.
+- Gravação real pelo microfone, interrupções de hardware, rotas Bluetooth e
+  permissões no iPhone físico ainda precisam de teste no aparelho do usuário.
+- Reprodução de áudio sintético verificada com AVPlayer: o executor da interface
+  continuou atendendo e a preparação encerrou dentro do prazo, sem acessar o
+  microfone. A versão inicial com AVAudioPlayer bloqueou o serviço HAL deste Mac;
+  foi substituída por início assíncrono com cancelamento e limite de espera.
+  Qualidade audível, volume e rotas reais permanecem dependentes de teste físico.
+- Build final macOS aprovado e assinatura local verificada com
+  `codesign --verify --deep --strict`. Build iPhone arm64 sem assinatura aprovado.
+- A última consulta de dispositivos mostrou somente simuladores e zero identidades
+  de assinatura. Instalação física e eventual IPA continuam pendentes; não houve
+  envio de aplicativo instalável por AirDrop.
