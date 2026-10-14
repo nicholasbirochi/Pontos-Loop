@@ -19,7 +19,7 @@ public enum SimpleAssistant {
             return "Use o + para anexar uma imagem, PDF com texto, TXT ou áudio. O microfone grava até 1 minuto; confira a transcrição antes de enviar. A voz depende do reconhecimento offline da Apple disponível no aparelho. Para uma oferta, toque em ‘Revisar valores da oferta’ no anexo antes de comparar. Os anexos ficam só nesta conversa."
         }
         if has("foto", "fotos", "print", "imagem", "imagens") {
-            return "Toque em ‘Comparar uma foto’ aqui, ou em ‘Usar foto ou print’ na aba Simular. Escolha até 4 imagens com o preço e as parcelas. Confira os valores lidos antes de comparar. A imagem é processada neste aparelho."
+            return "Toque em ‘Comparar uma foto’ aqui, ou em ‘Usar foto ou print’ na aba Simular. Escolha até 20 imagens com o preço e as parcelas. Confira os valores lidos antes de comparar. A imagem é processada neste aparelho."
         }
         if has("ia", "inteligencia", "mac", "ollama") {
             return "Sou o Noah, um assistente com respostas prontas sobre a calculadora. Não uso a IA do seu Mac. A leitura de fotos usa o reconhecimento de texto da Apple neste aparelho, sem enviar a imagem para um servidor."

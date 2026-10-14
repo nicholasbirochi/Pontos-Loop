@@ -52,7 +52,7 @@ condições do Loop, débito automático ativo e pagamento integral em dia; enca
 parcelamento da fatura e outros lançamentos são excluídos. Confira a previsão no
 PDF da sua fatura. [Fontes oficiais e consulta](Docs/INTER-PRIME.md).
 
-Para fotos, use **Usar foto ou print** (até 4 imagens). Confira Pix, total,
+Para fotos, use **Usar foto ou print** (até 20 imagens). Confira Pix, total,
 parcelas e se há juros antes de confirmar. Ofertas ambíguas e parcelas irregulares
 exigem preenchimento manual. A leitura usa Apple Vision local; fotos e texto não
 são gravados no histórico.
@@ -63,7 +63,7 @@ dos cenários informados, sem API ou modelo generativo.
 ## O que tem
 
 - **Chat com mídia:** área de mensagem sem a borda nativa de foco, balões animados,
-  sugestões em cartões deslizantes, até 4 anexos por mensagem, fotos/PDF/TXT e
+  sugestões em cartões deslizantes, até 20 anexos por mensagem, fotos/PDF/TXT e
   áudio de até 1 minuto com reprodução e transcrição local quando disponível.
   Confirme banco, total e parcelas para receber no chat o ranking de Inter Prime,
   Itaú, Mercado Livre e Pix. Antecipação exige a oferta real de quitação do Inter. [Como usar e limites](Docs/CHAT-MIDIA.md).
@@ -78,6 +78,13 @@ O Noah usa regras locais, sem modelo generativo: responde aos assuntos da
 calculadora e informa seu limite em outras perguntas. A conversa fica em memória
 na sessão; histórico de simulações e rascunho usam UserDefaults versionado.
 Não existe sincronização entre iPhone e Mac.
+
+## Atualizar pelo Mac
+
+O atualizador gratuito verifica novos commits da main a cada 5 minutos, compila e
+instala quando o iPhone está disponível e o Pontos Loop foi fechado. Configuração
+local pelo Xcode; nenhum dado financeiro vai para o GitHub.
+[Configuração, condições e como desligar](Docs/ATUALIZACOES.md).
 
 ## Premissas
 

@@ -10,8 +10,8 @@ settings:
     GENERATE_INFOPLIST_FILE: YES
     CODE_SIGN_STYLE: Automatic
     ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-    MARKETING_VERSION: "1.3.0"
-    CURRENT_PROJECT_VERSION: "4"
+    MARKETING_VERSION: "1.3.1"
+    CURRENT_PROJECT_VERSION: "5"
     INFOPLIST_KEY_NSMicrophoneUsageDescription: "Grave uma mensagem de voz para o Noah. O áudio fica neste aparelho."
     INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Transcreva sua mensagem de voz neste aparelho para conversar com o Noah, sem enviar o áudio para a internet."
 packages:

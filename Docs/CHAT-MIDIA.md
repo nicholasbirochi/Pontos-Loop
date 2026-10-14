@@ -2,7 +2,7 @@
 
 Na aba **Noah**, escreva uma pergunta ou use os controles na área de mensagem:
 
-- **Fotos / +**: selecione até **4 prints na mesma mensagem**. No Mac, também
+- **Fotos / +**: selecione até **20 prints na mesma mensagem**. No Mac, também
   pode arrastar imagens ou arquivos para o chat.
 - **Arquivo**: imagem, PDF com texto selecionável, TXT ou arquivo de áudio.
 - **Microfone**: grave até 1 minuto. **Concluir** termina e tenta transcrever;
@@ -41,7 +41,7 @@ compatíveis entre si. Sem valor do milheiro, pontos ainda não reduzem custo em
 
 ## Limites e privacidade
 
-- Até 4 anexos por mensagem, **20 MB por arquivo**. Áudio de até **60 segundos**.
+- Até 20 anexos por mensagem, **20 MB por arquivo**. Áudio de até **60 segundos**, somando no máximo **40 MB de áudio por mensagem**.
 - Imagens usam Apple Vision. PDFs precisam de texto selecionável: são lidas
   até 20 páginas e 30 mil caracteres; o cartão avisa quando houver corte.
   Para PDF escaneado, mande um print das páginas com a oferta.

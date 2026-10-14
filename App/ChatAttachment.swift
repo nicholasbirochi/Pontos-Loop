@@ -22,9 +22,11 @@ struct ChatAttachment: Identifiable {
 }
 
 enum ChatAttachmentError: LocalizedError {
-    case tooLarge, unsupported, unreadable, scannedPDF
+    case tooLarge, unsupported, unreadable, scannedPDF, tooManyAttachments, tooMuchAudio
     var errorDescription: String? {
         switch self {
+        case .tooManyAttachments: return "Envie até \(ChatAttachmentReader.maxCount) anexos por mensagem."
+        case .tooMuchAudio: return "Os áudios desta mensagem podem somar até 40 MB. Remova algum áudio antes de adicionar mais."
         case .tooLarge: return "Escolha um arquivo de até 20 MB."
         case .unsupported: return "Envie uma imagem, PDF com texto, TXT ou áudio de até 1 minuto."
         case .unreadable: return "Não consegui ler este arquivo. Tente outro formato ou copie o texto na mensagem."
@@ -34,6 +36,13 @@ enum ChatAttachmentError: LocalizedError {
 }
 
 enum ChatAttachmentReader {
+    static let maxCount = 20
+    static let maxAudioBytes = 40 * 1024 * 1024
+
+    static func validateBatch(_ attachments: [ChatAttachment]) throws {
+        guard attachments.count <= maxCount else { throw ChatAttachmentError.tooManyAttachments }
+        guard attachments.reduce(0, { $0 + ($1.audio?.count ?? 0) }) <= maxAudioBytes else { throw ChatAttachmentError.tooMuchAudio }
+    }
 
     static func read(data: Data, type: UTType, name: String) async throws -> ChatAttachment {
         guard data.count <= 20 * 1024 * 1024 else { throw ChatAttachmentError.tooLarge }

@@ -91,7 +91,7 @@ struct AssistantView: View {
         .onDrop(of: [UTType.fileURL, .image], isTargeted: $dropTargeted, perform: receiveDrop)
         .overlay {
             if dropTargeted {
-                Label("Solte até 4 prints aqui", systemImage: "photo.stack")
+                Label("Solte até \(ChatAttachmentReader.maxCount) prints aqui", systemImage: "photo.stack")
                     .font(.title2.bold()).padding(30).background(AppTheme.ink, in: RoundedRectangle(cornerRadius: 25))
                     .overlay(RoundedRectangle(cornerRadius: 25).stroke(AppTheme.silver, lineWidth: 2))
                     .allowsHitTesting(false)
@@ -158,13 +158,13 @@ struct AssistantView: View {
             }
             HStack(spacing: 10) {
                 #if os(iOS)
-                PhotosPicker(selection: $photos, maxSelectionCount: max(1, 4 - attachments.count), matching: .images) { Label("Fotos", systemImage: "photo.stack") }.accessibilityLabel("Comparar uma foto")
+                PhotosPicker(selection: $photos, maxSelectionCount: max(1, ChatAttachmentReader.maxCount - attachments.count), matching: .images) { Label("Fotos", systemImage: "photo.stack") }.accessibilityLabel("Comparar uma foto")
                 #else
                 Button { chooseFiles() } label: { Label("Fotos", systemImage: "photo.stack") }.accessibilityLabel("Comparar uma foto")
                 #endif
                 Button { chooseFiles() } label: { Label("Arquivo", systemImage: "paperclip") }
             }
-            .buttonStyle(.bordered).controlSize(.large).font(.subheadline).disabled(busy)
+            .buttonStyle(.bordered).controlSize(.large).font(.subheadline).disabled(busy || attachments.count >= ChatAttachmentReader.maxCount)
             Text("Respostas locais sobre a calculadora. Os valores dos anexos passam pela sua revisão.")
                 .font(.caption).foregroundStyle(.secondary)
             VStack(alignment: .leading, spacing: 10) {
@@ -264,7 +264,7 @@ struct AssistantView: View {
                     }
                 }.scrollIndicators(.hidden)
             }
-            if !attachments.isEmpty { Text("\(attachments.count)/4 anexos · envie para conferir e comparar").font(.caption).foregroundStyle(.secondary) }
+            if !attachments.isEmpty { Text("\(attachments.count)/\(ChatAttachmentReader.maxCount) anexos · envie para conferir e comparar").font(.caption).foregroundStyle(.secondary) }
             if busy {
                 HStack(spacing: 10) {
                     if voice.isRecording {
@@ -290,7 +290,7 @@ struct AssistantView: View {
             HStack(spacing: 10) {
                 Menu {
                     #if os(iOS)
-                    PhotosPicker(selection: $photos, maxSelectionCount: max(1, 4 - attachments.count), matching: .images) { Label("Foto da biblioteca", systemImage: "photo") }
+                    PhotosPicker(selection: $photos, maxSelectionCount: max(1, ChatAttachmentReader.maxCount - attachments.count), matching: .images) { Label("Foto da biblioteca", systemImage: "photo") }
                     #else
                     Button { chooseFiles() } label: { Label("Foto ou print", systemImage: "photo") }
                     #endif
@@ -299,7 +299,7 @@ struct AssistantView: View {
                     Image(systemName: "plus").font(.title3.weight(.medium)).frame(width: 44, height: 44)
                         .background(.white.opacity(0.055), in: Circle())
                 }
-                .menuStyle(.borderlessButton).fixedSize().disabled(busy || attachments.count >= 4)
+                .menuStyle(.borderlessButton).fixedSize().disabled(busy || attachments.count >= ChatAttachmentReader.maxCount)
                 .accessibilityLabel("Anexar foto ou arquivo").accessibilityIdentifier("chatAttachments")
                 Button {
                     playback.stop(); startingVoice = true
@@ -307,7 +307,7 @@ struct AssistantView: View {
                 } label: {
                     Image(systemName: "mic").font(.title3).frame(width: 44, height: 44)
                 }
-                .buttonStyle(.plain).disabled(busy || attachments.count >= 4).accessibilityLabel("Gravar áudio de até 1 minuto").accessibilityIdentifier("chatMicrophone")
+                .buttonStyle(.plain).disabled(busy || attachments.count >= ChatAttachmentReader.maxCount).accessibilityLabel("Gravar áudio de até 1 minuto").accessibilityIdentifier("chatMicrophone")
                 Spacer(minLength: 0)
                 Text(question.count > 400 ? "\(question.count)/500" : "Texto, voz e arquivos")
                     .font(.caption2).foregroundStyle(.secondary).lineLimit(1)
@@ -373,7 +373,7 @@ struct AssistantView: View {
             do {
                 let result = try await action()
                 try Task.checkCancellation()
-                guard attachments.count + result.count <= 4 else { throw CalculationError.invalid("Envie até 4 anexos por mensagem. Remova algum antes de adicionar mais.") }
+                try ChatAttachmentReader.validateBatch(attachments + result)
                 playback.stop(); attachments.append(contentsOf: result); photos = []
             } catch { if !Task.isCancelled && !(error is CancellationError) { self.error = error.localizedDescription } }
             if !Task.isCancelled { reading = false }
@@ -391,7 +391,7 @@ struct AssistantView: View {
         panel.allowsOtherFileTypes = true
         panel.allowedContentTypes = [.item]
         panel.prompt = "Anexar"
-        panel.message = "Escolha até 4 imagens, PDFs com texto, TXT ou áudios de até 1 minuto."
+        panel.message = "Escolha até \(ChatAttachmentReader.maxCount) imagens, PDFs com texto, TXT ou áudios de até 1 minuto."
         let completed: (NSApplication.ModalResponse) -> Void = { response in
             showFile = false
             if response == .OK { loadFiles(panel.urls) }
@@ -404,10 +404,13 @@ struct AssistantView: View {
     }
 
     private func loadFiles(_ urls: [URL]) {
-        guard !urls.isEmpty, urls.count + attachments.count <= 4 else { error = "Envie até 4 anexos por mensagem."; return }
+        guard !urls.isEmpty, urls.count + attachments.count <= ChatAttachmentReader.maxCount else { error = "Envie até \(ChatAttachmentReader.maxCount) anexos por mensagem."; return }
         loadMany {
             var results: [ChatAttachment] = []
-            for url in urls { results.append(try await readFile(url)) }
+            for url in urls {
+                results.append(try await readFile(url))
+                try ChatAttachmentReader.validateBatch(attachments + results)
+            }
             return results
         }
     }
@@ -437,8 +440,8 @@ struct AssistantView: View {
     }
 
     private func receiveDrop(_ providers: [NSItemProvider]) -> Bool {
-        guard !busy, !providers.isEmpty, providers.count + attachments.count <= 4 else {
-            error = "Solte até 4 arquivos por mensagem."; return false
+        guard !busy, !providers.isEmpty, providers.count + attachments.count <= ChatAttachmentReader.maxCount else {
+            error = "Solte até \(ChatAttachmentReader.maxCount) arquivos por mensagem."; return false
         }
         loadMany {
             var results: [ChatAttachment] = []
@@ -458,6 +461,7 @@ struct AssistantView: View {
                 } else {
                     results.append(try await ChatAttachmentReader.read(data: data, type: .image, name: "Print \(index + 1)"))
                 }
+                try ChatAttachmentReader.validateBatch(attachments + results)
             }
             return results
         }

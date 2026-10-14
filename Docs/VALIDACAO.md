@@ -111,3 +111,18 @@ pasta de trabalho na assinatura dos produtos temporários.
 - A última consulta de dispositivos mostrou somente simuladores e zero identidades
   de assinatura. Instalação física e eventual IPA continuam pendentes; não houve
   envio de aplicativo instalável por AirDrop.
+
+## Pontos Loop 1.3.1 — mais anexos e atualização pelo Mac (14/10/2026)
+
+- 43 testes Swift aprovados, incluindo comparação com 240 ofertas e rejeição
+  acima de 1.000. O limite dos seletores, arquivos e drop passou para 20 anexos.
+- Checagem nativa de mídia aprovou 20 anexos, rejeição de 21 e áudio de exatamente
+  40 MB versus 40 MB + 1 byte. A leitura por lote é validada antes de acumular mais
+  áudio; os limites de arquivo individual e duração continuam preservados.
+- Cinco testes do atualizador aprovados: históricos Git compatíveis/divergentes,
+  documentação sem reconstrução, app aberto preservado, falha de build sem
+  avançar versão instalada e pausa após três falhas do mesmo commit.
+- Builds macOS e iPhone arm64 assinado aprovados. Os testes de interface da 1.3
+  continuam registrados acima; não foram apresentados como nova execução 1.3.1.
+- A operação real do atualizador é registrada no perfil local após configurar;
+  as condições e os comandos de parada estão em ATUALIZACOES.md.

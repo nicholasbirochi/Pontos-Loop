@@ -36,7 +36,7 @@ Instruções oficiais consultadas em 13/10/2026:
 ## Usar fotos de uma oferta
 
 Na aba Simular, toque em **Usar foto ou print**, depois **Escolher fotos**.
-Selecione até 4 imagens da oferta, confira preço Pix, total, quantidade e data das
+Selecione até 20 imagens da oferta, confira preço Pix, total, quantidade e data das
 parcelas e toque em **Usar e comparar**. Se algum campo não for reconhecido,
 preencha manualmente. A leitura acontece no próprio aparelho; não usa a IA do Mac.
 
@@ -50,7 +50,7 @@ O repositório atual é https://github.com/nicholasbirochi/Pontos-Loop.
 
 ## Chat com áudio e anexos (1.3)
 
-Na aba Noah, use **Fotos / +** para anexar até quatro prints na mesma mensagem,
+Na aba Noah, use **Fotos / +** para anexar até 20 prints na mesma mensagem,
 ou **Arquivo** para PDF com texto, TXT ou áudio. O **microfone** grava até 1 minuto.
 Confira a transcrição antes de enviar. Se o reconhecimento local não estiver
 disponível, escreva a pergunta junto do áudio.

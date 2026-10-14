@@ -29,10 +29,10 @@ struct PhotoImportView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Mande o print. Confira os valores.")
                         .font(.system(.title2, design: .rounded).bold())
-                    Text("Escolha até 4 fotos: por exemplo, uma do Pix e outra das parcelas. A leitura acontece neste aparelho.")
+                    Text("Escolha até \(ChatAttachmentReader.maxCount) fotos: por exemplo, uma do Pix e outra das parcelas. A leitura acontece neste aparelho.")
                         .font(.subheadline).foregroundStyle(.secondary)
                     #if os(iOS)
-                    PhotosPicker(selection: $photos, maxSelectionCount: 4, matching: .images) {
+                    PhotosPicker(selection: $photos, maxSelectionCount: ChatAttachmentReader.maxCount, matching: .images) {
                         Label("Escolher fotos", systemImage: "photo.on.rectangle")
                             .frame(maxWidth: .infinity, minHeight: 36)
                     }
@@ -76,7 +76,7 @@ struct PhotoImportView: View {
                         if withInterest { field("Valor da compra sem juros (base elegível)", value: $principal) }
                         Stepper("Parcelas: \(count)x", value: $count, in: 0...36)
                         DatePicker("Primeiro vencimento", selection: $firstDate, in: Date()..., displayedComponents: .date)
-                        Text("O total sugerido é parcelas × valor de cada parcela. Confira juros, taxas e a última parcela. O rendimento e o valor monetário dos pontos começam em 0. Pontos normais do Prime são estimados sobre a compra elegível; confira também se esta oferta tem juros.")
+                        Text("O total sugerido usa o valor final anunciado quando reconhecido; caso contrário, usa parcelas × valor de cada parcela. Confira juros, taxas e a última parcela. O rendimento e o valor monetário dos pontos começam em 0. Pontos normais do Prime são estimados sobre a compra elegível; confira também se esta oferta tem juros.")
                             .font(.caption).foregroundStyle(.secondary)
                         Button(action: apply) {
                             Label("Usar e comparar", systemImage: "checkmark")
@@ -120,7 +120,7 @@ struct PhotoImportView: View {
             guard !items.isEmpty else { return }
             begin {
                 var texts: [String] = []
-                for item in items.prefix(4) {
+                for item in items.prefix(ChatAttachmentReader.maxCount) {
                     try Task.checkCancellation()
                     guard let data = try await item.loadTransferable(type: Data.self) else { throw PhotoReadError.invalidImage }
                     texts.append(try await PhotoTextRecognizer.read(data))
@@ -132,7 +132,7 @@ struct PhotoImportView: View {
             switch result {
             case .failure(let failure): error = failure.localizedDescription
             case .success(let urls):
-                guard !urls.isEmpty, urls.count <= 4 else { error = "Escolha de 1 a 4 imagens por vez."; return }
+                guard !urls.isEmpty, urls.count <= ChatAttachmentReader.maxCount else { error = "Escolha de 1 a \(ChatAttachmentReader.maxCount) imagens por vez."; return }
                 begin {
                     var texts: [String] = []
                     for url in urls {
