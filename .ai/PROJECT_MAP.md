@@ -17,7 +17,7 @@ App nativo SwiftUI, iOS 17+ e macOS 14+, sem dependências remotas.
 - `ChatAttachment`: leitura limitada de imagem/PDF/TXT, cartões e reprodução de áudio em memória.
 - `VoiceInput`: gravação nativa até 60s, transcrição local Apple Speech, permissões e cancelamento com espera limitada.
 - `HistoryStore`: UserDefaults versionado v1, até 100 cenários; preço Pix direto opcional mantém compatibilidade com cenários antigos.
-- `Scripts/update_iphone.py`: agente local do Mac, compara main local/remota sem divergência, espera app fechado, compila/assina/instala; estado e configuração privados fora do repo.
+- `Scripts/update_iphone.py`: agente do Mac acompanha main do GitHub; atalho compara main local/remota sem divergência. Espera app fechado, compila/assina/instala; estado e configuração privados fora do repo.
 - `project.yml`: fonte XcodeGen; projeto Xcode gerado incluído para abrir diretamente.
 
 Validação: `swift test --package-path Packages/DecisionCore`,

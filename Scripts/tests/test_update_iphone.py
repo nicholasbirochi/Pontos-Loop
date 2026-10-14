@@ -1,4 +1,6 @@
 import importlib.util
+import contextlib
+import io
 import json
 from pathlib import Path
 import subprocess
@@ -12,6 +14,25 @@ spec.loader.exec_module(updater)
 
 
 class UpdateTests(unittest.TestCase):
+    def test_background_never_reads_the_project_in_onedrive(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(updater, 'ROOT', Path(directory)), \
+             patch.object(updater, 'run', return_value='remote\n') as commands, \
+             patch.object(updater, 'install', return_value='ok'):
+            self.assertEqual(updater.update({'project': '/inaccessible/OneDrive'}), 'ok')
+            self.assertFalse(any('/inaccessible/OneDrive' in call.args[0] for call in commands.call_args_list))
+
+    def test_failure_details_stay_in_private_log(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(updater, 'ROOT', Path(directory)), \
+             patch.object(updater.sys, 'argv', ['updater']), patch.object(updater, 'update', \
+             side_effect=subprocess.CalledProcessError(128, 'git', stderr='private diagnostic')):
+            (Path(directory) / 'config.json').write_text('{}')
+            public = io.StringIO()
+            with contextlib.redirect_stderr(public), self.assertRaises(SystemExit): updater.main()
+            diagnostic = Path(directory) / 'error.log'
+            self.assertEqual(diagnostic.read_text(), 'private diagnostic')
+            self.assertEqual(diagnostic.stat().st_mode & 0o777, 0o600)
+            self.assertNotIn('private diagnostic', public.getvalue())
+
     def test_only_fast_forward_histories_are_accepted(self):
         with tempfile.TemporaryDirectory() as directory:
             repo = Path(directory)

@@ -119,10 +119,16 @@ pasta de trabalho na assinatura dos produtos temporários.
 - Checagem nativa de mídia aprovou 20 anexos, rejeição de 21 e áudio de exatamente
   40 MB versus 40 MB + 1 byte. A leitura por lote é validada antes de acumular mais
   áudio; os limites de arquivo individual e duração continuam preservados.
-- Cinco testes do atualizador aprovados: históricos Git compatíveis/divergentes,
+- Sete testes do atualizador aprovados: históricos Git compatíveis/divergentes,
   documentação sem reconstrução, app aberto preservado, falha de build sem
-  avançar versão instalada e pausa após três falhas do mesmo commit.
+  avançar versão instalada, pausa após três falhas, diagnóstico privado e agente
+  sem leitura do projeto no OneDrive.
 - Builds macOS e iPhone arm64 assinado aprovados. Os testes de interface da 1.3
   continuam registrados acima; não foram apresentados como nova execução 1.3.1.
-- A operação real do atualizador é registrada no perfil local após configurar;
-  as condições e os comandos de parada estão em ATUALIZACOES.md.
+- Instalação pelo atualizador concluída no iPhone 13 físico; consulta do aparelho
+  confirmou 1.3.1, build 5. O usuário confirmou selecionar sete prints juntos.
+- Agente do Mac registrado com intervalo de 300 segundos; execução real em
+  segundo plano terminou com código 0 e estado "Em dia". A leitura do OneDrive
+  pelo agente havia falhado; o fluxo automático passou a acompanhar o GitHub.
+  Somente o atalho manual lê a main local. As condições e os comandos de parada
+  estão em ATUALIZACOES.md. Wi-Fi e renovação após vencer o perfil não testados.

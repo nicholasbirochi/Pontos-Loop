@@ -81,7 +81,7 @@ Não existe sincronização entre iPhone e Mac.
 
 ## Atualizar pelo Mac
 
-O atualizador gratuito verifica novos commits da main a cada 5 minutos, compila e
+O atualizador gratuito verifica novos commits da main do GitHub a cada 5 minutos, compila e
 instala quando o iPhone está disponível e o Pontos Loop foi fechado. Configuração
 local pelo Xcode; nenhum dado financeiro vai para o GitHub.
 [Configuração, condições e como desligar](Docs/ATUALIZACOES.md).
