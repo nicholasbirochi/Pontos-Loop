@@ -18,6 +18,15 @@ final class CheckoutComparisonTests: XCTestCase {
         XCTAssertEqual(valued.options[3].presentCost, 977, accuracy: 0.001)
     }
 
+    func testLargePhotoBatchAndComparisonLimit() throws {
+        let offers = (0..<240).map { CheckoutOffer(name: "Oferta \($0)", total: Decimal(100 + $0), days: [30]) }
+        let result = try DecisionEngine.checkout(offers, reaisPerThousand: 0, monthlyRate: 0)
+        XCTAssertEqual(result.options.count, 240)
+        XCTAssertEqual(result.ordered.first?.cashOutlay, 100)
+        let tooMany = (0..<1001).map { CheckoutOffer(name: "Oferta \($0)", total: 100, days: [30]) }
+        XCTAssertThrowsError(try DecisionEngine.checkout(tooMany, reaisPerThousand: 0, monthlyRate: 0))
+    }
+
     func testAnticipationCountsNormalPointsOncePlusExtra() throws {
         let report = try DecisionEngine.checkout([
             CheckoutOffer(name: "Pix", total: 950, days: [0]),

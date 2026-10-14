@@ -10,6 +10,16 @@ struct ChatAttachmentCheck {
         let directory = FileManager.default.temporaryDirectory.appendingPathComponent("loop-attachment-check-\(UUID())")
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: directory) }
+        let documents = (0..<20).map { ChatAttachment(name: "print-\($0)", kind: .document, text: "Oferta") }
+        try ChatAttachmentReader.validateBatch(documents)
+        do { try ChatAttachmentReader.validateBatch(documents + [documents[0]]); assertionFailure("21 anexos devem ser rejeitados") }
+        catch ChatAttachmentError.tooManyAttachments { }
+        let audio = ChatAttachment(name: "limite.wav", kind: .audio, text: "", audio: Data(count: 20 * 1024 * 1024))
+        try ChatAttachmentReader.validateBatch([audio, audio])
+        do {
+            try ChatAttachmentReader.validateBatch([audio, audio, ChatAttachment(name: "extra.wav", kind: .audio, text: "", audio: Data([0]))])
+            assertionFailure("Mais de 40 MB de áudio devem ser rejeitados antes de enviar")
+        } catch ChatAttachmentError.tooMuchAudio { }
         let offer = "Pix R$ 950,00\n10x de R$ 100,00"
         let text = try await ChatAttachmentReader.read(data: Data(offer.utf8), type: .plainText, name: "oferta.txt")
         assert(text.text == offer && text.kind == .document)

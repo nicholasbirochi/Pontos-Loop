@@ -19,7 +19,7 @@ public struct CheckoutOffer {
 
 extension DecisionEngine {
     public static func checkout(_ offers: [CheckoutOffer], reaisPerThousand: Decimal, monthlyRate: Double) throws -> Comparison {
-        guard (2...100).contains(offers.count) else { throw CalculationError.invalid("Confirme de 2 a 100 ofertas para comparar.") }
+        guard (2...1000).contains(offers.count) else { throw CalculationError.invalid("Confirme de 2 a 1.000 ofertas para comparar.") }
         let options = try offers.map { offer in
             guard !offer.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                   offer.total > 0, !offer.total.isNaN, offer.cashback >= 0,

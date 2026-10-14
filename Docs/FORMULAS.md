@@ -127,6 +127,6 @@ A disponibilidade dos benefícios usa uma única data editável por comparação
 
 Confirmação do banco é obrigatória; não basta encontrar o nome no cabeçalho.
 O preço de quitação precisa vir do Inter. Cashback condicional e valor do milheiro
-não são inferidos. São necessárias 2 a 100 ofertas válidas; totais zero são rejeitados.
+não são inferidos. São necessárias 2 a 1.000 ofertas válidas; totais zero são rejeitados.
 O ranking vale para as ofertas confirmadas da mesma compra, com dinheiro reservado
 e pagamento integral da fatura. A revisão do chat não altera a calculadora salva.
