@@ -121,12 +121,15 @@ def update(config, force=False):
     if not (repo / '.git').is_dir():
         run(['/usr/bin/git', 'init', str(repo)])
     run(['/usr/bin/git', 'fetch', '--quiet', REMOTE, '+main:refs/remotes/updates/main'], cwd=repo)
-    run(['/usr/bin/git', 'fetch', '--quiet', config['project'], '+main:refs/remotes/local/main'], cwd=repo)
     remote = run(['/usr/bin/git', 'rev-parse', 'refs/remotes/updates/main'], cwd=repo).strip()
-    local = run(['/usr/bin/git', 'rev-parse', 'refs/remotes/local/main'], cwd=repo).strip()
-    sha = select_commit(repo, local, remote)
     state_path = ROOT / 'state.json'
     state = json.loads(state_path.read_text()) if state_path.exists() else {}
+    local = state.get('installedCommit', remote)
+    # O agente não precisa de acesso ao OneDrive; o atalho manual também aceita commits locais.
+    if force:
+        run(['/usr/bin/git', 'fetch', '--quiet', config['project'], '+main:refs/remotes/local/main'], cwd=repo)
+        local = run(['/usr/bin/git', 'rev-parse', 'refs/remotes/local/main'], cwd=repo).strip()
+    sha = select_commit(repo, local, remote)
     return install(config, repo, sha, state, force)
 
 
@@ -185,8 +188,14 @@ def main():
         print(message)
     except (subprocess.SubprocessError, OSError, ValueError, RuntimeError, KeyError) as error:
         # Logs completos da compilação permanecem privados; não imprimir certificados/conta.
-        message = 'Atualização não concluída: ' + (str(error) if isinstance(error, RuntimeError) else type(error).__name__) + '. Confira o Xcode e build.log local.'
-        if ROOT.exists(): (ROOT / 'status.txt').write_text(message)
+        message = 'Atualização não concluída: ' + (str(error) if isinstance(error, RuntimeError) else type(error).__name__) + '. Confira os logs locais do atualizador.'
+        if ROOT.exists():
+            (ROOT / 'status.txt').write_text(message)
+            details = getattr(error, 'stderr', '') or type(error).__name__
+            if isinstance(details, bytes): details = details.decode(errors='replace')
+            diagnostic = ROOT / 'error.log'
+            diagnostic.write_text(details)
+            diagnostic.chmod(0o600)
         print(message, file=sys.stderr)
         raise SystemExit(1)
 

@@ -6,11 +6,13 @@ usando o Xcode e o iPhone já pareado, sem contratar o Apple Developer Program.
 
 ## Funcionamento
 
-- O atualizador verifica a cada **5 minutos**, enquanto sua sessão do Mac estiver
-  ligada. Compara os commits da **main** local e da main do repositório público.
-- Usa o histórico que estiver à frente, desde que um seja continuação do outro.
-  Se divergirem, aguarda correção do Git. **Arquivos apenas salvos, sem commit,
-  não são publicados nem instalados automaticamente.**
+- O atualizador verifica a **main do GitHub** a cada **5 minutos**, enquanto sua
+  sessão do Mac estiver ligada. Depois de editar no Mac, faça **commit e push**
+  para que a atualização seja automática. Não exige acesso do agente ao OneDrive.
+- O atalho manual também compara a main local. Usa o histórico que estiver à
+  frente, desde que um seja continuação do outro, e preserva uma versão local
+  já instalada que ainda não foi enviada. Se os históricos divergirem, aguarda
+  correção do Git. **Arquivos salvos sem commit não entram na atualização.**
 - Mudanças somente em documentação não recompilam o app. Se XcodeGen estiver
   instalado ao configurar, ele regenera o projeto na cópia de compilação.
 - Compila numa cópia separada, assina com a equipe já configurada e instala no
@@ -47,6 +49,9 @@ app aberto/aparelho indisponível. Para consultar o último resultado:
 ```sh
 python3 Scripts/update_iphone.py --status
 ```
+
+Os detalhes de falhas ficam em `error.log`; a saída da compilação fica em
+`build.log`, ambos dentro da pasta privada do atualizador.
 
 Para desligar a verificação automática, preservando os arquivos locais:
 
