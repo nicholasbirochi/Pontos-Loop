@@ -15,9 +15,21 @@ enum PhotoReadError: LocalizedError {
 }
 
 enum PhotoTextRecognizer {
+    enum Payment: String { case itau, mercado }
+    struct Reading {
+        let text: String
+        var preview: Data?
+        var selectedPayment: Payment?
+        var advertisedPrice: Decimal?
+    }
+
     static func read(_ data: Data) async throws -> String {
+        try await inspect(data).text
+    }
+
+    static func inspect(_ data: Data) async throws -> Reading {
         guard data.count <= 20 * 1024 * 1024 else { throw PhotoReadError.tooLarge }
-        let text = try await Task.detached(priority: .userInitiated) {
+        let reading = try await Task.detached(priority: .userInitiated) {
             guard let source = CGImageSourceCreateWithData(data as CFData, nil),
                   let image = CGImageSourceCreateThumbnailAtIndex(source, 0, [
                     kCGImageSourceCreateThumbnailFromImageAlways: true,
@@ -64,10 +76,65 @@ enum PhotoTextRecognizer {
             }
             let text = String(rendered.joined(separator: "\n").prefix(30_000))
             guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { throw PhotoReadError.noText }
-            return text
+            let previewImage = CGImageSourceCreateThumbnailAtIndex(source, 0, [
+                kCGImageSourceCreateThumbnailFromImageAlways: true,
+                kCGImageSourceCreateThumbnailWithTransform: true,
+                kCGImageSourceThumbnailMaxPixelSize: 900
+            ] as CFDictionary)
+            let preview = NSMutableData()
+            if let previewImage, let destination = CGImageDestinationCreateWithData(preview, "public.jpeg" as CFString, 1, nil) {
+                CGImageDestinationAddImage(destination, previewImage, [kCGImageDestinationLossyCompressionQuality: 0.75] as CFDictionary)
+                if !CGImageDestinationFinalize(destination) { preview.length = 0 }
+            }
+            let folded = text.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "pt_BR"))
+            let prices = observations.filter { $0.text.range(of: #"^R\$\s*[0-9.,]+(?:\s|$)"#, options: .regularExpression) != nil }
+                .sorted { $0.box.height > $1.box.height }
+            var advertised: Decimal?
+            if folded.contains("mais vendido"), !folded.contains("escolha as parcelas"), let price = prices.first,
+               prices.dropFirst().allSatisfy({ $0.box.height < price.box.height * 0.9 }),
+               let range = price.text.range(of: #"[0-9]+(?:[.,][0-9]+)*"#, options: .regularExpression) {
+                let raw = String(price.text[range])
+                let grouped = raw.contains(",") || raw.range(of: #"^[0-9]+(?:\.[0-9]{3})+$"#, options: .regularExpression) != nil
+                let normalized = grouped ? raw.replacingOccurrences(of: ".", with: "").replacingOccurrences(of: ",", with: ".") : raw
+                if normalized.range(of: #"^[0-9]+(?:\.[0-9]{1,2})?$"#, options: .regularExpression) != nil {
+                    advertised = Decimal(string: normalized, locale: Locale(identifier: "en_US_POSIX"))
+                }
+            }
+            return Reading(text: text, preview: preview.length > 0 ? preview as Data : nil,
+                           selectedPayment: selectedPayment(observations, image: image), advertisedPrice: advertised)
         }.value
         try Task.checkCancellation()
-        return text
+        return reading
+    }
+
+    private static func selectedPayment(_ observations: [(text: String, box: CGRect)], image: CGImage) -> Payment? {
+        let labels = observations.filter { $0.text.count < 65 }.map {
+            (text: $0.text.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "pt_BR")), box: $0.box)
+        }
+        guard let itau = labels.first(where: { $0.text.contains("itau") }),
+              let mercado = labels.first(where: { $0.text.contains("mercad") && !$0.text.contains("cashback") }),
+              abs(itau.box.midY - mercado.box.midY) < max(itau.box.height, mercado.box.height) * 3,
+              abs(itau.box.midX - mercado.box.midX) > 0.2 else { return nil }
+        func background(_ box: CGRect) -> Int? {
+            let rect = CGRect(x: box.minX * Double(image.width), y: (1 - box.maxY) * Double(image.height),
+                              width: box.width * Double(image.width), height: box.height * Double(image.height)).integral
+            guard let crop = image.cropping(to: rect) else { return nil }
+            var pixels = [UInt8](repeating: 0, count: crop.width * crop.height)
+            let drawn = pixels.withUnsafeMutableBytes { bytes -> Bool in
+                guard let context = CGContext(data: bytes.baseAddress, width: crop.width, height: crop.height, bitsPerComponent: 8,
+                                              bytesPerRow: crop.width, space: CGColorSpaceCreateDeviceGray(), bitmapInfo: CGImageAlphaInfo.none.rawValue) else { return false }
+                context.draw(crop, in: CGRect(x: 0, y: 0, width: crop.width, height: crop.height)); return true
+            }
+            guard drawn else { return nil }
+            var histogram = [Int](repeating: 0, count: 256)
+            for value in pixels { histogram[Int(value)] += 1 }
+            guard histogram[230...255].reduce(0, +) > pixels.count / 2 else { return nil }
+            return (230...255).max { histogram[$0] < histogram[$1] }
+        }
+        guard let left = background(itau.box), let right = background(mercado.box), abs(left - right) >= 7,
+              max(left, right) >= 252 else { return nil }
+        // shortcut: reconhece abas claras com contraste legível; outros layouts pedem uma confirmação por grupo.
+        return left > right ? .itau : .mercado
     }
 
     private static func currencyText(_ candidate: VNRecognizedText, image: CGImage) throws -> String {

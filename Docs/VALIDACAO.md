@@ -154,3 +154,32 @@ pasta de trabalho na assinatura dos produtos temporários.
 - Suíte completa de seis testes de interface aprovada no simulador iPhone 13:
   compositor/anexos, explicação do chat, navegação, histórico após reabrir,
   importação e padrões zerados. Instalação no iPhone físico é verificada à parte.
+
+## Pontos Loop 1.3.3 — contexto entre prints e prévia (16/10/2026)
+
+- Checagem nativa de revisão aprovada: continuação por parcelas compatíveis,
+  herança de cartão/base, edição de benefícios compartilhada, separação manual,
+  deduplicação por grupo e rejeição de totais contraditórios. Cabeçalhos de cartões
+  diferentes permanecem separados mesmo quando os preços são iguais.
+- Sete imagens reais verificadas apenas localmente: três grupos de cartões,
+  cada um com todas as opções de 1x a 12x, somando 36 planos únicos. O anúncio
+  fornece um preço preenchido; confirmar que é Pix acrescenta a 37ª opção.
+  Conferidos o ranking, o empate das opções 1x e a quantidade de pontos Prime.
+  Fotos, valores reais e identificadores continuam fora do repositório.
+- OCR sintético aprovado para abas Itaú/Mercado Livre selecionadas e ambíguas,
+  fundo escuro sem sugestão indevida, preço principal com vírgula ou ponto,
+  miniaturas, centavos elevados e totais deslocados. Preço anunciado não vira
+  automaticamente preço Pix quando a modalidade não está escrita.
+- Fluxo completo no Mac: selecionar sete arquivos, enviar, ampliar miniatura,
+  voltar, confirmar preço como Pix sem digitar valores e receber o diagnóstico
+  com os três cartões e suas continuações corretamente identificados.
+- Suíte completa de seis testes de interface aprovada novamente no iPhone 13
+  simulado. Os 44 testes do motor já passaram na 1.3.2; seu código não mudou.
+- A associação automática usa a ordem das imagens e parcelas compatíveis. Envie
+  primeiro o cabeçalho do cartão, depois suas continuações. Layouts sem destaque
+  visual legível ainda podem pedir uma confirmação do cartão por grupo.
+- Antecipação depende da cotação real do Inter; cashback condicional e valor
+  monetário dos pontos não são inventados para completar o ranking.
+- Builds finais macOS e iOS Simulator aprovados; build genérico iPhone arm64
+  aprovado durante esta validação. Assinatura e instalação física são conferidas
+  pelo atualizador do Mac, mantendo o identificador do app e seus dados salvos.

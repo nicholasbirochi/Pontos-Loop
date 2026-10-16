@@ -16,16 +16,21 @@ escreva a pergunta junto. O Noah informa que não conseguiu interpretar o áudio
 
 ## Comparar prints de uma compra
 
-1. Anexe os prints do Pix e das condições de cada cartão e envie.
-2. Em **Conferir ofertas**, os preços e parcelas já aparecem preenchidos. Toque
-   em **Confirmar e comparar no chat** para receber o resumo. Cartão desconhecido
-   não bloqueia a comparação de preços: seus benefícios ficam fora da conta.
-3. Abra um print apenas para corrigir um valor, escolher o cartão ou alterar
-   ofertas. O cabeçalho pode mostrar dois bancos; nesse caso a seleção continua
-   opcional. Um cabeçalho só com Banco Inter sugere Inter Prime para conferência.
-   Anúncios marcados como “Mais vendido” começam excluídos para não misturar
-   preços promocionais do anúncio com o checkout. Prints sem oferta legível
-   também começam excluídos e não bloqueiam os demais.
+1. Anexe os prints na ordem: tela inicial de cada cartão, depois as telas que
+   continuam suas parcelas. O seletor de fotos mostra a ordem escolhida; arquivos
+   da mesma sequência numerada (como IMG_1, IMG_2) são ordenados pelo nome.
+2. Em **Conferir ofertas**, cada print tem miniatura: toque para ampliar. As
+   continuações compatíveis herdam o cartão e os benefícios do primeiro print;
+   parcelas repetidas entram uma única vez. Uma aba clara selecionada pode
+   identificar Itaú ou Mercado Livre, mesmo com os dois nomes no cabeçalho.
+   Quando o destaque não é legível, confirme o cartão uma vez para todo o grupo.
+3. O preço principal do anúncio aparece preenchido quando é legível e tem destaque
+   único. Toque em **Confirmar este preço como Pix** se ele também for o preço final
+   dessa modalidade; o ícone do Pix sozinho não confirma preço nem desconto.
+   O parcelamento do anúncio não substitui a oferta final do checkout.
+   Abra um print para corrigir valores, escolher outro cartão ou separar uma
+   continuação associada incorretamente. Totais contraditórios no mesmo grupo
+   bloqueiam o ranking até serem corrigidos. Prints sem valores ficam excluídos.
 4. Para Inter Prime, confira a base elegível sem juros, preenchida pelo preço 1x
    do print ou por um preço 1x único comum às imagens da mesma compra. Os pontos normais entram
    mesmo sem antecipar, uma vez por alternativa. Para outros cartões, informe
@@ -61,7 +66,7 @@ compatíveis entre si. Sem valor do milheiro, pontos ainda não reduzem custo em
 - No Mac, confira **Ajustes do Sistema → Privacidade e Segurança → Microfone /
   Reconhecimento de Fala**. No iPhone, confira as permissões correspondentes em
   Ajustes. A disponibilidade depende do aparelho e dos recursos locais da Apple.
-- Conversa, texto extraído e áudio ficam em memória na sessão. Gravações
+- Conversa, miniaturas, texto extraído e áudio ficam em memória na sessão. Gravações
   temporárias são apagadas após carregar ou descartar; a reprodução cria uma cópia
   temporária removida ao parar. Não entram no histórico, no GitHub nem em serviços
   de IA. A conversa guarda até 100 mensagens e 40 MB de áudio; mensagens mais
