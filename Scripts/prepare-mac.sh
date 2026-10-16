@@ -7,7 +7,7 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
   exit 1
 fi
 if ! command -v xcodegen >/dev/null 2>&1; then
-  echo "Instale XcodeGen conforme README.md e execute novamente."
+  echo "Instale XcodeGen conforme readme.md e execute novamente."
   exit 1
 fi
 if ! xcrun --find swift >/dev/null 2>&1; then

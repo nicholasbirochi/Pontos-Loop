@@ -5,7 +5,7 @@ simples para meu iPhone e também meu MacBook. Continue o projeto desta pasta,
 que já contém uma base SwiftUI e o motor DecisionCore. Priorize iPhone.
 Entregue código que eu possa compilar no Xcode e executar nos meus dispositivos.
 
-Leia AGENTS.md, README.md, Docs/FORMULAS.md, Docs/CENARIOS.md, Docs/ACEITE.md,
+Leia AGENTS.md, readme.md, Docs/FORMULAS.md, Docs/CENARIOS.md, Docs/ACEITE.md,
 Docs/VALIDACAO.md e project.yml antes de modificar. Inspecione a implementação.
 Não substitua este projeto por um site, PWA ou backend.
 

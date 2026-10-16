@@ -1,9 +1,6 @@
 # Pontos Loop · projeto 60 (numeração apenas da pasta local)
 
-Calculadora nativa para escolher entre Pix, cartão, antecipação e resgate de
-pontos. Interface em português, visual preto e grafite e **Noah**, um chatbot
-local que explica as contas de um jeito simples. Compatível com **iPhone 13**
-(iOS 17+) e Mac (macOS 14+).
+Aplicativo para comparar o custo de pagar no Pix, parcelar no cartão, antecipar parcelas ou usar pontos. As simulações ficam no aparelho, e o Noah ajuda a explicar as contas. O projeto tem interface em português para iPhone com iOS 17+ e Mac com macOS 14+.
 
 <img src="Design/PontosLoop-iPhone13.png" width="300" alt="Pontos Loop no simulador do iPhone 13, com tema preto e Noah" />
 <img src="Design/PontosLoop-Noah-iPhone13.png" width="300" alt="Noah com fotos, arquivos e áudio no iPhone 13" />
@@ -125,3 +122,7 @@ Para testes de interface, selecione um simulador no Xcode e use ⌘U.
 O símbolo do ícone segue a referência do Inter, recolorido em cinza sobre preto
 conforme pedido. [Fonte e reprodução do ícone](Design/LOGO.md).
 Esta é uma ferramenta pessoal independente, sem vínculo oficial com o Inter. Não conecta ao banco nem pede senha.
+
+## Licença
+
+Código e documentação autorais sob [MIT](license).
