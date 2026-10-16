@@ -12,6 +12,7 @@ struct ChatAttachment: Identifiable {
     var note: String = ""
     var audio: Data?
     var duration: TimeInterval = 0
+    var image: PhotoTextRecognizer.Reading?
     var symbol: String {
         switch kind {
         case .image: return "photo.fill"
@@ -39,6 +40,16 @@ enum ChatAttachmentReader {
     static let maxCount = 20
     static let maxAudioBytes = 40 * 1024 * 1024
 
+    static func orderedFiles(_ urls: [URL]) -> [URL] {
+        let prefixes = urls.compactMap { url -> String? in
+            let name = url.deletingPathExtension().lastPathComponent
+            guard let range = name.range(of: #"[0-9]+$"#, options: .regularExpression) else { return nil }
+            return String(name[..<range.lowerBound])
+        }
+        guard prefixes.count == urls.count, Set(prefixes).count == 1 else { return urls }
+        return urls.sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }
+    }
+
     static func validateBatch(_ attachments: [ChatAttachment]) throws {
         guard attachments.count <= maxCount else { throw ChatAttachmentError.tooManyAttachments }
         guard attachments.reduce(0, { $0 + ($1.audio?.count ?? 0) }) <= maxAudioBytes else { throw ChatAttachmentError.tooMuchAudio }
@@ -48,7 +59,8 @@ enum ChatAttachmentReader {
         guard data.count <= 20 * 1024 * 1024 else { throw ChatAttachmentError.tooLarge }
         try Task.checkCancellation()
         if type.conforms(to: .image) {
-            return ChatAttachment(name: name, kind: .image, text: try await PhotoTextRecognizer.read(data))
+            let image = try await PhotoTextRecognizer.inspect(data)
+            return ChatAttachment(name: name, kind: .image, text: image.text, image: image)
         }
         let result = try await Task.detached(priority: .userInitiated) {
             let text: String

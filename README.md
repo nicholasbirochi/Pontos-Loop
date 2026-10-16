@@ -65,8 +65,10 @@ dos cenários informados, sem API ou modelo generativo.
 - **Chat com mídia:** área de mensagem sem a borda nativa de foco, balões animados,
   sugestões em cartões deslizantes, até 20 anexos por mensagem, fotos/PDF/TXT e
   áudio de até 1 minuto com reprodução e transcrição local quando disponível.
-  Preenche preços e parcelas dos prints e traz o menor custo no chat, sem exigir
-  identificar todos os cartões. Bancos e benefícios podem ser conferidos na revisão.
+  Preenche preços e parcelas, relaciona prints de continuação ao mesmo cartão e
+  remove parcelas repetidas. Miniaturas ampliáveis ajudam a conferir; o preço
+  principal do anúncio pode ser confirmado como Pix em um toque. Bancos e
+  benefícios podem ser corrigidos uma vez por grupo. Traz o menor custo no chat.
   Antecipação exige a oferta real de quitação do Inter. [Como usar e limites](Docs/CHAT-MIDIA.md).
 - **Simular:** Pix × cartão, quitação antecipada e uso de pontos na fatura.
 - **Noah:** respostas prontas sobre o aplicativo e explicação da comparação

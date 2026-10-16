@@ -158,7 +158,7 @@ struct AssistantView: View {
             }
             HStack(spacing: 10) {
                 #if os(iOS)
-                PhotosPicker(selection: $photos, maxSelectionCount: max(1, ChatAttachmentReader.maxCount - attachments.count), matching: .images) { Label("Fotos", systemImage: "photo.stack") }.accessibilityLabel("Comparar uma foto")
+                PhotosPicker(selection: $photos, maxSelectionCount: max(1, ChatAttachmentReader.maxCount - attachments.count), selectionBehavior: .ordered, matching: .images) { Label("Fotos", systemImage: "photo.stack") }.accessibilityLabel("Comparar uma foto")
                 #else
                 Button { chooseFiles() } label: { Label("Fotos", systemImage: "photo.stack") }.accessibilityLabel("Comparar uma foto")
                 #endif
@@ -290,7 +290,7 @@ struct AssistantView: View {
             HStack(spacing: 10) {
                 Menu {
                     #if os(iOS)
-                    PhotosPicker(selection: $photos, maxSelectionCount: max(1, ChatAttachmentReader.maxCount - attachments.count), matching: .images) { Label("Foto da biblioteca", systemImage: "photo") }
+                    PhotosPicker(selection: $photos, maxSelectionCount: max(1, ChatAttachmentReader.maxCount - attachments.count), selectionBehavior: .ordered, matching: .images) { Label("Foto da biblioteca", systemImage: "photo") }
                     #else
                     Button { chooseFiles() } label: { Label("Foto ou print", systemImage: "photo") }
                     #endif
@@ -407,7 +407,7 @@ struct AssistantView: View {
         guard !urls.isEmpty, urls.count + attachments.count <= ChatAttachmentReader.maxCount else { error = "Envie até \(ChatAttachmentReader.maxCount) anexos por mensagem."; return }
         loadMany {
             var results: [ChatAttachment] = []
-            for url in urls {
+            for url in ChatAttachmentReader.orderedFiles(urls) {
                 results.append(try await readFile(url))
                 try ChatAttachmentReader.validateBatch(attachments + results)
             }

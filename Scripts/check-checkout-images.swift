@@ -55,6 +55,38 @@ import Foundation
         let text = try await PhotoTextRecognizer.read(data)
         let read = ExtractedOffers.read(text)
         assert(read.installments.map(\.total) == [Decimal(string: "624.90")!, Decimal(string: "652.11")!, Decimal(string: "710.68")!], text)
-        print("OK: quatro imagens regulares e centavos elevados (90, 06, 89) lidos; totais deslocados e arredondamento preservados.")
+        let tabCases: [(PhotoTextRecognizer.Payment?, Bool)] = [(nil, false), (.itau, false), (.mercado, false), (nil, true)]
+        for (selected, dark) in tabCases {
+            let tabs = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 1200, pixelsHigh: 700, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
+            NSGraphicsContext.saveGraphicsState()
+            NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: tabs)
+            NSColor.white.setFill(); NSBezierPath(rect: NSRect(x: 0, y: 0, width: 1200, height: 700)).fill()
+            NSColor(calibratedWhite: dark ? 0.1 : 0.96, alpha: 1).setFill(); NSBezierPath(rect: NSRect(x: 40, y: 420, width: 1120, height: 160)).fill()
+            if let selected { NSColor.white.setFill(); NSBezierPath(rect: NSRect(x: selected == .itau ? 40 : 600, y: 420, width: 560, height: 160)).fill() }
+            draw("Escolha as parcelas", 70, 620, 35)
+            draw("Itaú", 120, 470, 38, dark ? .white : .black); draw("Cartão Mercado", 680, 470, 38, dark ? .white : .black)
+            draw("1x R$ 400,00", 70, 300, 38)
+            NSGraphicsContext.restoreGraphicsState()
+            let data = tabs.representation(using: .png, properties: [:])!
+            try data.write(to: directory.appendingPathComponent("aba-\(selected?.rawValue ?? "indefinida")-\(dark).png"))
+            let reading = try await PhotoTextRecognizer.inspect(data)
+            assert(reading.selectedPayment == selected, "Aba selecionada deve ser reconhecida pelo fundo, sem escolher pelo primeiro nome")
+            assert((reading.preview?.count ?? 0) > 0 && (reading.preview?.count ?? 0) < 250_000)
+        }
+        for (price, expected) in [("R$ 400,00", Decimal(400)), ("R$ 400.90", Decimal(string: "400.90")!)] {
+            let ad = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 1200, pixelsHigh: 700, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
+            NSGraphicsContext.saveGraphicsState()
+            NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: ad)
+            NSColor.white.setFill(); NSBezierPath(rect: NSRect(x: 0, y: 0, width: 1200, height: 700)).fill()
+            draw("MAIS VENDIDO", 70, 600, 28); draw("R$ 500,00", 70, 520, 22, .gray)
+            draw(price, 70, 400, 64); draw("12x R$ 34,56", 70, 320, 28)
+            draw("Cashback com Cartão Mercado", 70, 210, 25)
+            NSGraphicsContext.restoreGraphicsState()
+            let adReading = try await PhotoTextRecognizer.inspect(ad.representation(using: .png, properties: [:])!)
+            assert(adReading.advertisedPrice == expected)
+            assert(adReading.selectedPayment == nil && ExtractedOffers.read(adReading.text).pixPrices.isEmpty, "Anúncio não confirma Pix nem cartão selecionado")
+        }
+        print("OK: quatro ofertas regulares, centavos elevados, duas abas de cartão, miniaturas e preço anunciado sem presumir Pix.")
+
     }
 }
