@@ -6,12 +6,12 @@ struct CheckoutBatch: Identifiable {
     let attachments: [ChatAttachment]
 }
 
-private enum CheckoutCard: String, CaseIterable {
+enum CheckoutCard: String, CaseIterable {
     case choose = "Confirme o meio de pagamento"
     case pix = "Pix", inter = "Inter Prime", itau = "Itaú", mercado = "Cartão Mercado Livre", other = "Outro cartão"
 }
 
-private struct CheckoutRow: Identifiable {
+struct CheckoutRow: Identifiable {
     let id = UUID()
     var included = true
     var count = 0
@@ -19,7 +19,7 @@ private struct CheckoutRow: Identifiable {
     var pix = false
 }
 
-private struct CheckoutSource: Identifiable {
+struct CheckoutSource: Identifiable {
     let id: UUID
     let name: String
     let text: String
@@ -27,6 +27,32 @@ private struct CheckoutSource: Identifiable {
     var principal = "0"
     var cashback = "0"
     var rows: [CheckoutRow]
+    var note = ""
+
+    static func read(_ attachments: [ChatAttachment]) -> [CheckoutSource] {
+        let extracted = attachments.map { ExtractedOffers.read($0.text) }
+        let bases = Set(extracted.flatMap(\.installments).filter { $0.count == 1 }.map(\.total))
+        let sharedBase = bases.count == 1 ? bases.first : nil
+        let number: (Decimal) -> String = { $0.formatted(.number.locale(Locale(identifier: "pt_BR")).grouping(.never).precision(.fractionLength(2))) }
+        return zip(attachments, extracted).enumerated().map { index, pair in
+            let (attachment, read) = pair
+            let text = attachment.text.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "pt_BR"))
+            let advertisement = text.contains("mais vendido") && !text.contains("escolha as parcelas")
+            let inter = text.contains("banco inter")
+            let itau = text.contains("itau"), mercado = text.contains("mercad")
+            let pixOnly = !read.pixPrices.isEmpty && read.installments.isEmpty
+            let card: CheckoutCard = pixOnly ? .pix : inter && !itau ? .inter : itau && !mercado ? .itau : .choose
+            var rows = read.pixPrices.map { CheckoutRow(count: 1, total: number($0), pix: true) }
+                + read.installments.map { CheckoutRow(count: $0.count, total: number($0.total)) }
+            if advertisement { for index in rows.indices { rows[index].included = false } }
+            let note = advertisement ? "Anúncio: ofertas excluídas inicialmente. O checkout pode ter outros preços."
+                : rows.isEmpty ? "Não encontrei um preço legível. Este print não impede comparar os demais." : ""
+            if rows.isEmpty { rows = [CheckoutRow(included: false)] }
+            let base = read.installments.first(where: { $0.count == 1 })?.total ?? sharedBase ?? 0
+            return CheckoutSource(id: attachment.id, name: "Print \(index + 1) · \(attachment.name)", text: attachment.text,
+                                  card: card, principal: number(base), rows: rows, note: note)
+        }
+    }
 }
 
 struct CheckoutReviewView: View {
@@ -46,16 +72,7 @@ struct CheckoutReviewView: View {
 
     init(attachments: [ChatAttachment], compared: @escaping (Comparison, String) -> Void) {
         self.compared = compared
-        _sources = State(initialValue: attachments.enumerated().map { index, attachment in
-            let read = ExtractedOffers.read(attachment.text)
-            let pixOnly = !read.pixPrices.isEmpty && read.installments.isEmpty
-            var rows = read.pixPrices.map { CheckoutRow(count: 1, total: Self.number($0), pix: true) }
-                + read.installments.map { CheckoutRow(count: $0.count, total: Self.number($0.total)) }
-            if rows.isEmpty { rows = [CheckoutRow()] }
-            return CheckoutSource(id: attachment.id, name: "Print \(index + 1) · \(attachment.name)", text: attachment.text,
-                                  card: pixOnly ? .pix : .choose,
-                                  principal: read.installments.first(where: { $0.count == 1 }).map { Self.number($0.total) } ?? "0", rows: rows)
-        })
+        _sources = State(initialValue: CheckoutSource.read(attachments))
     }
 
     var body: some View {
@@ -63,13 +80,14 @@ struct CheckoutReviewView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Uma compra. Todas as ofertas.").font(.system(.title2, design: .rounded).bold())
-                    Text("1. Confirme o cartão selecionado em cada print.\n2. Confira o total e as parcelas de cada oferta.\n3. Compare para receber o diagnóstico aqui no chat.")
+                    Text("Os preços e parcelas já estão preenchidos. Toque em comparar para receber o resumo; abra um print apenas se precisar corrigir algo ou incluir benefícios do cartão.")
                         .font(.subheadline).foregroundStyle(.secondary)
-                    Text("O print pode mostrar dois cartões no cabeçalho. Escolha o que estava selecionado. Cashback ‘até’ um valor depende de condições: informe somente o benefício confirmado.")
+                    Text("Cartão desconhecido não impede comparar preços. Confirme Inter Prime para estimar seus pontos; cashback ‘até’ um valor só entra quando você confirmar o benefício.")
                         .font(.caption).foregroundStyle(.secondary)
                     ForEach($sources) { $source in
-                        DisclosureGroup(source.name) {
+                        DisclosureGroup {
                             VStack(alignment: .leading, spacing: 14) {
+                                if !source.note.isEmpty { Text(source.note).font(.caption).foregroundStyle(.secondary) }
                                 Picker("Meio de pagamento", selection: $source.card) {
                                     ForEach(CheckoutCard.allCases, id: \.self) { card in Text(card.rawValue).tag(card) }
                                 }.accessibilityIdentifier("checkoutCard")
@@ -89,6 +107,12 @@ struct CheckoutReviewView: View {
                                 Button("Adicionar oferta") { source.rows.append(CheckoutRow()) }.buttonStyle(.bordered)
                                 DisclosureGroup("Conferir texto lido") { Text(source.text).font(.caption).textSelection(.enabled) }
                             }.padding(.top, 12)
+                        } label: {
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(source.name)
+                                Text("\(source.rows.filter(\.included).count) ofertas · \(source.card == .choose ? "cartão opcional" : source.card.rawValue)")
+                                    .font(.caption).foregroundStyle(.secondary)
+                            }
                         }
                         .padding(17).background(AppTheme.card, in: RoundedRectangle(cornerRadius: 20))
                     }
@@ -153,7 +177,6 @@ struct CheckoutReviewView: View {
             let benefitDay = try LocalSchedule.day(benefitDate)
             var offers: [CheckoutOffer] = []
             for (index, source) in sources.enumerated() where source.rows.contains(where: \.included) {
-                guard source.card != .choose else { throw CalculationError.invalid("Confirme o meio de pagamento no print \(index + 1).") }
                 let principal = source.card == .inter ? try BrazilianInput.decimal(source.principal, label: "compra elegível Prime") : 0
                 guard source.card != .inter || principal > 0 else { throw CalculationError.invalid("Informe o valor elegível da compra para calcular os pontos normais do Inter Prime.") }
                 let cashback = source.card == .pix ? 0 : try BrazilianInput.decimal(source.cashback, label: "benefício confirmado")
@@ -162,7 +185,8 @@ struct CheckoutReviewView: View {
                     let days = isPix ? [0] : try LocalSchedule.days(first: firstDate, count: row.count)
                     let total = try BrazilianInput.decimal(row.total, label: "total final")
                     guard isPix || source.card != .inter || principal <= total else { throw CalculationError.invalid("A base Prime não pode superar o total da compra parcelada.") }
-                    offers.append(CheckoutOffer(name: "\(isPix ? "Pix" : source.card.rawValue) · print \(index + 1)" + (isPix ? "" : " · \(row.count)x"),
+                    let cardName = source.card == .choose ? "Cartão não identificado" : source.card.rawValue
+                    offers.append(CheckoutOffer(name: "\(isPix ? "Pix" : cardName) · print \(index + 1)" + (isPix ? "" : " · \(row.count)x"),
                                                 total: total, days: days, eligiblePrimeSpend: isPix ? 0 : principal, cashback: isPix ? 0 : cashback, benefitDay: benefitDay))
                 }
             }
@@ -188,21 +212,31 @@ struct CheckoutReviewView: View {
                 }
             }
             let comparison = try DecisionEngine.checkout(offers, reaisPerThousand: thousand, monthlyRate: rate)
-            var lines = ["Comparei as ofertas que você confirmou:"]
-            for (index, option) in comparison.ordered.enumerated() {
+            let best = comparison.ordered[0]
+            let count = best.flows.filter { $0.kind == .payment }.count
+            var lines = ["Menor custo encontrado: \(Self.money(best.presentCost)), em \(count)x. Total pago: \(Self.money(DecisionEngine.number(best.cashOutlay)))."]
+            if let next = comparison.ordered.first(where: { $0.presentCost - best.presentCost > 0.01 }) {
+                lines.append("A próxima faixa de custo começa em \(Self.money(next.presentCost)): \(Self.money(next.presentCost - best.presentCost)) a mais.")
+            }
+            lines.append("\nComparei \(comparison.options.count) ofertas. Estas têm os menores custos:")
+            for (index, option) in comparison.ordered.prefix(5).enumerated() {
                 lines.append("\(index + 1). \(option.name): \(Self.money(option.presentCost)) em reais de hoje; total pago \(Self.money(DecisionEngine.number(option.cashOutlay))).")
             }
             let tied = comparison.ordered.filter { $0.presentCost - comparison.ordered[0].presentCost <= 0.01 }
             lines.append(tied.count > 1 ? "\nEmpate econômico entre: " + tied.map(\.name).joined(separator: ", ") + "." : "\nA mais vantajosa entre as ofertas confirmadas é \(comparison.ordered[0].name), com vantagem de \(Self.money(comparison.difference)) sobre a segunda opção.")
             if quote == 0 { lines.append("Antecipação do Inter ainda não comparada: falta a oferta real de quitação e seu bônus extra.") }
+            if !offers.contains(where: { $0.name.hasPrefix("Pix") }) { lines.append("Pix ainda não comparado: falta o preço final dessa modalidade.") }
+            if sources.contains(where: { $0.card == .choose && $0.rows.contains(where: \.included) }) {
+                lines.append("Cartões não identificados entram pelo preço, sem presumir pontos ou cashback. Você pode confirmar o banco na revisão.")
+            }
+            if let inter = offers.first(where: { $0.eligiblePrimeSpend > 0 }) {
+                lines.append("Inter Prime: \(try DecisionEngine.earnedPoints(eligibleSpend: inter.eligiblePrimeSpend, reaisPerPoint: Decimal(string: "2.50")!)) pontos normais estimados pela compra, inclusive em 1x, sem depender de antecipar.")
+            }
             if thousand == 0 { lines.append("Valor do milheiro em zero: os pontos ainda não reduzem o custo em reais.") }
             lines.append("Pontos normais só nas compras elegíveis do Inter Prime confirmado, uma vez por alternativa. Itaú e Mercado Livre usam apenas os benefícios em reais que você informou. O ranking usa rendimento líquido de \(monthlyRate)% a.m. e as datas da revisão.")
             compared(comparison, lines.joined(separator: "\n")); dismiss()
         } catch { self.error = error.localizedDescription }
     }
 
-    private static func number(_ value: Decimal) -> String {
-        value.formatted(.number.locale(Locale(identifier: "pt_BR")).grouping(.never).precision(.fractionLength(2)))
-    }
     private static func money(_ value: Double) -> String { value.formatted(.currency(code: "BRL").locale(Locale(identifier: "pt_BR"))) }
 }

@@ -125,7 +125,12 @@ O bônus extra só entra na oferta real de antecipação. Juros não ampliam a b
 Cashback de antecipação é informado separadamente; não se presume cumulatividade.
 A disponibilidade dos benefícios usa uma única data editável por comparação.
 
-Confirmação do banco é obrigatória; não basta encontrar o nome no cabeçalho.
+Sem banco identificado, a oferta entra apenas pelo preço, sem presumir benefícios.
+Cabeçalho só com Banco Inter sugere Inter Prime, sujeito à conferência na revisão;
+dois cartões no mesmo cabeçalho continuam sem seleção automática. A base Prime é
+o preço 1x do print ou um preço 1x único comum às imagens da mesma compra.
+Anúncios começam excluídos e totais incompatíveis com as parcelas não são aceitos
+como leitura confiável. Os valores reconhecidos continuam editáveis.
 O preço de quitação precisa vir do Inter. Cashback condicional e valor do milheiro
 não são inferidos. São necessárias 2 a 1.000 ofertas válidas; totais zero são rejeitados.
 O ranking vale para as ofertas confirmadas da mesma compra, com dinheiro reservado

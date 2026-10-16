@@ -10,10 +10,10 @@ App nativo SwiftUI, iOS 17+ e macOS 14+, sem dependências remotas.
 - `DecisionCore/SimpleAssistant`: respostas locais por assunto, com a comparação atual.
 - `CalculatorView`: entrada simples (Pix direto, total e parcelas), comparação explícita e detalhes recolhidos.
 - `PhotoImportView`: até 20 fotos/arquivos, revisão editável, aplicação somente após validar.
-- `PhotoTextRecognizer`: Apple Vision local, imagens até 20 MB, orientação corrigida, redução para 2400 px e agrupamento horizontal das linhas de parcelas.
+- `PhotoTextRecognizer`: Vision local, imagens até 20 MB/2400 px, agrupamento de parcelas/totais e releitura dos centavos elevados com orientação explícita.
 - `DecisionCore/OfferExtractor`: extrai preços Pix e ofertas regulares explícitas; preserva total anunciado coerente, centavos elevados e Pix em linha separada; não adivinha valores ambíguos.
 - `AssistantView`: conversa em memória, até 20 anexos por mensagem, seleção múltipla e drop; nenhuma chamada de rede.
-- `CheckoutReviewView`: revisão de banco, preço e parcelas por anexo; devolve o diagnóstico ao chat sem alterar InputState.
+- `CheckoutReviewView`/`CheckoutSource.read`: preenche ofertas e base 1x comum, exclui anúncios inicialmente e compara preços com cartão opcional; benefícios exigem confirmação. Resumo no chat sem alterar InputState.
 - `ChatAttachment`: leitura limitada de imagem/PDF/TXT, cartões e reprodução de áudio em memória.
 - `VoiceInput`: gravação nativa até 60s, transcrição local Apple Speech, permissões e cancelamento com espera limitada.
 - `HistoryStore`: UserDefaults versionado v1, até 100 cenários; preço Pix direto opcional mantém compatibilidade com cenários antigos.

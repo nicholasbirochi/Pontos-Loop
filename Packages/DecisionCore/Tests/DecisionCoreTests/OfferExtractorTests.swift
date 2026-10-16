@@ -36,4 +36,10 @@ final class OfferExtractorTests: XCTestCase {
         XCTAssertEqual(ExtractedOffers.read("2x R$ 1.000").installments.first?.total, 2000)
         XCTAssertEqual(ExtractedOffers.read("3x R$ 10.50").installments.first?.total, Decimal(string: "31.5"))
     }
+
+    func testMultiplicationSymbolAndConflictingQuotedTotals() {
+        let read = ExtractedOffers.read("3× R$ 238,68 R$ 716,03\n5x R$ 87,65 R$ 494,19")
+        XCTAssertEqual(read.installments.count, 1)
+        XCTAssertEqual(read.installments.first?.total, Decimal(string: "716.03"))
+    }
 }
