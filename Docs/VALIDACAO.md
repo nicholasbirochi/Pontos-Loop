@@ -132,3 +132,25 @@ pasta de trabalho na assinatura dos produtos temporários.
   pelo agente havia falhado; o fluxo automático passou a acompanhar o GitHub.
   Somente o atalho manual lê a main local. As condições e os comandos de parada
   estão em ATUALIZACOES.md. Wi-Fi e renovação após vencer o perfil não testados.
+
+## Pontos Loop 1.3.2 — leitura e revisão automática (16/10/2026)
+
+- 44 testes Swift aprovados, incluindo símbolo de multiplicação nas parcelas
+  e rejeição de totais conflitantes em vez de calcular um custo com OCR incorreto.
+- Checagem nativa aprovou quatro imagens fictícias regulares e uma com centavos
+  elevados (90, 06 e 89), totais deslocados verticalmente e ajuste de centavos.
+- Checagem da revisão aprovou banco ambíguo opcional, anúncios excluídos,
+  imagens sem valores que não bloqueiam o lote e base 1x comum somente quando única.
+- Sete imagens fornecidas pelo usuário foram testadas apenas localmente. As
+  54 ofertas dos seis prints de checkout foram conferidas uma a uma, incluindo
+  os centavos dos totais. Nenhuma dessas imagens ou seus valores entrou no repo.
+- Fluxo completo no Mac: selecionar os sete arquivos no painel nativo, enviar,
+  confirmar sem editar campos e receber o resumo correto no chat. A ordem de
+  seleção variou; a leitura não dependeu de adivinhar qual print vinha antes.
+  O anúncio ficou excluído inicialmente. Cartões ambíguos entraram só pelo preço;
+  Pix e antecipação sem preço real foram informados como dados ausentes.
+- Builds macOS e iPhone arm64 aprovados. A cópia de teste Mac usou identificador
+  separado para preservar rascunho e histórico do aplicativo normal.
+- Suíte completa de seis testes de interface aprovada no simulador iPhone 13:
+  compositor/anexos, explicação do chat, navegação, histórico após reabrir,
+  importação e padrões zerados. Instalação no iPhone físico é verificada à parte.

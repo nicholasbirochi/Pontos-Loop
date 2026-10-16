@@ -17,12 +17,17 @@ escreva a pergunta junto. O Noah informa que não conseguiu interpretar o áudio
 ## Comparar prints de uma compra
 
 1. Anexe os prints do Pix e das condições de cada cartão e envie.
-2. Em **Conferir ofertas**, abra cada print e confirme o meio de pagamento:
-   Inter Prime, Itaú, Cartão Mercado Livre, Pix ou outro cartão. O cabeçalho pode
-   mostrar dois bancos; o app não escolhe o cartão por você.
-3. Confira o **total final** de cada quantidade de parcelas. Desmarque ofertas
-   que não deseja comparar. Os totais reconhecidos são sugestões editáveis.
-4. Para Inter Prime, confira a base elegível sem juros. Os pontos normais entram
+2. Em **Conferir ofertas**, os preços e parcelas já aparecem preenchidos. Toque
+   em **Confirmar e comparar no chat** para receber o resumo. Cartão desconhecido
+   não bloqueia a comparação de preços: seus benefícios ficam fora da conta.
+3. Abra um print apenas para corrigir um valor, escolher o cartão ou alterar
+   ofertas. O cabeçalho pode mostrar dois bancos; nesse caso a seleção continua
+   opcional. Um cabeçalho só com Banco Inter sugere Inter Prime para conferência.
+   Anúncios marcados como “Mais vendido” começam excluídos para não misturar
+   preços promocionais do anúncio com o checkout. Prints sem oferta legível
+   também começam excluídos e não bloqueiam os demais.
+4. Para Inter Prime, confira a base elegível sem juros, preenchida pelo preço 1x
+   do print ou por um preço 1x único comum às imagens da mesma compra. Os pontos normais entram
    mesmo sem antecipar, uma vez por alternativa. Para outros cartões, informe
    somente benefícios confirmados em reais. Cashback anunciado como “até” não
    entra automaticamente.
@@ -31,8 +36,9 @@ escreva a pergunta junto. O Noah informa que não conseguiu interpretar o áudio
    O app não deduz a quitação pelos prints da loja.
 6. Opcionalmente ajuste datas, rendimento líquido e valor real do milheiro no seu
    resgate. Rendimento e valor dos pontos começam em zero.
-7. Toque em **Confirmar e comparar no chat**. O Noah devolve o ranking, a vantagem
-   sobre a segunda opção, os empates e os dados faltantes.
+7. O Noah informa o menor custo, a próxima faixa de custo, até cinco ofertas
+   mais baratas, os empates e os dados faltantes. Pix e antecipação precisam de
+   seus preços reais; ele não inventa valores para completar o diagnóstico.
 
 O botão **Conferir e comparar estas ofertas** na mensagem permite revisar de novo.
 O diagnóstico fica na conversa; ele não altera a simulação da aba Simular nem o
@@ -42,7 +48,8 @@ compatíveis entre si. Sem valor do milheiro, pontos ainda não reduzem custo em
 ## Limites e privacidade
 
 - Até 20 anexos por mensagem, **20 MB por arquivo**. Áudio de até **60 segundos**, somando no máximo **40 MB de áudio por mensagem**.
-- Imagens usam Apple Vision. PDFs precisam de texto selecionável: são lidas
+- Imagens usam Apple Vision, incluindo uma segunda leitura dos centavos elevados.
+  Valores ilegíveis e totais incompatíveis exigem revisão. PDFs precisam de texto selecionável: são lidas
   até 20 páginas e 30 mil caracteres; o cartão avisa quando houver corte.
   Para PDF escaneado, mande um print das páginas com a oferta.
 - Voz usa o reconhecimento nativo da Apple, com disponibilidade local `pt_BR`

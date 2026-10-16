@@ -29,6 +29,32 @@ import Foundation
             if index == 2 { assert(read.installments.count == 2 && read.installments.last?.total == 1080, text) }
             if index == 3 { assert(read.installments.count == 2 && read.installments.last?.count == 12, text) }
         }
-        print("OK: quatro imagens lidas localmente, Pix separado e totais finais com centavos preservados.")
+        let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 1200, pixelsHigh: 700, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
+        NSGraphicsContext.saveGraphicsState()
+        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)
+        NSColor.white.setFill(); NSBezierPath(rect: NSRect(x: 0, y: 0, width: 1200, height: 700)).fill()
+        func draw(_ text: String, _ x: Int, _ y: Int, _ size: CGFloat, _ color: NSColor = .black) {
+            (text as NSString).draw(at: NSPoint(x: x, y: y), withAttributes: [.font: NSFont.systemFont(ofSize: size), .foregroundColor: color])
+        }
+        for (index, row) in [("1x", "624", "90", "", ""), ("2x", "326", "06", "652", "11"), ("3×", "236", "89", "710", "68")].enumerated() {
+            let y = 540 - index * 170
+            let prefix = row.0 + " R$ "
+            let wholeX = 70 + Int((prefix as NSString).size(withAttributes: [.font: NSFont.systemFont(ofSize: 46)]).width.rounded(.up))
+            let centsX = wholeX + Int((row.1 as NSString).size(withAttributes: [.font: NSFont.systemFont(ofSize: 46)]).width.rounded(.up)) + 2
+            draw(prefix, 70, y, 46); draw(row.1, wholeX, y, 46); draw(row.2, centsX, y + 21, 26)
+            if !row.3.isEmpty {
+                let total = "R$ " + row.3
+                let totalCentsX = 750 + Int((total as NSString).size(withAttributes: [.font: NSFont.systemFont(ofSize: 34)]).width.rounded(.up)) + 2
+                draw(total, 750, y - 15, 34, .gray); draw(row.4, totalCentsX, y + 1, 20, .gray)
+                draw("Só R$ 10 a mais por parcela", 70, y - 42, 21, .gray)
+            }
+        }
+        NSGraphicsContext.restoreGraphicsState()
+        let data = bitmap.representation(using: .png, properties: [:])!
+        try data.write(to: directory.appendingPathComponent("centavos-elevados.png"))
+        let text = try await PhotoTextRecognizer.read(data)
+        let read = ExtractedOffers.read(text)
+        assert(read.installments.map(\.total) == [Decimal(string: "624.90")!, Decimal(string: "652.11")!, Decimal(string: "710.68")!], text)
+        print("OK: quatro imagens regulares e centavos elevados (90, 06, 89) lidos; totais deslocados e arredondamento preservados.")
     }
 }

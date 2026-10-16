@@ -19,6 +19,7 @@ public struct ExtractedOffers {
 
     public static func read(_ text: String) -> ExtractedOffers {
         var text = String(text.prefix(30_000))
+        text = text.replacingOccurrences(of: "×", with: "x")
         // Centavos sobrescritos podem chegar colados ao grupo de milhar ou separados por espaço.
         text = text.replacingOccurrences(of: #"(R\$\s*[0-9]{1,3}(?:\.[0-9]{3})+)([0-9]{2})(?![0-9.,])"#, with: "$1,$2", options: .regularExpression)
         text = text.replacingOccurrences(of: #"(R\$\s*[0-9]+(?:\.[0-9]{3})*)[ \t]+([0-9]{2})(?![0-9.,xX%])"#, with: "$1,$2", options: .regularExpression)
@@ -50,6 +51,10 @@ public struct ExtractedOffers {
                 if regularDifference >= -tolerance && regularDifference <= tolerance ||
                     (!raw.contains(",") && !raw.contains(".") && joinedCentsDifference >= -tolerance && joinedCentsDifference <= tolerance) {
                     quoted = candidate
+                } else {
+                    let tail = (snippet as NSString).substring(from: NSMaxRange(totals[1].range))
+                    // Total conflitante não pode virar um custo calculado a partir de OCR incorreto.
+                    guard tail.range(of: #"(?i)^\s*(?:de\s+)?cashback"#, options: .regularExpression) != nil else { continue }
                 }
             }
             let offer = InstallmentOffer(count: count, amount: quoted.map { DecisionEngine.cents($0 / Decimal(count)) } ?? value, hasInterest: interest, quotedTotal: quoted)

@@ -65,8 +65,9 @@ dos cenários informados, sem API ou modelo generativo.
 - **Chat com mídia:** área de mensagem sem a borda nativa de foco, balões animados,
   sugestões em cartões deslizantes, até 20 anexos por mensagem, fotos/PDF/TXT e
   áudio de até 1 minuto com reprodução e transcrição local quando disponível.
-  Confirme banco, total e parcelas para receber no chat o ranking de Inter Prime,
-  Itaú, Mercado Livre e Pix. Antecipação exige a oferta real de quitação do Inter. [Como usar e limites](Docs/CHAT-MIDIA.md).
+  Preenche preços e parcelas dos prints e traz o menor custo no chat, sem exigir
+  identificar todos os cartões. Bancos e benefícios podem ser conferidos na revisão.
+  Antecipação exige a oferta real de quitação do Inter. [Como usar e limites](Docs/CHAT-MIDIA.md).
 - **Simular:** Pix × cartão, quitação antecipada e uso de pontos na fatura.
 - **Noah:** respostas prontas sobre o aplicativo e explicação da comparação
   atual, usando os valores reais da tela. Funciona sem internet, conta ou API.

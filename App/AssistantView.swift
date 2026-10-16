@@ -343,7 +343,7 @@ struct AssistantView: View {
         let needsReview = attached.contains { $0.kind != .audio || hasOffer($0.text) }
         if needsReview {
             checkoutComparison = nil; checkoutSummary = ""
-            answer = "Recebi os anexos. Confirme o cartão selecionado, os preços e as parcelas na revisão. Vou comparar as ofertas de cada banco e o Pix e trazer o diagnóstico aqui na conversa."
+            answer = "Li os anexos e preenchi os preços e parcelas que consegui reconhecer. Toque em comparar na revisão para receber o resumo. Você só precisa editar valores incorretos ou confirmar benefícios; prints sem todos os dados não bloqueiam os demais."
         } else if !attached.isEmpty && spoken.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             answer = clean.isEmpty
                 ? "Recebi seu áudio para reprodução, mas a transcrição não está disponível. Escreva sua pergunta para eu conseguir responder."
