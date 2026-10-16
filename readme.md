@@ -117,7 +117,6 @@ Para testes de interface, selecione um simulador no Xcode e use ⌘U.
 | `Packages/DecisionCore` | Motor e chatbot testáveis sem SwiftUI |
 | `App/Assets.xcassets` | Ícones iPhone/Mac |
 | `UITests` | Fluxos reais no simulador |
-| `.ai/PROJECT_MAP.md` | Mapa breve para manutenção |
 
 O símbolo do ícone segue a referência do Inter, recolorido em cinza sobre preto
 conforme pedido. [Fonte e reprodução do ícone](Design/LOGO.md).
