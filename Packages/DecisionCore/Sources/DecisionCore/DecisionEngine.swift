@@ -63,6 +63,7 @@ public enum DecisionEngine {
             !$0.amount.isNaN && number($0.amount).isFinite }) else {
             throw CalculationError.invalid("Revise os valores e os prazos, entre 0 e 36.600 dias.")
         }
+        // A taxa é mensal e o prazo está em dias: o expoente adota mês convencional de 30 dias.
         let result = flows.reduce(0.0) {
             $0 + number($1.amount) / pow(1 + monthlyRate, Double($1.day) / 30)
         }
